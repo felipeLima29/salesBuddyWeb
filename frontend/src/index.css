@@ -171,7 +171,8 @@ a {
 }
 
 .buttonUserContainer {
-    flex-direction: row;
+    flex-direction: row-reverse;
+    display: flex;
     position: fixed;
     bottom: 30px;
     right: 30px;
