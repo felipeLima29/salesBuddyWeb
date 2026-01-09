@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 function PortalLogin() {
 
     return (
-        <div className='body'>
+        <div className='bodyLogin'>
             <div className="logoContainer">
                 <img src={icLogo} alt="icLogo" id="icLogo" />
                 
@@ -15,7 +15,7 @@ function PortalLogin() {
             <div className='inputContainer'>
                 <InputUser />
                 <InputPassword />
-                <Link to="/menu"><ButtonLogin /></Link>
+                <Link to="/usersList"><ButtonLogin /></Link>
                 <Link to="/forgot-password" id="navForgetPassword">Esqueci a senha</Link>
             </div>
         </div>

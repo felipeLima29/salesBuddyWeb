@@ -10,13 +10,13 @@ function Menu() {
 
     return (
         <div className='menu'>
-            <img src={icLogo} alt="Logo"/>
-
+            
             <ul className='listMenu'>
 
+                <img src={icLogo} alt="Logo" className='logoMenu'/>
                 <li className='divMenu'>
                     <img src={icUserBlue} alt="Icon User" />
-                    <Link to="/" className='optionsMenuChosed'><p >USUÁRIOS</p></Link>
+                    <Link to="/usersList" className='optionsMenuChosed'><p >USUÁRIOS</p></Link>
                 </li>
                 <li className='divMenu'>
                     <img src={icSalePink} alt="Icon Sale" />

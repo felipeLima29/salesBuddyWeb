@@ -1,9 +1,3 @@
-.body {
-    background-image: url('assets/icBackground.png');
-    width: 100%;
-    height: 100vh;
-}
-
 :root {
     /* Colors: */
     --unnamed-color-ffffff: #FFFFFF;
@@ -30,6 +24,25 @@
     color: var(--unnamed-color-074a82);
 }
 
+.body {
+    background-image: url('assets/icBackground.png');
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+}
+
+.bodyLogin{
+    background-image: url('assets/icBackground.png');
+    width: 100%;
+    height: 100vh;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Login Page Styles */
 .logoContainer {
     display: flex;
     justify-content: center;
@@ -85,31 +98,33 @@
     text-decoration: none;
 }
 
+/* Menu Styles */
+.logoMenu {
+    width: 200px;
+}
+
 .menu {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     width: 18%;
     height: 100vh;
-    padding-left: 4%;
     padding-top: 2%;
     padding-right: 4%;
     background-color: white;
 }
 
 .listMenu {
-    margin-right: 10px;
-    padding-left: 1px;
-    padding-top: 30px;
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 50px;
     list-style: none;
-
 }
 
 .divMenu {
     display: flex;
     flex-direction: row;
+    align-items: center;
     gap: 10px;
 }
 
@@ -118,7 +133,7 @@
     color: #074A82;
     font-family: 'Montserrat', sans-serif;
     font-optical-sizing: auto;
-    font-weight: bolder;
+    font-weight: 900;
     font-style: normal;
 }
 
@@ -127,10 +142,20 @@
     color: #A32C65;
     font-family: 'Montserrat', sans-serif;
     font-optical-sizing: auto;
-    font-weight: 400;
+    font-weight: 500;
     font-style: normal;
 }
 
-a {
-    text-decoration: none;
+/* List of Users Styles */
+.containerUsersList {
+    padding: 20px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tableUsersList {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #FFFFFF;
+
 }
