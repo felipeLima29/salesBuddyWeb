@@ -60,7 +60,6 @@ function UserList() {
     return (
         <div className="body">
 
-            <Menu />
             <div className="containerUsersList">
                 <h1>Lista de Usuários</h1>
                 <table className="tableUsersList">
