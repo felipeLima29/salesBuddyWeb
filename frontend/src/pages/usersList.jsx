@@ -1,4 +1,3 @@
-import Menu from "../components/menu";
 import icEditUser from '../assets/icEditUser.svg';
 import ButtonAddUser from "../components/buttons/buttonsListUser.jsx";
 import { Link } from "react-router-dom";
@@ -48,7 +47,7 @@ function UserList() {
                             <td className="txViewUsersSales">{user.nome}</td>
                             <td className="txViewUsersSales">{user.empresa}</td>
                             <td className="txViewUsersSales">{user.cnpj}</td>
-                            <td><Link to='/editUser'> <img src={icEditUser} alt="Editar usuário" className="icEditUser"/> </Link></td>
+                            <td> <Link to='/editUser'><img src={icEditUser} alt="Editar usuário" className="icEditUser"/></Link> </td>
                         </tr>
                     ))}
 
