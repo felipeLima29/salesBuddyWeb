@@ -168,8 +168,7 @@ a {
 .tableUsersList {
     width: 100%;
     padding: 2%;
-    background-color: #FFFFFF;
-
+    background-color: rgba(255, 255, 255, 0.6);
     & td {
         font-family: 'Montserrat', sans-serif;
         font-size: 14px;
