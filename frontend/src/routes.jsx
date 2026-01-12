@@ -1,10 +1,13 @@
-import PortalLogin from "./pages/login.jsx";
-import Menu from "./components/menu.jsx";
-import UserList from "./pages/usersList.jsx";
 import { Routes, Route } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import PortalLogin from "./pages/login.jsx";
+import Menu from "./components/menu.jsx";
+import UserList from "./pages/usersList.jsx";
 import MainLayout from "./components/mainLayout.jsx";
+import SalesList from "./pages/salesList.jsx";
+import AddNewUser from './pages/addNewUser.jsx';
+import ButtonEditUser from './components/buttons/buttonEditUser.jsx' 
 
 function AppRoutes() {
     return (
@@ -15,6 +18,9 @@ function AppRoutes() {
                 <Route element={<MainLayout />}>
                     <Route path="/menu" element={<Menu />} />
                     <Route path="/usersList" element={<UserList />} />
+                    <Route path="/salesList" element={<SalesList />} />
+                    <Route path="/usersList/addNewUser" element={<AddNewUser />} />
+                    <Route path="/usersList/editUser" element={<ButtonEditUser />} />
                 </Route>
 
             </Routes>

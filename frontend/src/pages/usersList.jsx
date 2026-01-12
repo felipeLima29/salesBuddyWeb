@@ -1,6 +1,7 @@
 import Menu from "../components/menu";
 import icEditUser from '../assets/icEditUser.svg';
-import ButtonAddUser from "../components/buttons/buttonAddUser.jsx";
+import ButtonAddUser from "../components/buttons/buttonsListUser.jsx";
+import { Link } from "react-router-dom";
 
 function UserList() {
 
@@ -15,21 +16,21 @@ function UserList() {
         { id: 8, usuario: "julia.p", nome: "Júlia Pereira", empresa: "Pereira Design", cnpj: "99.000.111/0001-55" },
         { id: 9, usuario: "ricardo.a", nome: "Ricardo Almeida", empresa: "Almeida Tech", cnpj: "22.333.444/0001-11" },
         { id: 10, usuario: "beatriz.l", nome: "Beatriz Lima", empresa: "Lima Advocacia", cnpj: "66.777.888/0001-99" },
-        // { id: 11, usuario: "bruno.dias", nome: "Bruno Dias", empresa: "Dias Transportes", cnpj: "10.111.222/0001-33" },
-        // { id: 12, usuario: "camila.r", nome: "Camila Rocha", empresa: "Rocha & Associados", cnpj: "13.141.516/0001-77" },
-        // { id: 13, usuario: "diego.ferreira", nome: "Diego Ferreira", empresa: "Ferreira Imports", cnpj: "17.181.920/0001-88" },
-        // { id: 14, usuario: "eliana.m", nome: "Eliana Martins", empresa: "Martins Eventos", cnpj: "21.222.324/0001-99" },
-        // { id: 15, usuario: "gabriel.s", nome: "Gabriel Santos", empresa: "Santos Autopeças", cnpj: "25.262.728/0001-00" },
-        // { id: 16, usuario: "heloisa.n", nome: "Heloísa Nunes", empresa: "Nunes Cosméticos", cnpj: "29.303.132/0001-11" },
-        // { id: 17, usuario: "igor.t", nome: "Igor Teixeira", empresa: "Teixeira Engenharia", cnpj: "33.343.536/0001-22" },
-        // { id: 18, usuario: "jessica.b", nome: "Jéssica Barbosa", empresa: "Barbosa Modas", cnpj: "37.383.940/0001-33" },
-        // { id: 19, usuario: "kleber.v", nome: "Kleber Vieira", empresa: "Vieira Segurança", cnpj: "41.424.344/0001-44" },
-        // { id: 20, usuario: "larissa.g", nome: "Larissa Gomes", empresa: "Gomes Doceria", cnpj: "45.464.748/0001-55" },
-        // { id: 21, usuario: "matheus.l", nome: "Matheus Lopes", empresa: "Lopes Imóveis", cnpj: "49.505.152/0001-66" },
-        // { id: 22, usuario: "natalia.r", nome: "Natália Ribeiro", empresa: "Ribeiro Turismo", cnpj: "53.545.556/0001-77" },
-        // { id: 23, usuario: "otavio.m", nome: "Otávio Moreira", empresa: "Moreira Seguros", cnpj: "57.585.960/0001-88" },
-        // { id: 24, usuario: "patricia.c", nome: "Patrícia Carvalho", empresa: "Carvalho Clínica", cnpj: "61.626.364/0001-99" },
-        // { id: 25, usuario: "renan.b", nome: "Renan Batista", empresa: "Batista Software", cnpj: "65.666.768/0001-00" },
+        { id: 11, usuario: "bruno.dias", nome: "Bruno Dias", empresa: "Dias Transportes", cnpj: "10.111.222/0001-33" },
+        { id: 12, usuario: "camila.r", nome: "Camila Rocha", empresa: "Rocha & Associados", cnpj: "13.141.516/0001-77" },
+        { id: 13, usuario: "diego.ferreira", nome: "Diego Ferreira", empresa: "Ferreira Imports", cnpj: "17.181.920/0001-88" },
+        { id: 14, usuario: "eliana.m", nome: "Eliana Martins", empresa: "Martins Eventos", cnpj: "21.222.324/0001-99" },
+        { id: 15, usuario: "gabriel.s", nome: "Gabriel Santos", empresa: "Santos Autopeças", cnpj: "25.262.728/0001-00" },
+        { id: 16, usuario: "heloisa.n", nome: "Heloísa Nunes", empresa: "Nunes Cosméticos", cnpj: "29.303.132/0001-11" },
+        { id: 17, usuario: "igor.t", nome: "Igor Teixeira", empresa: "Teixeira Engenharia", cnpj: "33.343.536/0001-22" },
+        { id: 18, usuario: "jessica.b", nome: "Jéssica Barbosa", empresa: "Barbosa Modas", cnpj: "37.383.940/0001-33" },
+        { id: 19, usuario: "kleber.v", nome: "Kleber Vieira", empresa: "Vieira Segurança", cnpj: "41.424.344/0001-44" },
+        { id: 20, usuario: "larissa.g", nome: "Larissa Gomes", empresa: "Gomes Doceria", cnpj: "45.464.748/0001-55" },
+        { id: 21, usuario: "matheus.l", nome: "Matheus Lopes", empresa: "Lopes Imóveis", cnpj: "49.505.152/0001-66" },
+        { id: 22, usuario: "natalia.r", nome: "Natália Ribeiro", empresa: "Ribeiro Turismo", cnpj: "53.545.556/0001-77" },
+        { id: 23, usuario: "otavio.m", nome: "Otávio Moreira", empresa: "Moreira Seguros", cnpj: "57.585.960/0001-88" },
+        { id: 24, usuario: "patricia.c", nome: "Patrícia Carvalho", empresa: "Carvalho Clínica", cnpj: "61.626.364/0001-99" },
+        { id: 25, usuario: "renan.b", nome: "Renan Batista", empresa: "Batista Software", cnpj: "65.666.768/0001-00" },
         { id: 26, usuario: "sabrina.k", nome: "Sabrina Klein", empresa: "Klein Arquitetura", cnpj: "69.707.172/0001-11" },
         { id: 27, usuario: "thiago.a", nome: "Thiago Alves", empresa: "Alves & Cia", cnpj: "73.747.576/0001-22" },
         { id: 28, usuario: "ursula.p", nome: "Ursula Pinto", empresa: "Pinto Paisagismo", cnpj: "77.787.980/0001-33" },
@@ -42,41 +43,30 @@ function UserList() {
         { id: 35, usuario: "breno.k", nome: "Breno Kuster", empresa: "Kuster Investimentos", cnpj: "05.060.708/0001-00" },
         { id: 36, usuario: "celia.t", nome: "Célia Torres", empresa: "Torres Editora", cnpj: "09.101.112/0001-11" },
         { id: 37, usuario: "daniel.x", nome: "Daniel Xavier", empresa: "Xavier Games", cnpj: "13.141.516/0001-22" },
-        { id: 38, usuario: "eliza.s", nome: "Eliza Samudio", empresa: "Samudio Varejo", cnpj: "17.181.920/0001-33" },
-        { id: 39, usuario: "fabio.jr", nome: "Fábio Junior", empresa: "FJ Músicas", cnpj: "21.222.324/0001-44" },
-        { id: 40, usuario: "giovana.l", nome: "Giovana Lins", empresa: "Lins Petshop", cnpj: "25.262.728/0001-55" },
-        { id: 41, usuario: "hugo.v", nome: "Hugo Viana", empresa: "Viana Contabilidade", cnpj: "29.303.132/0001-66" },
-        { id: 42, usuario: "isabela.f", nome: "Isabela Freitas", empresa: "Freitas RH", cnpj: "33.343.536/0001-77" },
-        { id: 43, usuario: "joao.pedro", nome: "João Pedro", empresa: "JP Automação", cnpj: "37.383.940/0001-88" },
-        { id: 44, usuario: "karina.b", nome: "Karina Bastos", empresa: "Bastos Odonto", cnpj: "41.424.344/0001-99" },
-        { id: 45, usuario: "leandro.m", nome: "Leandro Macedo", empresa: "Macedo Fitness", cnpj: "45.464.748/0001-00" },
-        { id: 46, usuario: "monica.g", nome: "Mônica Geller", empresa: "Geller Chef", cnpj: "49.505.152/0001-11" },
-        { id: 47, usuario: "nelson.m", nome: "Nelson Mandela", empresa: "Freedom Foundation", cnpj: "53.545.556/0001-22" },
-        { id: 48, usuario: "olivia.p", nome: "Olívia Palito", empresa: "Popeye Solutions", cnpj: "57.585.960/0001-33" },
-        { id: 49, usuario: "pedro.alvares", nome: "Pedro Álvares", empresa: "Descobrimento Ltda", cnpj: "61.626.364/0001-44" },
-        { id: 50, usuario: "quiteria.s", nome: "Quitéria Silva", empresa: "Silva Artesanato", cnpj: "65.666.768/0001-55" }
+        { id: 38, usuario: "eliza.s", nome: "Eliza Samudio", empresa: "Samudio Varejo", cnpj: "17.181.920/0001-33" }
     ];
 
     return (
         <div className="body">
 
-            <div className="containerUsersList">
-                <h1>Lista de Usuários</h1>
+            <div className="containerList">
+                
                 <table className="tableUsersList">
                     <tr>
-                        <td>USUÁRIO</td>
-                        <td>NOME</td>
-                        <td>EMPRESA</td>
-                        <td>CNPJ</td>
+                        <td></td>
+                        <td className="txViewTable">USUÁRIO</td>
+                        <td className="txViewTable">NOME</td>
+                        <td className="txViewTable">EMPRESA</td>
+                        <td className="txViewTable">CNPJ</td>
                     </tr>
                     {mockUsers.map((user) => (
                         <tr key={user.id}>
                             <td><input type="checkbox" className="checkbox"/></td>
-                            <td>{user.usuario}</td>
-                            <td>{user.nome}</td>
-                            <td>{user.empresa}</td>
-                            <td>{user.cnpj}</td>
-                            <td><img src={icEditUser} alt="Editar usuário"/></td>
+                            <td className="txViewUser">{user.usuario}</td>
+                            <td className="txViewUsersSales">{user.nome}</td>
+                            <td className="txViewUsersSales">{user.empresa}</td>
+                            <td className="txViewUsersSales">{user.cnpj}</td>
+                            <td><Link to='/editUser'> <img src={icEditUser} alt="Editar usuário" className="icEditUser"/> </Link></td>
                         </tr>
                     ))}
 

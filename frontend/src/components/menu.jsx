@@ -1,6 +1,8 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import icLogo from '../assets/icLogo.svg';
 import icUserBlue from '../assets/icUserBlue.svg';
+import icUserPink from '../assets/icUserPink.svg';
+import icSaleBlue from '../assets/icSaleBlue.svg';
 import icSalePink from '../assets/icSalePink.svg';
 import icLogoutPink from '../assets/icLogoutPink.svg';
 
@@ -12,17 +14,32 @@ function Menu() {
             <ul className='listMenu'>
 
                 <img src={icLogo} alt="Logo" className='logoMenu'/>
-                <li className='divMenu'>
-                    <img src={icUserBlue} alt="Icon User" />
-                    <Link to="/usersList" className='optionsMenuChosed'><p >USUÁRIOS</p></Link>
+                <li>
+                    <NavLink to="/usersList" className='divMenu'>
+
+                        {({isActive}) => (
+                            <>
+                                <img src={isActive ? icUserBlue : icUserPink} alt="Usuários" />
+                                <p className={isActive ? 'optionsMenuChosed' : 'optionsMenu'}>USUÁRIOS</p>
+                            </>
+                        )}
+                            
+                    </NavLink>
                 </li>
-                <li className='divMenu'>
-                    <img src={icSalePink} alt="Icon Sale" />
-                    <Link to="/" className='optionsMenu'>VENDAS</Link>
+                <li>
+                    <NavLink to="/salesList" className='divMenu'>
+                        
+                        {({isActive}) => (
+                            <>
+                                <img src={isActive ? icSaleBlue : icSalePink} alt="Vendas" />
+                                <p className={isActive ? 'optionsMenuChosed' : 'optionsMenu'}>VENDAS</p>
+                            </>
+                        )}
+                    </NavLink>
                 </li>
                 <li className='divMenu'>
                     <img src={icLogoutPink} alt="Log out Icon" />
-                    <Link to="/" className='optionsMenu'>LOG OUT</Link>
+                    <NavLink to="/" className='optionsMenu'>LOG OUT</NavLink>
                 </li>
             </ul>
 

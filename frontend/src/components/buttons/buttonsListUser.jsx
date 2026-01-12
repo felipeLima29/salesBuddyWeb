@@ -5,12 +5,12 @@ import icDeleteUser from '../../assets/icDeleteUser.svg';
 function ButtonAddUser() {
     return (
         <div className='buttonUserContainer'>
-            <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '5px'}}>
+            <Link to="/usersList/addNewUser" style={{ display: 'flex', alignItems: 'center', gap: '5px'}}>
 
                 <button className="buttonAddUser">
                     <img src={icAddUser} alt="Adicionar" className="iconAddUser" />
                 </button>
-                <span>CADASTRAR NOVO USUÁRIO</span>
+                <span className='txAddUser'>CADASTRAR NOVO USUÁRIO</span>
             </Link>
 
             <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '5px'}}>
@@ -18,7 +18,7 @@ function ButtonAddUser() {
                 <button className='buttonDeleteUser'>
                     <img src={icDeleteUser} alt="Deletar usuário"/>
                 </button>
-                <span>EXCLUIR USUÁRIO</span>
+                <span className='txDeleteUser'>EXCLUIR USUÁRIO</span>
 
             </Link>
 
