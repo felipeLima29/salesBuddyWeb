@@ -39,14 +39,14 @@ function SalesList() {
             <div className="containerList">
                 <table className="tableUsersList">
                     <tr>
-                        <td>ID.VENDA</td>
-                        <td>NOME</td>
-                        <td>CPF</td>
-                        <td>E-MAIL</td>
-                        <td>QTD.ITENS</td>
-                        <td>VALOR</td>
-                        <td>TROCO</td>
-                        <td>COMPROVANTE</td>
+                        <td className="txViewHeader">ID.VENDA</td>
+                        <td className="txViewHeader">NOME</td>
+                        <td className="txViewHeader">CPF</td>
+                        <td className="txViewHeader">E-MAIL</td>
+                        <td className="txViewHeader">QTD.ITENS</td>
+                        <td className="txViewHeader">VALOR</td>
+                        <td className="txViewHeader">TROCO</td>
+                        <td className="txViewHeader">COMPROVANTE</td>
                     </tr>
                     {mockSales.map((sale) =>(
                         <tr key={sale.idVenda}>
