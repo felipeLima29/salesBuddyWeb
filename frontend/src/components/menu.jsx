@@ -3,8 +3,6 @@ import icLogo from '../assets/icLogo.svg';
 import icUserBlue from '../assets/icUserBlue.svg';
 import icSalePink from '../assets/icSalePink.svg';
 import icLogoutPink from '../assets/icLogoutPink.svg';
-import '@fontsource/montserrat/400.css'; // Peso Regular
-import '@fontsource/montserrat/700.css'; // Peso Bold
 
 function Menu() {
 
