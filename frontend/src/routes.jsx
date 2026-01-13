@@ -7,7 +7,7 @@ import UserList from "./pages/usersList.jsx";
 import MainLayout from "./components/mainLayout.jsx";
 import SalesList from "./pages/salesList.jsx";
 import AddNewUser from './pages/addNewUser.jsx';
-import ButtonsEditUser from './components/buttons/buttonsEditUser.jsx' 
+import EditUser from './pages/editUser.jsx';
 
 function AppRoutes() {
     return (
@@ -20,7 +20,7 @@ function AppRoutes() {
                     <Route path="/usersList" element={<UserList />} />
                     <Route path="/salesList" element={<SalesList />} />
                     <Route path="/usersList/addNewUser" element={<AddNewUser />} />
-                    <Route path="/usersList/editUser" element={<ButtonsEditUser />} />
+                    <Route path="/usersList/editUser" element={<EditUser />} />
                 </Route>
 
             </Routes>

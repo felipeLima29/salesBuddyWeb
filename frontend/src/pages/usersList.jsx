@@ -48,7 +48,7 @@ function UserList() {
                             <td className="txViewUsersSales">{user.empresa}</td>
                             <td className="txViewUsersSales">{user.cnpj}</td>
                             <td>
-                                <Link to='/editUser' style={{
+                                <Link to='/usersList/editUser' style={{
                                     display: 'block',
                                     width: '20px',
                                     height: '20px',

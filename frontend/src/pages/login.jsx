@@ -10,13 +10,20 @@ function PortalLogin() {
         <div className='bodyLogin'>
             <div className="logoContainer">
                 <img src={icLogo} alt="icLogo" id="icLogo" />
-                
+
             </div>
             <div className='inputContainer'>
                 <InputUser />
                 <InputPassword />
                 <Link to="/usersList"><ButtonLogin /></Link>
-                <Link to="/forgot-password" id="navForgetPassword">Esqueci a senha</Link>
+                <Link to="/forgot-password"
+                    id="navForgetPassword"
+                    style={{
+                        fontFamily: "'Montserrat', sans-serif",
+                        fontSize: '13px',
+                        fontWeight: '600'
+                    }}>Esqueci a senha
+                </Link>
             </div>
         </div>
     )
