@@ -1,5 +1,5 @@
 import icEditUser from '../assets/icEditUser.svg';
-import ButtonAddUser from "../components/buttons/buttonsListUser.jsx";
+import ButtonListUser from "../components/buttons/buttonsListUser.jsx";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -13,9 +13,9 @@ function UserList() {
         try {
             const response = await axios.get('http://localhost:3000/listAllUser');
 
-            if(response.data){
+            if (response.data) {
                 setUsers(response.data);
-            }else{
+            } else {
                 toast.info('Sem usuários cadastrados');
             }
         } catch (error) {
@@ -31,7 +31,7 @@ function UserList() {
         <div className="body">
 
             <div className="containerList">
-                
+
                 <table className="tableUsersList">
                     <tr>
                         <td></td>
@@ -42,17 +42,24 @@ function UserList() {
                     </tr>
                     {users.map((user) => (
                         <tr key={user.id}>
-                            <td><input type="checkbox" className="checkbox"/></td>
+                            <td><input type="checkbox" className="checkbox" /></td>
                             <td className="txViewUser">{user.usuario}</td>
                             <td className="txViewUsersSales">{user.nome}</td>
                             <td className="txViewUsersSales">{user.empresa}</td>
                             <td className="txViewUsersSales">{user.cnpj}</td>
-                            <td> <Link to='/editUser'><img src={icEditUser} alt="Editar usuário" className="icEditUser"/></Link> </td>
+                            <td>
+                                <Link to='/editUser'>
+                                    <img src={icEditUser} alt="Editar usuário" className="icEditUser" />
+                                </Link>
+                            </td>
                         </tr>
                     ))}
 
                 </table>
-                <ButtonAddUser />
+                <ButtonListUser
+                    classNameButtonDelete="buttonInactiveUser"
+                    classNameTxDelete="txInactiveUser"
+                />
             </div>
 
         </div>

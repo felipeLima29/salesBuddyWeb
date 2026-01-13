@@ -2,24 +2,24 @@ import { Link } from "react-router-dom";
 import icRefresh from '../../assets/icRefresh.svg';
 import icSave from '../../assets/icSave.svg/'
 
-function ButtonEditUser({onSave, classNameTx, classNameButton}) {
+function ButtonEditUser({onSave, classNameTxSave, classNameButtonSave, classNameTxReset, classNameButtonreset}) {
     return (
         <div className="buttonUserContainer">
             
             <div onClick={onSave}
                  style={{ display: 'flex', alignItems: 'center', gap: '5px'}}
             >
-                <button className="buttonSaveUser">
+                <button className={classNameButtonSave}>
                     <img src={icSave} alt="Salvar" />
                 </button>
-                <span className="txSaveUser">SALVAR ALTERAÇÕES</span>
+                <span className={classNameTxSave}>SALVAR ALTERAÇÕES</span>
             </div>
 
             <Link style={{ display: 'flex', alignItems: 'center', gap: '5px'}}>
-                <button className={classNameButton}>
+                <button className={classNameButtonreset}>
                     <img src={icRefresh} alt="Refresh"/>
                 </button>
-                <span className={classNameTx}>RESETAR SENHA</span>
+                <span className={classNameTxReset}>RESETAR SENHA</span>
             </Link>
 
         </div>

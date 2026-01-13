@@ -2,23 +2,23 @@ import { Link } from 'react-router-dom';
 import icAddUser from '../../assets/icAddUser.svg';
 import icDeleteUser from '../../assets/icDeleteUser.svg';
 
-function ButtonAddUser() {
+function ButtonListUser({classNameButtonDelete, classNameTxDelete}) {
     return (
         <div className='buttonUserContainer'>
             <Link to="/usersList/addNewUser" style={{ display: 'flex', alignItems: 'center', gap: '5px'}}>
 
-                <button className="buttonAddUser">
+                <button className="buttonActiveUser">
                     <img src={icAddUser} alt="Adicionar" className="iconAddUser" />
                 </button>
-                <span className='txAddUser'>CADASTRAR NOVO USUÁRIO</span>
+                <span className="txActiveUser">CADASTRAR NOVO USUÁRIO</span>
             </Link>
 
             <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '5px'}}>
 
-                <button className='buttonDeleteUser'>
+                <button className={classNameButtonDelete}>
                     <img src={icDeleteUser} alt="Deletar usuário"/>
                 </button>
-                <span className='txDeleteUser'>EXCLUIR USUÁRIO</span>
+                <span className={classNameTxDelete}>EXCLUIR USUÁRIO</span>
 
             </Link>
 
@@ -26,4 +26,4 @@ function ButtonAddUser() {
     )
 }
 
-export default ButtonAddUser;
+export default ButtonListUser;

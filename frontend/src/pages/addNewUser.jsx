@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import icPersonBlue from '../assets/icPersonBlue.svg';
-import ButtonEditUser from '../components/buttons/buttonEditUser';
+import ButtonEditUser from '../components/buttons/buttonsEditUser';
 import InputAddUser from '../components/inputs/inputAddUser';
 import axios from 'axios';
 import { toast } from 'react-toastify';
@@ -76,8 +76,10 @@ function addNewUser() {
                 </div>
                 <ButtonEditUser 
                     onSave={handleInsert}
-                    classNameTx="txDeleteUser"
-                    classNameButton="buttonDeleteUser"
+                    classNameTxSave='txActiveUser'
+                    classNameButtonSave='buttonActiveUser'
+                    classNameTxReset='txInactiveUser'
+                    classNameButtonreset='buttonInactiveUser'
                 />
 
             </div>
