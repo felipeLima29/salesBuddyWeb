@@ -2,15 +2,25 @@ import express from 'express';
 import cors from 'cors';
 import router from './routes/routes.js';
 import sequelize from './database/db.js';
+import './models/User.js';
 
 const app = express();
 app.use(express.json());
 app.use(cors())
 app.use(router);
 
-sequelize.sync().then(() => {
-    console.log("Banco conectado!")
-    app.listen(3000, () => {
-        console.log("API rodando.")
-    })
-})
+const startServer = async () => {
+    try {
+        // force: true para recriar as tabelas (use só agora, depois tire)
+        await sequelize.sync({ force: false });
+        console.log('Tabelas criadas no Banco de Dados!');
+
+        app.listen(3000, () => {
+            console.log('Server rodando na porta 3000');
+        });
+    } catch (error) {
+        console.error('Erro ao conectar:', error);
+    }
+};
+
+startServer();
