@@ -140,6 +140,21 @@ a {
     overflow-y: auto;
 }
 
+.icEditUser {
+    width: 20px;
+}
+
+.checkbox{
+    /* Remove aparência padrão do navegador. */
+    appearance: none; 
+    -webkit-appearance: none;
+
+    width: 15px;
+    height: 15px;
+    border: 1px solid, #707070;
+    border-radius: 3px;
+}
+
 .tableUsersList {
     width: 100%;
     padding: 2%;
@@ -218,10 +233,6 @@ a {
     font-family: 'Montserrat', sans-serif;
     height: 40px;
     padding: 10px;
-}
-
-.icEditUser {
-    padding-right: 35vh;
 }
 
 .txViewUser {

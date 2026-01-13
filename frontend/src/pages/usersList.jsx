@@ -48,7 +48,14 @@ function UserList() {
                             <td className="txViewUsersSales">{user.empresa}</td>
                             <td className="txViewUsersSales">{user.cnpj}</td>
                             <td>
-                                <Link to='/editUser'>
+                                <Link to='/editUser' style={{
+                                    display: 'block',
+                                    width: '20px',
+                                    height: '20px',
+                                    padding: 0,
+                                    marginBottom: '15px',
+                                    marginRight: '40vh'
+                                }}>
                                     <img src={icEditUser} alt="Editar usuário" className="icEditUser" />
                                 </Link>
                             </td>
