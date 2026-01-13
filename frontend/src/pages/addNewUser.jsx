@@ -30,7 +30,7 @@ function addNewUser() {
             setEmpresa('');
             setCnpj('');
             console.log(response.data);
-        } catch (error) {
+        } catch (error) {   
             error.message;
         }
     }
@@ -76,6 +76,8 @@ function addNewUser() {
                 </div>
                 <ButtonEditUser 
                     onSave={handleInsert}
+                    classNameTx="txDeleteUser"
+                    classNameButton="buttonDeleteUser"
                 />
 
             </div>
