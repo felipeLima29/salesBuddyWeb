@@ -11,8 +11,7 @@ app.use(router);
 
 const startServer = async () => {
     try {
-        // force: true para recriar as tabelas (use só agora, depois tire)
-        await sequelize.sync({ force: false });
+        await sequelize.sync(); //Removi o force
         console.log('Tabelas criadas no Banco de Dados!');
 
         app.listen(3000, () => {
