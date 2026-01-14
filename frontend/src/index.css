@@ -12,6 +12,11 @@
     display: flex;
 }
 
+
+.bodyModalOpen {
+    filter: blur(5px);
+}
+
 .bodyLogin {
     background-image: url('assets/icBackground.png');
     width: 100%;
@@ -316,4 +321,67 @@ a {
         font-weight: 700;
         font-size: 18px;
     }
+}
+
+/* Confirm Delete Styles */
+
+.backgroundModalDelete {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 3px 3px 3px #888;
+}
+
+.spanModalDelete {
+    color: #A32C2C;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    display: inline-block;
+    padding: 8px 0px 8px 0px;
+}
+
+.modalDeleteUsers {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    color: #A32C2C;
+    padding: 13px 0px 13px 0px;
+    font-size: 14px;
+}
+
+.modalActions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 0px 0px 0px;
+    gap: 10px;
+}
+
+.btnYes {
+    background-color: #408140;
+    border-radius: 5px;
+    color: white;
+    padding: 7px;
+    width: 115px;
+    height: 45px;
+    border: none;
+
+}
+
+.btnNo {
+    background-color: #A32C2C;
+    border-radius: 5px;
+    color: white;
+    padding: 7px;
+    width: 115px;
+    height: 45px;
+    border: none;
+
 }

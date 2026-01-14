@@ -8,7 +8,7 @@ import MainLayout from "./components/mainLayout.jsx";
 import SalesList from "./pages/salesList.jsx";
 import AddNewUser from './pages/addNewUser.jsx';
 import EditUser from './pages/editUser.jsx';
-
+import ConfirmModalDelete from './components/confirmModal.jsx';
 function AppRoutes() {
     return (
         <div>
@@ -21,6 +21,7 @@ function AppRoutes() {
                     <Route path="/salesList" element={<SalesList />} />
                     <Route path="/usersList/addNewUser" element={<AddNewUser />} />
                     <Route path="/usersList/editUser" element={<EditUser />} />
+                    <Route path="/usersList/modelDeleteUser" element={<ConfirmModalDelete />} />
                 </Route>
 
             </Routes>
