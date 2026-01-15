@@ -52,7 +52,7 @@ function UserList() {
                         </tr>
                         {users.map((user) => (
                             <tr key={user.id}>
-                                <td><input type="checkbox" className="checkbox" /></td>
+                                <td><input type="checkbox" id="checkbox" /></td>
                                 <td className="txViewUser">{user.usuario}</td>
                                 <td className="txViewUsersSales">{user.nome}</td>
                                 <td className="txViewUsersSales">{user.empresa}</td>

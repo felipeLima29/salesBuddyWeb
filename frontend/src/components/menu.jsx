@@ -19,7 +19,7 @@ function Menu() {
 
                         {({isActive}) => (
                             <>
-                                <img src={isActive ? icUserBlue : icUserPink} alt="Usuários" />
+                                <img src={isActive ? icUserBlue : icUserPink} alt="Usuários" className='imgMenu' />
                                 <p className={isActive ? 'optionsMenuChosed' : 'optionsMenu'}>USUÁRIOS</p>
                             </>
                         )}
@@ -28,17 +28,16 @@ function Menu() {
                 </li>
                 <li>
                     <NavLink to="/salesList" className='divMenu'>
-                        
                         {({isActive}) => (
                             <>
-                                <img src={isActive ? icSaleBlue : icSalePink} alt="Vendas" />
+                                <img src={isActive ? icSaleBlue : icSalePink} alt="Vendas" className='imgMenu' />
                                 <p className={isActive ? 'optionsMenuChosed' : 'optionsMenu'}>VENDAS</p>
                             </>
                         )}
                     </NavLink>
                 </li>
                 <li className='divMenu'>
-                    <img src={icLogoutPink} alt="Log out Icon" />
+                    <img src={icLogoutPink} alt="Log out Icon" className='imgMenu' />
                     <NavLink to="/" className='optionsMenu'>LOG OUT</NavLink>
                 </li>
             </ul>
