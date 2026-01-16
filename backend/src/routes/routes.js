@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { insertUser, listAllUser } from "../controllers/UserController.js";
+import { getUserId, insertUser, listAllUser } from "../controllers/UserController.js";
 
 const router = Router();
 
@@ -8,6 +8,7 @@ router.get('/', (req, res) => {
 })
 router.post('/insertUser', insertUser);
 router.get('/listAllUser', listAllUser);
+router.get('/getUserId/:id', getUserId);
 
 
 export default router;

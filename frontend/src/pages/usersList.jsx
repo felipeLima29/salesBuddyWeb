@@ -51,14 +51,16 @@ function UserList() {
                             <td className="txViewTable">CNPJ</td>
                         </tr>
                         {users.map((user) => (
+                            
                             <tr key={user.id}>
+                                {console.log(user)}
                                 <td><input type="checkbox" id="checkbox" /></td>
                                 <td className="txViewUser">{user.usuario}</td>
                                 <td className="txViewUsersSales">{user.nome}</td>
                                 <td className="txViewUsersSales">{user.empresa}</td>
                                 <td className="txViewUsersSales">{user.cnpj}</td>
                                 <td>
-                                    <Link to='/usersList/editUser' style={{
+                                    <Link to={`/usersList/editUser/${user.id}`} style={{
                                         display: 'block',
                                         width: '20px',
                                         height: '20px',
@@ -70,6 +72,7 @@ function UserList() {
                                     </Link>
                                 </td>
                             </tr>
+                            
                         ))}
 
                     </table>

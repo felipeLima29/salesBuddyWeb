@@ -20,7 +20,7 @@ function AppRoutes() {
                     <Route path="/usersList" element={<UserList />} />
                     <Route path="/salesList" element={<SalesList />} />
                     <Route path="/usersList/addNewUser" element={<AddNewUser />} />
-                    <Route path="/usersList/editUser" element={<EditUser />} />
+                    <Route path="/usersList/editUser/:id" element={<EditUser />} />
                     <Route path="/usersList/modelDeleteUser" element={<ConfirmModalDelete />} />
                 </Route>
 
