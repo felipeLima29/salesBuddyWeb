@@ -348,12 +348,19 @@ a {
     padding: 8px 0px 8px 0px;
 }
 
-.modalDeleteUsers {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-    color: #A32C2C;
-    padding: 13px 0px 13px 0px;
-    font-size: 14px;
+.usersList {
+    display: list-item;
+    list-style-type: none;
+    padding-top: 13px;
+    padding-bottom: 13px;
+
+    & li {
+        color: #A32C2C;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        font-size: 14px;
+        display: flex;
+    }
 }
 
 .modalActions {

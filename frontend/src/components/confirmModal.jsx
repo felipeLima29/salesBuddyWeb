@@ -9,17 +9,14 @@ function ConfirmModalDelete({ isOpen, usuariosToDelete, handleClose }) {
         return () => setMounted(false);
     }, []);
 
-    // EFEITO COLATERAL PARA BORRAR O SITE
     useEffect(() => {
         if (isOpen) {
-            // Pega a div onde seu React está rodando (geralmente id="root" ou id="__next")
             const appRoot = document.getElementById('root') || document.getElementById('__next');
             if (appRoot) {
                 appRoot.style.filter = 'blur(5px)';
                 appRoot.style.pointerEvents = 'none';
             }
         } else {
-            // Remove o blur quando fecha
             const appRoot = document.getElementById('root') || document.getElementById('__next');
             if (appRoot) {
                 appRoot.style.filter = 'none';
@@ -27,7 +24,6 @@ function ConfirmModalDelete({ isOpen, usuariosToDelete, handleClose }) {
             }
         }
 
-        // Limpeza ao desmontar
         return () => {
             const appRoot = document.getElementById('root') || document.getElementById('__next');
             if (appRoot) {
@@ -40,11 +36,20 @@ function ConfirmModalDelete({ isOpen, usuariosToDelete, handleClose }) {
     if (!mounted || !isOpen) return null;
 
     const modalContent = (
-        // ATENÇÃO: Tire o backdrop-filter daqui, senão soma blur com blur
         <div className="backgroundModalDelete" style={{ backdropFilter: 'none', webkitBackdropFilter: 'none' }}>
             <div className="modalContent" style={{ pointerEvents: 'auto' }}>
                 <span className="spanModalDelete">Você está prestes a excluir os seguintes usuários:</span>
-                <p className='modalDeleteUsers'>{usuariosToDelete} felipe <br></br> ola</p>
+
+                <ul className="usersList">
+                    {Array.isArray(usuariosToDelete) ? (
+                        usuariosToDelete.map((nome, index) => (
+                            <li key={index}>{nome}</li>
+                        ))
+                    ) : (
+                        <li>Nenhum usuário selecionado</li>
+                    )}
+                </ul>
+                
                 <span className="spanModalDelete">Deseja prosseguir?</span>
                 
                 <div className="modalActions">

@@ -10,13 +10,33 @@ function UserList() {
 
     const [users, setUsers] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedUserId, setSelectedUserId] = useState([]);
 
     const handleOpen = () => {
-        setIsModalOpen(true);
+        if(selectedUserId.length>0){
+            setIsModalOpen(true);
+        }else{
+            toast.warn('Selecione um usuário para deletar.')
+        }
     }
     const handleClose = () => {
         setIsModalOpen(false);
     }
+    const handleCheckboxChange = (id) => {
+        setSelectedUserId((prevIds) => {
+            if (prevIds.includes(id)) {
+                return prevIds.filter(prevId => prevId !== id);
+            } else {
+                return [...prevIds, id];
+            }
+        });
+    };
+
+    const getNamesSelecteds = () => {
+        return users
+            .filter(user => selectedUserId.includes(user.id))
+            .map(user => user.usuario)
+    };
 
     const listUsers = async () => {
         try {
@@ -49,12 +69,19 @@ function UserList() {
                             <td className="txViewTable">NOME</td>
                             <td className="txViewTable">EMPRESA</td>
                             <td className="txViewTable">CNPJ</td>
+                            <td></td>
                         </tr>
                         {users.map((user) => (
-                            
+
                             <tr key={user.id}>
-                                {console.log(user)}
-                                <td><input type="checkbox" id="checkbox" /></td>
+                                <td>
+                                    <input
+                                        type="checkbox"
+                                        id="checkbox"
+                                        checked={selectedUserId.includes(user.id)}
+                                        onClick={() => handleCheckboxChange(user.id)}
+                                    />
+                                </td>
                                 <td className="txViewUser">{user.usuario}</td>
                                 <td className="txViewUsersSales">{user.nome}</td>
                                 <td className="txViewUsersSales">{user.empresa}</td>
@@ -72,13 +99,13 @@ function UserList() {
                                     </Link>
                                 </td>
                             </tr>
-                            
+
                         ))}
 
                     </table>
                     <ButtonListUser
-                        classNameButtonDelete="buttonInactiveUser"
-                        classNameTxDelete="txInactiveUser"
+                        classNameButtonDelete={selectedUserId.length>0 ? 'buttonActiveUser' : 'buttonInactiveUser'}
+                        classNameTxDelete={selectedUserId.length>0 ? 'txActiveUser' : 'txInactiveUser'}
                         handleOpen={handleOpen}
                     />
 
@@ -86,12 +113,11 @@ function UserList() {
 
             </div>
 
-
             <ConfirmModalDelete
+                usuariosToDelete={getNamesSelecteds()}
                 isOpen={isModalOpen}
                 handleClose={handleClose}
             />
-
 
         </div>
 

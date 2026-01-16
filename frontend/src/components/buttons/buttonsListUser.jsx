@@ -14,6 +14,7 @@ function ButtonListUser({ classNameButtonDelete, classNameTxDelete, handleOpen }
                 <span className="txActiveUser">CADASTRAR NOVO USUÁRIO</span>
             </Link>
 
+            
             <Link style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
 
                 <button className={classNameButtonDelete} onClick={handleOpen}>

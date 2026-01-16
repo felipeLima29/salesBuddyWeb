@@ -90,6 +90,7 @@ function addNewUser() {
                     </div>
                 </div>
                 <ButtonEditUser
+                    
                     onSave={handleInsert}
                     classNameTxSave='txActiveUser'
                     classNameButtonSave='buttonActiveUser'
