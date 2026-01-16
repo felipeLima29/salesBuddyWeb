@@ -6,12 +6,12 @@ import './models/User.js';
 
 const app = express();
 app.use(express.json());
-app.use(cors())
+app.use(cors());
 app.use(router);
 
 const startServer = async () => {
     try {
-        await sequelize.sync(); //Removi o force
+        await sequelize.sync();
         console.log('Tabelas criadas no Banco de Dados!');
 
         app.listen(3000, () => {

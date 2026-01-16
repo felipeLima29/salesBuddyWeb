@@ -1,4 +1,4 @@
-export default function InputAddUser({ value, onChange , type = "text", name}) {
+export default function InputAddUser({ value, onChange, type = "text", name}) {
     return (
         <div>
             <input type={type}

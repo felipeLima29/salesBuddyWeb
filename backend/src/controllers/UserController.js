@@ -44,3 +44,23 @@ export async function getUserId(req, res) {
         })
     }
 }
+
+export async function updateUser(req, res) {
+    try {
+        const { id } = req.params;
+        console.log(id)
+        const userDto = new UserDTO(req.body);
+        console.log(userDto);
+
+        await UserService.updateUser(userDto, id);
+
+        return res.status(200).json({
+            msg: "Usuário atualizado com sucesso."
+        })
+    } catch (error) {
+        return res.status(400).json({
+            error: true,
+            message: error.message
+        })
+    }
+}

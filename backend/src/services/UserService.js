@@ -1,3 +1,4 @@
+import { where } from "sequelize";
 import User from "../models/User.js";
 
 class UserService {
@@ -24,17 +25,29 @@ class UserService {
         if (!dto.id) {
             throw new Error("ID não fornecido.");
         }
-
         const verifyUser = await User.findOne({
             where: { id: dto.id },
             attributes: ['usuario', 'nome', 'empresa', 'cnpj']
         })
-
         if (!verifyUser) {
             throw new Error("Usuário com esse ID não encontrado.");
         }
-
         return verifyUser;
+    }
+
+    async updateUser(dto, id) {
+        if (!dto) {
+            throw new Error("Dados não fornecidos.");
+        }
+        const verifyUser = await User.findOne({
+            where: { id: id }
+        })
+        if (!verifyUser) {
+            throw new Error("Usuário não encontrado.");
+        }
+        await User.update(dto, {
+            where: { id: id }
+        });
     }
 
 }

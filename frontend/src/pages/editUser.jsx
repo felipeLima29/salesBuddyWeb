@@ -1,9 +1,11 @@
 import icEditUser from '../assets/icEditUser.svg';
 import InputAddUser from '../components/inputs/inputAddUser';
 import ButtonEditUser from '../components/buttons/buttonsEditUser';
+import { isNull } from '../utils/verifyIsNull';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 function EditUser() {
 
@@ -21,7 +23,6 @@ function EditUser() {
     useEffect(() => {
 
         const getUser = async () => {
-
             const response = await axios.get(`http://localhost:3000/getUserId/${id}`);
             const user = response.data;
 
@@ -38,11 +39,30 @@ function EditUser() {
                 empresa: findUser.empresa,
                 cnpj: findUser.cnpj
             })
-
         }
-
         getUser();
     }, [id]);
+
+    const updateUser = async () => {
+
+        if (
+            !isNull(formData.usuario) ||
+            !isNull(formData.nome) ||
+            !isNull(formData.empresa) ||
+            !isNull(formData.cnpj)
+        ) {
+            toast.error('Preenchar todos os campos.');
+            return;
+        }
+
+        try {
+            const response = await axios.put(`http://localhost:3000/updateUser/${id}`, formData);
+            console.log(response.data);
+        } catch (error) {
+            error.body;
+        }
+
+    }
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -95,12 +115,12 @@ function EditUser() {
                     </div>
                 </div>
                 <ButtonEditUser
+                    onSave={updateUser}
                     classNameTxSave='txActiveUser'
                     classNameButtonSave='buttonActiveUser'
                     classNameTxReset='txInactiveUser'
                     classNameButtonreset='buttonInactiveUser'
                 />
-
             </div>
         </div>
     )

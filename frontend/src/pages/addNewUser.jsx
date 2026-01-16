@@ -9,24 +9,26 @@ function addNewUser() {
 
     const [usuario, setUsuario] = useState('');
     const [nome, setNome] = useState('');
+    const [email, setEmail] = useState('');
     const [empresa, setEmpresa] = useState('');
     const [cnpj, setCnpj] = useState('');
 
     const handleInsert = async (e) => {
         if(e) e.preventDefault();
 
-        if(!usuario, !nome, !empresa, !cnpj){
+        if(!usuario, !nome, !email, !empresa, !cnpj){
             toast.error('Preencha todos os campos.');
             return;
         }
         try {
             const response = await axios.post('http://localhost:3000/insertUser',
-                {usuario, nome, empresa, cnpj}
+                {usuario, nome, email, empresa, cnpj}
             );
 
             toast.success('Usuário inserido com sucesso.');
             setUsuario('');
             setNome('');
+            setEmail('');
             setEmpresa('');
             setCnpj('');
             console.log(response.data);
@@ -57,6 +59,13 @@ function addNewUser() {
                         <InputAddUser
                             value={nome}
                             onChange={(e) => setNome(e.target.value)}
+                        />
+                    </div>
+                    <div className='divAddUser'>
+                        <label htmlFor="E-MAIL" className='txViewInfo'>E-MAIL</label>
+                        <InputAddUser
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                         />
                     </div>
                     <div className='divAddUser'>
