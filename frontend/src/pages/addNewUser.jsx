@@ -4,6 +4,7 @@ import ButtonEditUser from '../components/buttons/buttonsEditUser';
 import InputAddUser from '../components/inputs/inputAddUser';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { isNull } from '../utils/verifyIsNull';
 
 function addNewUser() {
 
@@ -14,17 +15,22 @@ function addNewUser() {
     const [cnpj, setCnpj] = useState('');
 
     const handleInsert = async (e) => {
-        if(e) e.preventDefault();
+        if (e) e.preventDefault();
 
-        if(!usuario, !nome, !email, !empresa, !cnpj){
-            toast.error('Preencha todos os campos.');
+        if (
+            !isNull(usuario) ||
+            !isNull(nome) ||
+            !isNull(email) ||
+            !isNull(empresa) ||
+            !isNull(cnpj)
+        ) {
+            toast.error('Preenchar todos os campos.');
             return;
         }
         try {
             const response = await axios.post('http://localhost:3000/insertUser',
-                {usuario, nome, email, empresa, cnpj}
+                { usuario, nome, email, empresa, cnpj }
             );
-
             toast.success('Usuário inserido com sucesso.');
             setUsuario('');
             setNome('');
@@ -32,8 +38,8 @@ function addNewUser() {
             setEmpresa('');
             setCnpj('');
             console.log(response.data);
-        } catch (error) {   
-            error.message;
+        } catch (error) {
+            toast.error(error.response.data.message);
         }
     }
 
@@ -49,7 +55,7 @@ function addNewUser() {
                 <div className='formAddUser'>
                     <div className='divAddUser'>
                         <label htmlFor="USUÁRIOS" className='txViewInfo'>USUÁRIO</label>
-                        <InputAddUser 
+                        <InputAddUser
                             value={usuario}
                             onChange={(e) => setUsuario(e.target.value)}
                         />
@@ -77,13 +83,13 @@ function addNewUser() {
                     </div>
                     <div className='divAddUser'>
                         <label htmlFor="CNPJ" className='txViewInfo'>CNPJ</label>
-                        <InputAddUser 
+                        <InputAddUser
                             value={cnpj}
                             onChange={(e) => setCnpj(e.target.value)}
                         />
                     </div>
                 </div>
-                <ButtonEditUser 
+                <ButtonEditUser
                     onSave={handleInsert}
                     classNameTxSave='txActiveUser'
                     classNameButtonSave='buttonActiveUser'

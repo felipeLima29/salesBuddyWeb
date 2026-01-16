@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getUserId, insertUser, listAllUser, updateUser } from "../controllers/UserController.js";
+import { deleteUsers, getUserId, insertUser, listAllUser, updateUser } from "../controllers/UserController.js";
 
 const router = Router();
 
@@ -10,6 +10,6 @@ router.post('/insertUser', insertUser);
 router.get('/listAllUser', listAllUser);
 router.get('/getUserId/:id', getUserId);
 router.put('/updateUser/:id', updateUser);
-
+router.delete('/deleteUsers', deleteUsers);
 
 export default router;

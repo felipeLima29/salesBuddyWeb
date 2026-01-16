@@ -50,5 +50,12 @@ class UserService {
         });
     }
 
+    async deleteUsers(array) {
+        const deleteRows = await User.destroy({
+            where: {id: array}
+        });
+        return deleteRows;
+    }
+
 }
 export default new UserService();

@@ -54,9 +54,9 @@ function EditUser() {
             toast.error('Preenchar todos os campos.');
             return;
         }
-
         try {
             const response = await axios.put(`http://localhost:3000/updateUser/${id}`, formData);
+            toast.success('Usuário atualizado com sucesso!');
             console.log(response.data);
         } catch (error) {
             error.body;

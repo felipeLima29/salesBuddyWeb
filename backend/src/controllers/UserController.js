@@ -10,7 +10,7 @@ export async function insertUser(req, res) {
 
         return res.status(201).json({ msg: "Usuário inserido com sucesso." });
     } catch (error) {
-        return res.status(400).json({
+        return res.status(409).json({
             error: true,
             message: error.message
         })
@@ -48,15 +48,33 @@ export async function getUserId(req, res) {
 export async function updateUser(req, res) {
     try {
         const { id } = req.params;
-        console.log(id)
         const userDto = new UserDTO(req.body);
-        console.log(userDto);
-
         await UserService.updateUser(userDto, id);
 
         return res.status(200).json({
             msg: "Usuário atualizado com sucesso."
         })
+    } catch (error) {
+        return res.status(400).json({
+            error: true,
+            message: error.message
+        })
+    }
+}
+
+export async function deleteUsers(req, res) {
+    try {
+        const { ids } = req.body;
+        if (!ids || !Array.isArray(ids) || ids.length === 0) {
+            return res.status(400).json({ message: "Nenhum ID fornecido ou formato inválido." });
+        }
+        const response = await UserService.deleteUsers(ids);
+
+        console.log(response);
+        return res.status(200).json({
+            msg: "Usuário(s) deletado(s) com sucesso.",
+            affectedRows: response
+        });
     } catch (error) {
         return res.status(400).json({
             error: true,
