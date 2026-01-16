@@ -115,6 +115,7 @@ function UserList() {
 
             <ConfirmModalDelete
                 usuariosToDelete={getNamesSelecteds()}
+                idsToDelete={selectedUserId}
                 isOpen={isModalOpen}
                 handleClose={handleClose}
             />
