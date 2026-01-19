@@ -22,6 +22,7 @@ function UserList() {
     const handleClose = () => {
         setIsModalOpen(false);
     }
+
     const handleCheckboxChange = (id) => {
         setSelectedUserId((prevIds) => {
             if (prevIds.includes(id)) {

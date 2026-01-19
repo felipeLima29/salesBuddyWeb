@@ -1,5 +1,16 @@
+import { Link } from "react-router-dom";
 import icReceipt from "../assets/icReceipt.svg";
+import { useState } from "react";
+import PaymentReceiptModal from "../components/paymentReceiptModal";
 function SalesList() {
+    const [receiptIsOpen, setReceiptIsOpen] = useState(false);
+
+    const handleOpen = () => {
+        setReceiptIsOpen(true);
+    }
+    const handleClose = () => {
+        setReceiptIsOpen(false);
+    }
 
     const mockSales = [
         { idVenda: 1001, nome: "Ana Beatriz Silva", cpf: "123.456.789-00", email: "ana.beatriz@gmail.com", qtdItens: 3, valor: 150.90, troco: 0.00 },
@@ -51,18 +62,21 @@ function SalesList() {
                             <td className="txViewUsersSales textCenter">{sale.qtdItens}</td>
                             <td className="txViewUsersSales textCenter">{sale.valor}</td>
                             <td className="txViewUsersSales textCenter">{sale.troco}</td>
-                            <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-                                <td>
-                                    <img src={icReceipt} alt="Comprovante"/>
-                                </td>
-                            </div>
-
+                            <td>
+                                <div style={{ display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                    <img src={icReceipt} alt="Comprovante" onClick={handleOpen}/>
+                                </div>
+                            </td>
                         </tr>
                     ))}
 
                 </table>
             </div>
 
+            <PaymentReceiptModal 
+                isOpen={receiptIsOpen}
+                handleClose={handleClose}
+            />
         </div>
     )
 }

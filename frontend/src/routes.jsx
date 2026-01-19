@@ -9,6 +9,8 @@ import SalesList from "./pages/salesList.jsx";
 import AddNewUser from './pages/addNewUser.jsx';
 import EditUser from './pages/editUser.jsx';
 import ConfirmModalDelete from './components/confirmModal.jsx';
+import PaymentReceiptModal from './components/paymentReceiptModal.jsx';
+
 function AppRoutes() {
     return (
         <div>
@@ -22,6 +24,7 @@ function AppRoutes() {
                     <Route path="/usersList/addNewUser" element={<AddNewUser />} />
                     <Route path="/usersList/editUser/:id" element={<EditUser />} />
                     <Route path="/usersList/modelDeleteUser" element={<ConfirmModalDelete />} />
+                    <Route path="/salesList/paymentReceiptModal" element={<PaymentReceiptModal />} />
                 </Route>
 
             </Routes>
