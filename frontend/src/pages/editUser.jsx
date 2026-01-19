@@ -16,6 +16,7 @@ function EditUser() {
         id: '',
         usuario: '',
         nome: '',
+        email: '',
         empresa: '',
         cnpj: ''
     });
@@ -29,6 +30,7 @@ function EditUser() {
             const findUser = {
                 usuario: user.usuario,
                 nome: user.nome,
+                email: user.email,
                 empresa: user.empresa,
                 cnpj: user.cnpj
             };
@@ -36,6 +38,7 @@ function EditUser() {
             setFormData({
                 usuario: findUser.usuario,
                 nome: findUser.nome,
+                email: findUser.email,
                 empresa: findUser.empresa,
                 cnpj: findUser.cnpj
             })
@@ -48,6 +51,7 @@ function EditUser() {
         if (
             !isNull(formData.usuario) ||
             !isNull(formData.nome) ||
+            !isNull(formData.email) ||
             !isNull(formData.empresa) ||
             !isNull(formData.cnpj)
         ) {
@@ -59,6 +63,7 @@ function EditUser() {
             toast.success('Usuário atualizado com sucesso!');
             console.log(response.data);
         } catch (error) {
+            toast.error(error.response.data.message);
             error.body;
         }
 
@@ -94,6 +99,14 @@ function EditUser() {
                         <InputAddUser
                             name='nome'
                             value={formData.nome}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className="divAddUser">
+                        <label htmlFor="NOME" className="txViewInfo">EMAIL</label>
+                        <InputAddUser
+                            name='email'
+                            value={formData.email}
                             onChange={handleChange}
                         />
                     </div>

@@ -1,4 +1,4 @@
-import { where } from "sequelize";
+import { Op, where } from "sequelize";
 import User from "../models/User.js";
 
 class UserService {
@@ -27,7 +27,7 @@ class UserService {
         }
         const verifyUser = await User.findOne({
             where: { id: dto.id },
-            attributes: ['usuario', 'nome', 'empresa', 'cnpj']
+            attributes: ['usuario', 'nome', 'email', 'empresa', 'cnpj']
         })
         if (!verifyUser) {
             throw new Error("Usuário com esse ID não encontrado.");
@@ -44,6 +44,18 @@ class UserService {
         })
         if (!verifyUser) {
             throw new Error("Usuário não encontrado.");
+        }
+        const userConflic = await User.findOne({
+            where: { 
+                [Op.or]: [
+                    {usuario: dto.usuario},
+                    {email: dto.email}
+                ],
+                id: { [Op.ne]: id }
+            }
+        })
+        if(userConflic){
+            throw new Error("Email ou Usuário já foi cadastrado por outra pessoa.");
         }
         await User.update(dto, {
             where: { id: id }
