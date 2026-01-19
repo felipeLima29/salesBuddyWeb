@@ -3,19 +3,22 @@ import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { toast } from 'react-toastify';
 
-function ConfirmModalDelete({ isOpen, usuariosToDelete, idsToDelete, handleClose }) {
+function ConfirmModalDelete({ isOpen, usuariosToDelete, idsToDelete, handleClose, onSucess }) {
     const [mounted, setMounted] = useState(false);
 
-    const deleteUser = async () =>{
-        try{
+    const deleteUser = async () => {
+        try {
             console.log(idsToDelete)
             const ids = idsToDelete;
             const response = await axios.delete('http://localhost:3000/deleteUsers',
-                {data: { ids }
-            });
-
+                {
+                    data: { ids }
+                });
+            handleClose();
+            onSucess();
             toast.success(response.data.msg);
-        }catch(error){
+        } catch (error) {
+            handleClose();
             toast.error(error.message);
         }
     }
@@ -65,9 +68,9 @@ function ConfirmModalDelete({ isOpen, usuariosToDelete, idsToDelete, handleClose
                         <li>Nenhum usuário selecionado</li>
                     )}
                 </ul>
-                
+
                 <span className="spanModalDelete">Deseja prosseguir?</span>
-                
+
                 <div className="modalActions">
                     <button className="btnYes" onClick={deleteUser}>SIM</button>
                     <button className="btnNo" onClick={handleClose}>NÃO</button>

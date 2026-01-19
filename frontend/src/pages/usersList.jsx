@@ -13,9 +13,9 @@ function UserList() {
     const [selectedUserId, setSelectedUserId] = useState([]);
 
     const handleOpen = () => {
-        if(selectedUserId.length>0){
+        if (selectedUserId.length > 0) {
             setIsModalOpen(true);
-        }else{
+        } else {
             toast.warn('Selecione um usuário para deletar.')
         }
     }
@@ -104,8 +104,8 @@ function UserList() {
 
                     </table>
                     <ButtonListUser
-                        classNameButtonDelete={selectedUserId.length>0 ? 'buttonActiveUser' : 'buttonInactiveUser'}
-                        classNameTxDelete={selectedUserId.length>0 ? 'txActiveUser' : 'txInactiveUser'}
+                        classNameButtonDelete={selectedUserId.length > 0 ? 'buttonActiveUser' : 'buttonInactiveUser'}
+                        classNameTxDelete={selectedUserId.length > 0 ? 'txActiveUser' : 'txInactiveUser'}
                         handleOpen={handleOpen}
                     />
 
@@ -118,10 +118,12 @@ function UserList() {
                 idsToDelete={selectedUserId}
                 isOpen={isModalOpen}
                 handleClose={handleClose}
+                onSucess={() => {
+                    listUsers()
+                    setSelectedUserId([])
+                }}
             />
-
         </div>
-
     )
 }
 

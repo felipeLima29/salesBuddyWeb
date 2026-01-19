@@ -15,9 +15,9 @@ function ButtonListUser({ classNameButtonDelete, classNameTxDelete, handleOpen }
             </Link>
 
             
-            <Link style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+            <Link onClick={handleOpen} style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
 
-                <button className={classNameButtonDelete} onClick={handleOpen}>
+                <button className={classNameButtonDelete}>
                     <img src={icDeleteUser} alt="Deletar usuário" />
                 </button>
                 <span className={classNameTxDelete}>EXCLUIR USUÁRIO</span>

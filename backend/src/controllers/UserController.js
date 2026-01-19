@@ -1,9 +1,7 @@
 import UserDTO from "../dtos/UserDTO.js";
 import UserService from "../services/UserService.js";
 
-
 export async function insertUser(req, res) {
-
     try {
         const userDto = new UserDTO(req.body);
         await UserService.createUser(userDto);
@@ -15,11 +13,9 @@ export async function insertUser(req, res) {
             message: error.message
         })
     }
-
 }
 
 export async function listAllUser(req, res) {
-
     try {
         const listUsers = await UserService.listAllUsers({});
         return res.status(200).json(listUsers)
@@ -70,7 +66,6 @@ export async function deleteUsers(req, res) {
         }
         const response = await UserService.deleteUsers(ids);
 
-        console.log(response);
         return res.status(200).json({
             msg: "Usuário(s) deletado(s) com sucesso.",
             affectedRows: response
