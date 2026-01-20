@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { deleteUsers, getUserId, insertUser, listAllUser, updateUser } from "../controllers/UserController.js";
+import { insertSale } from "../controllers/SaleController.js";
 
 const router = Router();
 
@@ -11,5 +12,9 @@ router.get('/listAllUser', listAllUser);
 router.get('/getUserId/:id', getUserId);
 router.put('/updateUser/:id', updateUser);
 router.delete('/deleteUsers', deleteUsers);
+
+// Rotas de Vendas
+
+router.post('/insertSale', insertSale);
 
 export default router;
