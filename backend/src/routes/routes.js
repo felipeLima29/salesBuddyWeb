@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { deleteUsers, getUserId, insertUser, listAllUser, updateUser } from "../controllers/UserController.js";
-import { insertSale } from "../controllers/SaleController.js";
+import { insertSale, listAllSales } from "../controllers/SaleController.js";
 
 const router = Router();
 
@@ -16,5 +16,6 @@ router.delete('/deleteUsers', deleteUsers);
 // Rotas de Vendas
 
 router.post('/insertSale', insertSale);
+router.get('/listAllSales', listAllSales);
 
 export default router;

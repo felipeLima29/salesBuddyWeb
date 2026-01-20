@@ -14,3 +14,15 @@ export async function insertSale(req, res) {
         })
     }
 }
+
+export async function listAllSales(req, res) {
+    try {
+        const listSales = await SaleService.listAllSales();
+        return res.status(200).json(listSales);
+    } catch (error) {
+        return res.status(500).json({
+            error: true,
+            message: error.message
+        })
+    }
+}
