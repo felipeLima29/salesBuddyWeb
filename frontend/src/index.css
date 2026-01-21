@@ -252,6 +252,7 @@ a {
 
 .txViewUsersSales {
     color: #A32C65;
+    padding-bottom: 15px;
     padding-right: 8px;
 }
 
@@ -467,6 +468,12 @@ a {
     align-items: center;
     gap: 10px;
     padding-top: 10px;
+}
+
+.receiptModalItems {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 .btnReceiptModalBlue {

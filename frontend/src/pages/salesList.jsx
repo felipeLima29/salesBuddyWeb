@@ -7,6 +7,7 @@ function SalesList() {
 
     const [receiptIsOpen, setReceiptIsOpen] = useState(false);
     const [sales, setSales] = useState([]);
+    const [selectedSale, setSelectedSale] = useState(null);
 
     const handleOpen = () => {
         setReceiptIsOpen(true);
@@ -15,6 +16,10 @@ function SalesList() {
         setReceiptIsOpen(false);
     }
 
+    const handleSelectReceipt = (sale) => {
+        setSelectedSale(sale);
+        handleOpen();
+    };
 
     const listSales = async () => {
         try {
@@ -55,7 +60,7 @@ function SalesList() {
                             <td className="txViewUsersSales textCenter">{sale.changeDue}</td>
                             <td>
                                 <div style={{ display: "flex", justifyContent: "center", alignItems: "center"}}>
-                                    <img src={icReceipt} alt="Comprovante" onClick={handleOpen}/>
+                                    <img src={icReceipt} alt="Comprovante" onClick={() => { handleSelectReceipt(sale)}}/>
                                 </div>
                             </td>
                         </tr>
@@ -64,9 +69,10 @@ function SalesList() {
                 </table>
             </div>
 
-            <PaymentReceiptModal 
+            <PaymentReceiptModal
                 isOpen={receiptIsOpen}
                 handleClose={handleClose}
+                data={selectedSale}
             />
         </div>
     )

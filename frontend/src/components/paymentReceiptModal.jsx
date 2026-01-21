@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import ReactDOM from 'react-dom';
 
-function PaymentReceiptModal({ isOpen, handleClose }) {
+function PaymentReceiptModal({ isOpen, handleClose, data }) {
 
     useEffect(() => {
         if (isOpen) {
@@ -37,40 +37,43 @@ function PaymentReceiptModal({ isOpen, handleClose }) {
                     <div className="receiptModalTop">
                         <div className="receiptModalItemsFields">
                             <label className="labelReceiptModal" htmlFor="NOME">Nome</label> <br />
-                            <span className="spanReceiptModal">José Maria das Neves</span>
+                            <span className="spanReceiptModal">{data.name}</span>
                         </div>
                         <div className="receiptModalItemsFields">
                             <label className="labelReceiptModal" htmlFor="CPF">CPF</label> <br />
-                            <span className="spanReceiptModal">000.000.000-00</span>
+                            <span className="spanReceiptModal">{data.cpf}</span>
                         </div>
                     </div>
-
                     <label className="labelReceiptModal" htmlFor="EMAIL">E-mail</label> <br />
-                    <span className="spanReceiptModal">josemariasdasneves@gmail.com</span>
-
+                    <span className="spanReceiptModal">{data.email}</span>
                 </div>
                 <hr />
-
                 <div className="receiptModalDescription">
-                    <label className="labelReceiptModal" htmlFor="ITM">Itm</label>
-                    <label className="labelReceiptModal" htmlFor="DESCRICAO">Descrição</label>
+                    <div className="receiptModalItems">
+                        <label className="labelReceiptModal" htmlFor="ITM">Itm</label>
+                        <span className="spanReceiptModal">{data.qtdItems}</span>
+                    </div>
+                    <div className="receiptModalItems">
+                        <label className="labelReceiptModal" htmlFor="DESCRICAO">Descrição</label>
+                        <span className="spanReceiptModal">{data.description}</span>
+                    </div>
                 </div>
                 <hr />
 
                 <div className="receiptModalValues">
                     <div className="divValues">
                         <label className="spanReceiptModal" htmlFor="VALUERECEIVED">Valor recebido</label>
-                        <span className="valueReceiptModal">R$ 57,00</span>
+                        <span className="valueReceiptModal">R$ {data.valueReceived}</span>
                     </div>
                     <div className="divValues">
                         <label className="spanReceiptModal" htmlFor="VALUESALE">Valor venda</label>
-                        <span className="valueReceiptModal">R$ 56,30</span>
+                        <span className="valueReceiptModal">R$ {data.valueSale}</span>
                     </div>
                     <div className="divValues">
                         <label className="spanReceiptModal" htmlFor="CHANGEDUE">Troco devido</label>
-                        <span className="valueReceiptModal">R$ 00.70</span>
+                        <span className="valueReceiptModal">R$ {data.changeDue}</span>
                     </div>
-                    
+
                 </div>
             </div>
             <div className="receiptModalButtons">
