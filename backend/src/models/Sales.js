@@ -13,15 +13,17 @@ const Sale = sequelize.define('Sales', {
     },
     cpf: {
         type: DataTypes.STRING,
-        allowNull: false,
-        unique: true
+        allowNull: false
     },
     email: {
         type: DataTypes.STRING,
-        allowNull: false,
-        unique: true
+        allowNull: false
     },
     description: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    qtdItems: {
         type: DataTypes.STRING,
         allowNull: false
     },

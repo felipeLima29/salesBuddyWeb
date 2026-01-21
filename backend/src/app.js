@@ -3,6 +3,7 @@ import cors from 'cors';
 import router from './routes/routes.js';
 import sequelize from './database/db.js';
 import './models/User.js';
+import './models/Sales.js';
 
 const app = express();
 app.use(express.json());

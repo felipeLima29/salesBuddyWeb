@@ -5,6 +5,7 @@ class SaleDTO {
         this.cpf = body.cpf;
         this.email = body.email;
         this.description = body.description;
+        this.qtdItems = body.qtdItems;
         this.valueReceived = body.valueReceived;
         this.valueSale = body.valueSale;
         this.changeDue = body.changeDue;
@@ -17,6 +18,7 @@ class SaleDTO {
             cpf: sale.cpf,
             email: sale.email,
             description: sale.description,
+            qtdItems: sale.qtdItems,
             valueReceived: sale.valueReceived,
             valueSale: sale.valueSale,
             changeDue: sale.changeDue

@@ -14,7 +14,6 @@ router.put('/updateUser/:id', updateUser);
 router.delete('/deleteUsers', deleteUsers);
 
 // Rotas de Vendas
-
 router.post('/insertSale', insertSale);
 router.get('/listAllSales', listAllSales);
 
