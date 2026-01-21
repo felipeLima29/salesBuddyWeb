@@ -59,7 +59,7 @@ function SalesList() {
                             <td className="txViewUsersSales textCenter">{sale.valueSale}</td>
                             <td className="txViewUsersSales textCenter">{sale.changeDue}</td>
                             <td>
-                                <div style={{ display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                <div style={{ display: "flex", justifyContent: "center", alignItems: "center", paddingBottom: "13px"}}>
                                     <img src={icReceipt} alt="Comprovante" onClick={() => { handleSelectReceipt(sale)}}/>
                                 </div>
                             </td>

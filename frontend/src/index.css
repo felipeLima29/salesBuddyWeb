@@ -96,12 +96,13 @@ a {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    overflow: scroll;
+    background-color: white;
     width: 18%;
     height: 100%;
     padding-top: 2%;
     padding-left: 3%;
     padding-right: 4%;
-    background-color: white;
 }
 
 .listMenu {
@@ -131,7 +132,6 @@ a {
 }
 
 .optionsMenu {
-    
     color: #A32C65;
     font-family: 'Montserrat', sans-serif;
     font-size: 13px;
@@ -154,7 +154,6 @@ a {
 .checkbox {
     appearance: none;
     -webkit-appearance: none;
-
     width: 15px;
     height: 15px;
     border: 1px solid, #707070;
