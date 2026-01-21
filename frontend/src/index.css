@@ -126,13 +126,12 @@ a {
 .optionsMenuChosed {
     color: #074A82;
     font-family: 'Montserrat', sans-serif;
-    font-size: 16px;
     font-weight: 700;
     font-style: normal;
 }
 
 .optionsMenu {
-    font-weight: normal;
+    
     color: #A32C65;
     font-family: 'Montserrat', sans-serif;
     font-size: 13px;
@@ -258,6 +257,7 @@ a {
 
 .txViewIdName {
     color: #A32C65;
+    padding-bottom: 15px;
     font-weight: 700;
     letter-spacing: 0.1px;
 }
