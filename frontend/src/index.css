@@ -88,6 +88,7 @@ a {
 }
 
 /* Menu Styles */
+
 .logoMenu {
     width: 100%;
 }
@@ -139,6 +140,7 @@ a {
 }
 
 /* List of Users Styles */
+
 .containerList {
     padding: 3%;
     flex-direction: column;
@@ -177,13 +179,13 @@ a {
 
 .txViewHeader {
     color: #707070;
-    padding: 8px 10px 15px 0px;
+    padding: 8px 10px 15px 5px;
 }
 
 .txViewTable {
     color: #707070;
     font-weight: 400;
-    padding-bottom: 10px; /* aqui */
+    padding-bottom: 10px;
 }
 
 .buttonUserContainer {
@@ -199,7 +201,7 @@ a {
 .tableSalesList {
     width: 100%;
     padding-top: 2vh;
-    padding-right: 15vh;
+    padding-right: 25vh;
     padding-bottom: 2%;
     background-color: rgba(255, 255, 255, 0.6);
 
@@ -264,12 +266,11 @@ a {
 
 .txViewUsersSales {
     color: #A32C65;
-    padding-right: 8px; /* aqui */
+    padding-right: 8px;
 }
 
 .txViewIdName {
     color: #A32C65;
-    padding-bottom: 15px;
     font-weight: 700;
     letter-spacing: 0.1px;
 }
