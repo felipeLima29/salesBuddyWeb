@@ -33,26 +33,52 @@ function PaymentReceiptModal({ isOpen, handleClose }) {
         <div className="backgroundModalReceipt">
             <div className="receiptModaldiv">
                 <div className="receiptModalDetails">
-                    <label htmlFor="NOME">Nome</label> <br />
-                    <span>José Maria das Neves</span>
-                    <label htmlFor="CPF">CPF</label> <br />
-                    <span>000.000.000-00</span>
-                    <label htmlFor="EMAIL">E-mail</label> <br />
-                    <span>josemariasdasneves@gmail.com</span>
+
+                    <div className="receiptModalTop">
+                        <div className="receiptModalItemsFields">
+                            <label className="labelReceiptModal" htmlFor="NOME">Nome</label> <br />
+                            <span className="spanReceiptModal">José Maria das Neves</span>
+                        </div>
+                        <div className="receiptModalItemsFields">
+                            <label className="labelReceiptModal" htmlFor="CPF">CPF</label> <br />
+                            <span className="spanReceiptModal">000.000.000-00</span>
+                        </div>
+                    </div>
+
+                    <label className="labelReceiptModal" htmlFor="EMAIL">E-mail</label> <br />
+                    <span className="spanReceiptModal">josemariasdasneves@gmail.com</span>
+
                 </div>
                 <hr />
 
                 <div className="receiptModalDescription">
-                    <label htmlFor="ITM">Itm</label>
-                    <label htmlFor="DESCRICAO">Descrição</label>
+                    <label className="labelReceiptModal" htmlFor="ITM">Itm</label>
+                    <label className="labelReceiptModal" htmlFor="DESCRICAO">Descrição</label>
                 </div>
                 <hr />
-                <div className="receiptModalButtons">
-                    <button>SALVAR</button>
-                    <button>IMPRIMIR</button>
-                    <button onClick={handleClose}>FECHAR</button>
+
+                <div className="receiptModalValues">
+                    <div className="divValues">
+                        <label className="spanReceiptModal" htmlFor="VALUERECEIVED">Valor recebido</label>
+                        <span className="valueReceiptModal">R$ 57,00</span>
+                    </div>
+                    <div className="divValues">
+                        <label className="spanReceiptModal" htmlFor="VALUESALE">Valor venda</label>
+                        <span className="valueReceiptModal">R$ 56,30</span>
+                    </div>
+                    <div className="divValues">
+                        <label className="spanReceiptModal" htmlFor="CHANGEDUE">Troco devido</label>
+                        <span className="valueReceiptModal">R$ 00.70</span>
+                    </div>
+                    
                 </div>
             </div>
+            <div className="receiptModalButtons">
+                <button className="btnReceiptModalBlue">SALVAR</button>
+                <button className="btnReceiptModalBlue">IMPRIMIR</button>
+                <button className="btnReceiptModalRed" onClick={handleClose}>FECHAR</button>
+            </div>
+
         </div>
     );
 
