@@ -37,7 +37,7 @@ function SalesList() {
     return (
         <div className="body">
             <div className="containerList">
-                <table className="tableUsersList">
+                <table className="tableSalesList">
                     <tr>
                         <td className="txViewHeader textCenter">ID.VENDA</td>
                         <td className="txViewHeader">NOME</td>

@@ -78,7 +78,6 @@ function UserList() {
                                 <td>
                                     <input
                                         type="checkbox"
-                                        id="checkbox"
                                         checked={selectedUserId.includes(user.id)}
                                         onClick={() => handleCheckboxChange(user.id)}
                                     />
