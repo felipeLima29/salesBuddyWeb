@@ -24,7 +24,7 @@ const Sale = sequelize.define('Sales', {
         allowNull: false
     },
     qtdItems: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false
     },
     valueReceived: {

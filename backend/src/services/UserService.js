@@ -11,6 +11,7 @@ class UserService {
         if (verifyUser) {
             throw new Error("Usuário já existe.");
         }
+        //const passwordHash = await bcrypt.hash(dto)
 
         const newUser = User.create(dto);
         return newUser;
