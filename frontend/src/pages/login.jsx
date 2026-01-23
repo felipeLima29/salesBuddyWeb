@@ -30,6 +30,8 @@ function PortalLogin() {
                 toast.info(responseData.message);
                 return;
             }
+            localStorage.setItem('token', responseData.token);
+            localStorage.setItem('id', responseData.user);
             toast.success('Login realizado com sucesso.');
             navigate('/usersList');
             
