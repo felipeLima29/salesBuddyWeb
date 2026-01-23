@@ -4,9 +4,13 @@ import UserService from "../services/UserService.js";
 export async function insertUser(req, res) {
     try {
         const userDto = new UserDTO(req.body);
-        await UserService.createUser(userDto);
+        const { newUser, tempPassword } = await UserService.createUser(userDto);
 
-        return res.status(201).json({ msg: "Usuário inserido com sucesso." });
+        return res.status(201).json({
+            message: "Usuário inserido com sucesso.",
+            user: newUser,
+            password: tempPassword
+        })
     } catch (error) {
         return res.status(409).json({
             error: true,
@@ -48,7 +52,7 @@ export async function updateUser(req, res) {
         await UserService.updateUser(userDto, id);
 
         return res.status(200).json({
-            msg: "Usuário atualizado com sucesso."
+            message: "Usuário atualizado com sucesso."
         })
     } catch (error) {
         return res.status(400).json({
@@ -67,7 +71,7 @@ export async function deleteUsers(req, res) {
         const response = await UserService.deleteUsers(ids);
 
         return res.status(200).json({
-            msg: "Usuário(s) deletado(s) com sucesso.",
+            message: "Usuário(s) deletado(s) com sucesso.",
             affectedRows: response
         });
     } catch (error) {

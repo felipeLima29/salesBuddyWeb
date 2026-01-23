@@ -1,21 +1,35 @@
 import { Op, where } from "sequelize";
+import bcrypt from "bcryptjs";
 import User from "../models/User.js";
+import generatePassword from "../utils/generatePassword.js";
 
 class UserService {
 
     async createUser(dto) {
         const verifyUser = await User.findOne({
-            where: { usuario: dto.usuario }
+            where: {
+                [Op.or]: [
+                    {usuario: dto.usuario},
+                    {email: dto.email}
+                ],
+            }
         })
 
         if (verifyUser) {
             throw new Error("Usuário já existe.");
         }
-        //const passwordHash = await bcrypt.hash(dto)
+        
+        const plainPassword = generatePassword();
+        const passwordHash = await bcrypt.hash(plainPassword, 10);
 
-        const newUser = User.create(dto);
-        return newUser;
-    }
+        const newUser = User.create({
+            ...dto,
+            password: passwordHash
+        });
+
+        newUser.password = undefined;
+        return { newUser, tempPassword: plainPassword };
+    } 
 
     async listAllUsers() {
         const listUsers = await User.findAll({ attributes: ['id', 'usuario', 'nome', 'empresa', 'cnpj'] });

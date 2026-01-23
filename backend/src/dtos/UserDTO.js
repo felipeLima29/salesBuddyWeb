@@ -6,6 +6,7 @@ class UserDTO {
         this.email = body.email;
         this.empresa = body.empresa;
         this.cnpj = body.cnpj;
+        this.password = body.password;
     }
 
     static format(user){
@@ -15,7 +16,8 @@ class UserDTO {
             nome: user.nome,
             email: user.email,
             empresa: user.empresa,
-            cnpj: user.cnpj
+            cnpj: user.cnpj,
+            password: user.password
         }
     }
 }
