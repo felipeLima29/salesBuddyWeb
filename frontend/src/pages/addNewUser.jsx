@@ -18,11 +18,11 @@ function addNewUser() {
         if (e) e.preventDefault();
 
         if (
-            !isNull(usuario) ||
-            !isNull(nome) ||
-            !isNull(email) ||
-            !isNull(empresa) ||
-            !isNull(cnpj)
+            isNull(usuario) ||
+            isNull(nome) ||
+            isNull(email) ||
+            isNull(empresa) ||
+            isNull(cnpj)
         ) {
             toast.error('Preenchar todos os campos.');
             return;

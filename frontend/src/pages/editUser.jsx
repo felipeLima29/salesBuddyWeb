@@ -49,11 +49,11 @@ function EditUser() {
     const updateUser = async () => {
 
         if (
-            !isNull(formData.usuario) ||
-            !isNull(formData.nome) ||
-            !isNull(formData.email) ||
-            !isNull(formData.empresa) ||
-            !isNull(formData.cnpj)
+            isNull(formData.usuario) ||
+            isNull(formData.nome) ||
+            isNull(formData.email) ||
+            isNull(formData.empresa) ||
+            isNull(formData.cnpj)
         ) {
             toast.error('Preenchar todos os campos.');
             return;

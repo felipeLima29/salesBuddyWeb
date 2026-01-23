@@ -1,8 +1,8 @@
-export default function InputPassword() {
+export default function InputPassword({onChange}) {
 
     return (
         <div>
-            <input type="password" placeholder="Senha" className="inputLogin"/>
+            <input type="password" onChange={onChange} placeholder="Senha" className="inputLogin"/>
         </div>
     )
 }

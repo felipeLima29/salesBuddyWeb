@@ -1,5 +1,6 @@
 import User from "../models/User.js";
 import bcrypt from "bcryptjs";
+import AppError from "../utils/appError.js";
 
 class AuthService {
 
@@ -12,6 +13,9 @@ class AuthService {
         }
         const passwordMatch = await bcrypt.compare(dto.password, userFound.password);
 
+        if(!passwordMatch) {
+            throw new AppError('Senha incorreta.', 401);
+        }
         return passwordMatch;
     }
 

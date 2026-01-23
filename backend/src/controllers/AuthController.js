@@ -1,5 +1,6 @@
 import UserDTO from "../dtos/UserDTO.js";
 import AuthService from "../services/AuthService.js";
+import AppError from "../utils/appError.js";
 
 export async function login(req, res) {
 
@@ -13,15 +14,26 @@ export async function login(req, res) {
     }
 
     try {
-        const loginSuccess = await AuthService.login({ usuario, password });
+        await AuthService.login({ usuario, password });
 
         return res.status(200).json({
             error: false,
-            message: loginSuccess ? "Login bem sucedido." : "Credenciais inválidas."
+            login: true,
+            message: "Login realizado com sucesso."
         });
     } catch (error) {
-        return res.status(401).json({
+
+        if(error instanceof AppError) {
+            return res.status(error.statusCode).json({
+                error: true,
+                login: false,
+                message: error.message
+            });
+        }
+
+        return res.status(500).json({
             error: true,
+            login: false,
             message: error.message
         })
     }
