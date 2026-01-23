@@ -15,11 +15,13 @@ export async function login(req, res) {
     }
 
     try {
-        await AuthService.login({ usuario, password });
+        const { token, userFound } = await AuthService.login({ usuario, password });
 
         return res.status(200).json({
             error: false,
             login: true,
+            token: token,
+            user: userFound.id,
             message: "Login realizado com sucesso."
         });
     } catch (error) {

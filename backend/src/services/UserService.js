@@ -29,7 +29,7 @@ class UserService {
 
         newUser.password = undefined;
         return { newUser, tempPassword: plainPassword };
-    } 
+    }
 
     async listAllUsers() {
         const listUsers = await User.findAll({ attributes: ['id', 'usuario', 'nome', 'empresa', 'cnpj'] });

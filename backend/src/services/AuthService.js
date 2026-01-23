@@ -2,6 +2,7 @@ import User from "../models/User.js";
 import bcrypt from "bcryptjs";
 import AppError from "../utils/appError.js";
 import dotenv from 'dotenv';
+import jwt from 'jsonwebtoken';
 
 dotenv.config();
 
@@ -12,14 +13,19 @@ class AuthService {
             where: { usuario: dto.usuario }
         })
         if (!userFound) {
-            throw new Error("Usuário não encontrado.");
+            throw new AppError('Usuário não encontrado.', 401);
         }
         const passwordMatch = await bcrypt.compare(dto.password, userFound.password);
-        console.log(process.env.EMAIL_RESET, " | ", process.env.PASSWORD_RESET);
-        if(!passwordMatch) {
+        if (!passwordMatch) {
             throw new AppError('Senha incorreta.', 401);
         }
-        return passwordMatch;
+
+        const token = jwt.sign(
+            { id: userFound.id },
+            process.env.JWT_SECRET_KEY,
+            { expiresIn: process.env.JWT_EXPIRES_IN }
+        );
+        return { token, userFound };
     }
 
 }

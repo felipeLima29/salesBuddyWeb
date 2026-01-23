@@ -16,7 +16,7 @@ function PortalLogin() {
 
     const handleLogin = async () => {
         if (isNull(usuario) || isNull(password)) {
-            toast.success('Por favor, preencha todos os campos.');
+            toast.info('Por favor, preencha todos os campos.');
             return;
         }
 
@@ -26,8 +26,13 @@ function PortalLogin() {
             );
             const responseData = response.data;
 
+            if(responseData.login == false){
+                toast.info(responseData.message);
+                return;
+            }
+            toast.success('Login realizado com sucesso.');
             navigate('/usersList');
-            toast.success(responseData.message);
+            
         } catch (error) {
             toast.error(error.response.data.message);
         }

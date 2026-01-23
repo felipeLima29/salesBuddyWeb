@@ -15,6 +15,7 @@ const transporter = nodemailer.createTransport({
 });
 
 async function sendEmailUser(to, pass) {
+    console.log(to, " | ", pass);
     await transporter.sendMail({
         from: 'Sales Buddy',
         to: to,
