@@ -22,7 +22,7 @@ class UserService {
         const plainPassword = generatePassword();
         const passwordHash = await bcrypt.hash(plainPassword, 10);
 
-        const newUser = User.create({
+        const newUser = await User.create({
             ...dto,
             password: passwordHash
         });

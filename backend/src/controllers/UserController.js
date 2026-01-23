@@ -1,10 +1,23 @@
 import UserDTO from "../dtos/UserDTO.js";
+import sendEmailUser from "../services/EmailProvider.js";
 import UserService from "../services/UserService.js";
+import isNull from "../utils/verifyIsNull.js";
 
 export async function insertUser(req, res) {
     try {
         const userDto = new UserDTO(req.body);
+        if (isNull(userDto.usuario) ||
+            isNull(userDto.nome) ||
+            isNull(userDto.email) ||
+            isNull(userDto.empresa) ||
+            isNull(userDto.cnpj)) {
+            return res.status(400).json({
+                error: true,
+                message: "Todos os campos são obrigatórios."
+            });
+        }
         const { newUser, tempPassword } = await UserService.createUser(userDto);
+        await sendEmailUser(newUser.email, tempPassword);
 
         return res.status(201).json({
             message: "Usuário inserido com sucesso.",
@@ -34,6 +47,12 @@ export async function listAllUser(req, res) {
 export async function getUserId(req, res) {
     try {
         const userDto = new UserDTO(req.params);
+        if(isNull(req.params.id)){
+            return res.status(400).json({
+                error: true,
+                message: "ID do usuário é obrigatório."
+            });
+        }
         const getUser = await UserService.getUserId(userDto);
 
         return res.status(200).json(getUser)
@@ -49,6 +68,18 @@ export async function updateUser(req, res) {
     try {
         const { id } = req.params;
         const userDto = new UserDTO(req.body);
+
+        if(isNull(id) ||
+            isNull(userDto.usuario) ||
+            isNull(userDto.nome) ||
+            isNull(userDto.email) ||
+            isNull(userDto.empresa) ||
+            isNull(userDto.cnpj)) {
+            return res.status(400).json({
+                error: true,
+                message: "Todos os campos são obrigatórios."
+            });
+        }
         await UserService.updateUser(userDto, id);
 
         return res.status(200).json({

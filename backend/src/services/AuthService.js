@@ -1,6 +1,9 @@
 import User from "../models/User.js";
 import bcrypt from "bcryptjs";
 import AppError from "../utils/appError.js";
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 class AuthService {
 
@@ -12,7 +15,7 @@ class AuthService {
             throw new Error("Usuário não encontrado.");
         }
         const passwordMatch = await bcrypt.compare(dto.password, userFound.password);
-
+        console.log(process.env.EMAIL_RESET, " | ", process.env.PASSWORD_RESET);
         if(!passwordMatch) {
             throw new AppError('Senha incorreta.', 401);
         }

@@ -1,12 +1,13 @@
 import UserDTO from "../dtos/UserDTO.js";
 import AuthService from "../services/AuthService.js";
 import AppError from "../utils/appError.js";
+import isNull from "../utils/verifyIsNull.js";
 
 export async function login(req, res) {
 
     const { usuario, password } = new UserDTO(req.body);
 
-    if (!usuario || !password) {
+    if (isNull(usuario) || isNull(password)) {
         return res.status(400).json({
             error: true,
             message: "Usuário e senha são obrigatórios."
