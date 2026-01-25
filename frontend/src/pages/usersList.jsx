@@ -41,7 +41,9 @@ function UserList() {
 
     const listUsers = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/listAllUser');
+            const response = await axios.get('http://localhost:3000/listAllUser',
+                { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}`}}
+            );
 
             if (response.data) {
                 setUsers(response.data);

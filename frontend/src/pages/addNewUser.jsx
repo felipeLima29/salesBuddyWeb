@@ -29,7 +29,8 @@ function addNewUser() {
         }
         try {
             const response = await axios.post('http://localhost:3000/insertUser',
-                { usuario, nome, email, empresa, cnpj }
+                { usuario, nome, email, empresa, cnpj },
+                { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}`}}
             );
             toast.success('Usuário inserido com sucesso.');
             setUsuario('');

@@ -13,7 +13,7 @@ app.use(router);
 
 const startServer = async () => {
     try {
-        await sequelize.sync({ alter: true });
+        await sequelize.sync({ force: true });
         console.log('Tabelas criadas no Banco de Dados!');
 
         await seedAdmin();

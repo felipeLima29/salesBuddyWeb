@@ -23,7 +23,9 @@ function SalesList() {
 
     const listSales = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/listAllSales');
+            const response = await axios.get('http://localhost:3000/listAllSales',
+                { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}`}}
+            );
             setSales(response.data);
         } catch (error) {
             error.message;
