@@ -59,7 +59,9 @@ function EditUser() {
             return;
         }
         try {
-            const response = await axios.put(`http://localhost:3000/updateUser/${id}`, formData);
+            const response = await axios.put(`http://localhost:3000/updateUser/${id}`, formData,
+                { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } }
+            );
             toast.success('Usuário atualizado com sucesso!');
             console.log(response.data);
         } catch (error) {

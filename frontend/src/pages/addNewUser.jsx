@@ -5,6 +5,8 @@ import InputAddUser from '../components/inputs/inputAddUser';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { isNull } from '../utils/verifyIsNull';
+import validateEmail from '../utils/regex';
+import { formatCNPJ } from '../utils/formatters';
 
 function addNewUser() {
 
@@ -27,10 +29,14 @@ function addNewUser() {
             toast.error('Preenchar todos os campos.');
             return;
         }
+        if (!validateEmail(email)) {
+            toast.error('E-mail inválido.');
+            return;
+        }
         try {
             const response = await axios.post('http://localhost:3000/insertUser',
                 { usuario, nome, email, empresa, cnpj },
-                { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}`}}
+                { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } }
             );
             toast.success('Usuário inserido com sucesso.');
             setUsuario('');
@@ -86,12 +92,15 @@ function addNewUser() {
                         <label htmlFor="CNPJ" className='txViewInfo'>CNPJ</label>
                         <InputAddUser
                             value={cnpj}
-                            onChange={(e) => setCnpj(e.target.value)}
+                            maxLength="18"
+                            onChange={(e) => {
+                                setCnpj(formatCNPJ(e.target.value));
+                            }}
                         />
                     </div>
                 </div>
                 <ButtonEditUser
-                    
+
                     onSave={handleInsert}
                     classNameTxSave='txActiveUser'
                     classNameButtonSave='buttonActiveUser'

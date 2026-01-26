@@ -12,14 +12,21 @@ function ConfirmModalDelete({ isOpen, usuariosToDelete, idsToDelete, handleClose
             const ids = idsToDelete;
             const response = await axios.delete('http://localhost:3000/deleteUsers',
                 {
-                    data: { ids }
-                });
+                    // Tudo isso aqui é o SEGUNDO argumento (Config)
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    },
+                    data: { // O body TEM que vir dentro de uma propriedade chamada 'data' aqui dentro
+                        ids: ids
+                    }
+                }
+            );
             handleClose();
             onSucess();
-            toast.success(response.data.msg);
+            toast.success(response.data.message);
         } catch (error) {
             handleClose();
-            toast.error(error.message);
+            toast.error(error);
         }
     }
 
@@ -72,7 +79,7 @@ function ConfirmModalDelete({ isOpen, usuariosToDelete, idsToDelete, handleClose
                 <span className="spanModalDelete">Deseja prosseguir?</span>
 
                 <div className="modalActions">
-                    <button className="btnYes" onClick={deleteUser}>SIM</button>
+                    <button className="btnYes" onClick={() => deleteUser()}>SIM</button>
                     <button className="btnNo" onClick={handleClose}>NÃO</button>
                 </div>
             </div>

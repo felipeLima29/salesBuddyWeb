@@ -7,13 +7,13 @@ import './models/Sales.js';
 import seedAdmin from './database/seedAdmin.js';
 
 const app = express();
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 app.use(router);
 
 const startServer = async () => {
     try {
-        await sequelize.sync({ force: true });
+        await sequelize.sync();
         console.log('Tabelas criadas no Banco de Dados!');
 
         await seedAdmin();

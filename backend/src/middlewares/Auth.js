@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken';
 import { promisify } from 'util';
 
 export default async function middleware (req, res, next) {
+
     const authHeader = req.headers.authorization;
 
     if (!authHeader) {

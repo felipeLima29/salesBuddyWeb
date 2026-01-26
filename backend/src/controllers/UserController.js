@@ -16,8 +16,10 @@ export async function insertUser(req, res) {
                 message: "Todos os campos são obrigatórios."
             });
         }
+        const clearCnpj = userDto.cnpj.replace(/\D/g, '');
+        userDto.cnpj = clearCnpj;
         const { newUser, tempPassword } = await UserService.createUser(userDto);
-        await sendEmailUser(newUser.email, tempPassword);
+        sendEmailUser(newUser.email, tempPassword);
 
         return res.status(201).json({
             message: "Usuário inserido com sucesso.",
@@ -95,12 +97,14 @@ export async function updateUser(req, res) {
 
 export async function deleteUsers(req, res) {
     try {
+        console.log(req.body);
         const { ids } = req.body;
         if (!ids || !Array.isArray(ids) || ids.length === 0) {
             return res.status(400).json({ message: "Nenhum ID fornecido ou formato inválido." });
         }
         const response = await UserService.deleteUsers(ids);
 
+        console.log(response);
         return res.status(200).json({
             message: "Usuário(s) deletado(s) com sucesso.",
             affectedRows: response
