@@ -42,7 +42,7 @@ function UserList() {
     const listUsers = async () => {
         try {
             const response = await axios.get('http://localhost:3000/listAllUser',
-                { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}`}}
+                { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } }
             );
 
             if (response.data) {
@@ -66,44 +66,47 @@ function UserList() {
                 <div className="containerList">
 
                     <table className="tableUsersList">
-                        <tr>
-                            <td></td>
-                            <td className="txViewTable">USUÁRIO</td>
-                            <td className="txViewTable">NOME</td>
-                            <td className="txViewTable">EMPRESA</td>
-                            <td className="txViewTable">CNPJ</td>
-                            <td></td>
-                        </tr>
-                        {users.map((user) => (
-
-                            <tr key={user.id}>
-                                <td>
-                                    <input
-                                        type="checkbox"
-                                        checked={selectedUserId.includes(user.id)}
-                                        onClick={() => handleCheckboxChange(user.id)}
-                                    />
-                                </td>
-                                <td className="txViewUser">{user.usuario}</td>
-                                <td className="txViewUsersSales">{user.nome}</td>
-                                <td className="txViewUsersSales">{user.empresa}</td>
-                                <td className="txViewUsersSales">{user.cnpj}</td>
-                                <td>
-                                    <Link to={`/usersList/editUser/${user.id}`} style={{
-                                        display: 'block',
-                                        width: '20px',
-                                        height: '20px',
-                                        padding: 0,
-                                        marginBottom: '15px',
-                                        marginRight: '40vh'
-                                    }}>
-                                        <img src={icEditUser} alt="Editar usuário" className="icEditUser" />
-                                    </Link>
-                                </td>
+                        <thead>
+                            <tr>
+                                <td></td>
+                                <td className="txViewTable">USUÁRIO</td>
+                                <td className="txViewTable">NOME</td>
+                                <td className="txViewTable">EMPRESA</td>
+                                <td className="txViewTable">CNPJ</td>
+                                <td></td>
                             </tr>
+                        </thead>
+                        <tbody>
+                            {users.map((user) => (
 
-                        ))}
+                                <tr key={user.id}>
+                                    <td>
+                                        <input
+                                            type="checkbox"
+                                            checked={selectedUserId.includes(user.id)}
+                                            onClick={() => handleCheckboxChange(user.id)}
+                                        />
+                                    </td>
+                                    <td className="txViewUser">{user.usuario}</td>
+                                    <td className="txViewUsersSales">{user.nome}</td>
+                                    <td className="txViewUsersSales">{user.empresa}</td>
+                                    <td className="txViewUsersSales">{user.cnpj}</td>
+                                    <td>
+                                        <Link to={`/usersList/editUser/${user.id}`} style={{
+                                            display: 'block',
+                                            width: '20px',
+                                            height: '20px',
+                                            padding: 0,
+                                            marginBottom: '15px',
+                                            marginRight: '40vh'
+                                        }}>
+                                            <img src={icEditUser} alt="Editar usuário" className="icEditUser" />
+                                        </Link>
+                                    </td>
+                                </tr>
 
+                            ))}
+                        </tbody>
                     </table>
                     <ButtonListUser
                         classNameButtonDelete={selectedUserId.length > 0 ? 'buttonActiveUser' : 'buttonInactiveUser'}

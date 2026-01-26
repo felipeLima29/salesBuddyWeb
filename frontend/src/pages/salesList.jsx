@@ -24,7 +24,7 @@ function SalesList() {
     const listSales = async () => {
         try {
             const response = await axios.get('http://localhost:3000/listAllSales',
-                { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}`}}
+                { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } }
             );
             setSales(response.data);
         } catch (error) {
@@ -40,34 +40,37 @@ function SalesList() {
         <div className="body">
             <div className="containerList">
                 <table className="tableSalesList">
-                    <tr>
-                        <td className="txViewHeader textCenter">ID.VENDA</td>
-                        <td className="txViewHeader">NOME</td>
-                        <td className="txViewHeader">CPF</td>
-                        <td className="txViewHeader">E-MAIL</td>
-                        <td className="txViewHeader textCenter">QTD.ITENS</td>
-                        <td className="txViewHeader textCenter">VALOR</td>
-                        <td className="txViewHeader textCenter">TROCO</td>
-                        <td className="txViewHeader textCenter">COMPROVANTE</td>
+                    <thead>
+                        <tr>
+                            <td className="txViewHeader textCenter">ID.VENDA</td>
+                            <td className="txViewHeader">NOME</td>
+                            <td className="txViewHeader">CPF</td>
+                            <td className="txViewHeader">E-MAIL</td>
+                            <td className="txViewHeader textCenter">QTD.ITENS</td>
+                            <td className="txViewHeader textCenter">VALOR</td>
+                            <td className="txViewHeader textCenter">TROCO</td>
+                            <td className="txViewHeader textCenter">COMPROVANTE</td>
 
-                    </tr>
-                    {sales.map((sale) => (
-                        <tr key={sale.idVenda}>
-                            <td className="txViewIdName textCenter">{sale.id}</td>
-                            <td className="txViewIdName">{sale.name}</td>
-                            <td className="txViewUsersSales">{sale.cpf}</td>
-                            <td className="txViewUsersSales">{sale.email}</td>
-                            <td className="txViewUsersSales textCenter">{sale.qtdItems}</td>
-                            <td className="txViewUsersSales textCenter">{sale.valueSale}</td>
-                            <td className="txViewUsersSales textCenter">{sale.changeDue}</td>
-                            <td>
-                                <div style={{ display: "flex", justifyContent: "center", alignItems: "center", paddingBottom: "13px"}}>
-                                    <img src={icReceipt} alt="Comprovante" onClick={() => { handleSelectReceipt(sale)}}/>
-                                </div>
-                            </td>
                         </tr>
-                    ))}
-
+                    </thead>
+                    <tbody>
+                        {sales.map((sale) => (
+                            <tr key={sale.idVenda}>
+                                <td className="txViewIdName textCenter">{sale.id}</td>
+                                <td className="txViewIdName">{sale.name}</td>
+                                <td className="txViewUsersSales">{sale.cpf}</td>
+                                <td className="txViewUsersSales">{sale.email}</td>
+                                <td className="txViewUsersSales textCenter">{sale.qtdItems}</td>
+                                <td className="txViewUsersSales textCenter">{sale.valueSale}</td>
+                                <td className="txViewUsersSales textCenter">{sale.changeDue}</td>
+                                <td>
+                                    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", paddingBottom: "13px" }}>
+                                        <img src={icReceipt} alt="Comprovante" onClick={() => { handleSelectReceipt(sale) }} />
+                                    </div>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
                 </table>
             </div>
 
