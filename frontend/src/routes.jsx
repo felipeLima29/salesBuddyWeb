@@ -10,6 +10,7 @@ import AddNewUser from './pages/addNewUser.jsx';
 import EditUser from './pages/editUser.jsx';
 import ConfirmModalDelete from './components/confirmModal.jsx';
 import PaymentReceiptModal from './components/paymentReceiptModal.jsx';
+import ForgotPassword from './pages/forgotPassword.jsx';
 
 function AppRoutes() {
     return (
@@ -17,6 +18,7 @@ function AppRoutes() {
             <ToastContainer />
             <Routes>
                 <Route path="/" element={<PortalLogin />} />
+                <Route path="/forgotPassword" element={<ForgotPassword />} />
                 <Route element={<MainLayout />}>
                     <Route path="/menu" element={<Menu />} />
                     <Route path="/usersList" element={<UserList />} />

@@ -36,7 +36,7 @@ export async function insertUser(req, res) {
 
 export async function listAllUser(req, res) {
     try {
-        const listUsers = await UserService.listAllUsers({});
+        const listUsers = await UserService.listAllUsers();
         return res.status(200).json(listUsers)
     } catch (error) {
         return res.status(400).json({
@@ -49,7 +49,7 @@ export async function listAllUser(req, res) {
 export async function getUserId(req, res) {
     try {
         const userDto = new UserDTO(req.params);
-        if(isNull(req.params.id)){
+        if (isNull(req.params.id)) {
             return res.status(400).json({
                 error: true,
                 message: "ID do usuário é obrigatório."
@@ -71,7 +71,7 @@ export async function updateUser(req, res) {
         const { id } = req.params;
         const userDto = new UserDTO(req.body);
 
-        if(isNull(id) ||
+        if (isNull(id) ||
             isNull(userDto.usuario) ||
             isNull(userDto.nome) ||
             isNull(userDto.email) ||
@@ -97,7 +97,6 @@ export async function updateUser(req, res) {
 
 export async function deleteUsers(req, res) {
     try {
-        console.log(req.body);
         const { ids } = req.body;
         if (!ids || !Array.isArray(ids) || ids.length === 0) {
             return res.status(400).json({ message: "Nenhum ID fornecido ou formato inválido." });
@@ -109,6 +108,30 @@ export async function deleteUsers(req, res) {
             message: "Usuário(s) deletado(s) com sucesso.",
             affectedRows: response
         });
+    } catch (error) {
+        return res.status(400).json({
+            error: true,
+            message: error.message
+        })
+    }
+}
+
+export async function changePassword(req, res) {
+    try {
+        const userDto = new UserDTO(req.body);
+        const usuario = userDto.usuario;
+        if (isNull(usuario)) {
+            return res.status(400).json({
+                error: true,
+                message: "Usuário e nova senha são obrigatórios."
+            });
+        }
+
+        await UserService.changePassword(usuario);
+        return res.status(200).json({
+            message: "Senha alterada com sucesso. Verifique seu email."
+        });
+
     } catch (error) {
         return res.status(400).json({
             error: true,

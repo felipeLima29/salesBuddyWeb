@@ -1,5 +1,5 @@
-export default function ButtonLogin({handleLogin}) {
+export default function ButtonLogin({handleLogin, text}) {
     return (
-        <button className="buttonLogin" type="submit" onClick={handleLogin}>LOGIN</button>
+        <button className="buttonLogin" type="submit" onClick={handleLogin}>{text}</button>
     )
 }

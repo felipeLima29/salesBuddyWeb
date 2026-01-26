@@ -1,6 +1,5 @@
 import icLogo from '../assets/icLogo.svg';
 import InputUser from '../components/inputs/inputUser.jsx';
-import InputPassword from '../components/inputs/inputPassword.jsx';
 import ButtonLogin from '../components/buttons/buttonLogin.jsx';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
@@ -46,10 +45,10 @@ function PortalLogin() {
 
             </div>
             <div className='inputContainer'>
-                <InputUser onChange={(e) => setUsuario(e.target.value)} />
-                <InputPassword onChange={(e) => setPassword(e.target.value)} />
+                <InputUser placeholder="Usuário" onChange={(e) => setUsuario(e.target.value)} />
+                <InputUser placeholder="Senha" onChange={(e) => setPassword(e.target.value)} />
 
-                <ButtonLogin handleLogin={handleLogin} />
+                <ButtonLogin handleLogin={handleLogin} text="LOGIN"/>
 
                 <Link to="/forgotPassword"
                     id="navForgetPassword"

@@ -210,6 +210,7 @@ a {
         font-size: 12px;
     }
 }
+
 /* Buttons Styles */
 
 .buttonActiveUser {
@@ -523,4 +524,51 @@ hr {
     margin-top: 20px;
     margin-bottom: 20px;
     background-color: blue;
+}
+
+.bodyForgotPassword {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('assets/icBackground.png');
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.divTxForgotPassword {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    & h2 {
+        color: #074A82;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+    }
+
+    & h5 {
+        color: #707070;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+    }
+}
+
+.divItens {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.divInteractForgot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
 }

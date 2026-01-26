@@ -1,8 +1,8 @@
-export default function InputUser({onChange}) {
+export default function InputUser({onChange, placeholder}) {
 
     return (
         <div>
-            <input type="text" onChange={onChange} placeholder="Usuário" className="inputLogin"/>
+            <input type="text" onChange={onChange} placeholder={placeholder} className="inputLogin"/>
         </div>
     )
 }

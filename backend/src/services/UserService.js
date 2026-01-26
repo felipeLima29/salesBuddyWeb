@@ -2,6 +2,8 @@ import { Op, where } from "sequelize";
 import bcrypt from "bcryptjs";
 import User from "../models/User.js";
 import generatePassword from "../utils/generatePassword.js";
+import AppError from "../utils/appError.js";
+import sendEmailUser from "./EmailProvider.js";
 
 class UserService {
 
@@ -9,8 +11,8 @@ class UserService {
         const verifyUser = await User.findOne({
             where: {
                 [Op.or]: [
-                    {usuario: dto.usuario},
-                    {email: dto.email}
+                    { usuario: dto.usuario },
+                    { email: dto.email }
                 ],
             }
         })
@@ -18,7 +20,7 @@ class UserService {
         if (verifyUser) {
             throw new Error("Usuário já existe.");
         }
-        
+
         const plainPassword = generatePassword();
         const passwordHash = await bcrypt.hash(plainPassword, 10);
 
@@ -32,7 +34,7 @@ class UserService {
     }
 
     async listAllUsers() {
-        const listUsers = await User.findAll({ attributes: ['id', 'usuario', 'nome', 'empresa', 'cnpj'] });
+        const listUsers = await User.findAll({ attributes: ['id', 'usuario', 'nome', 'email', 'empresa', 'cnpj'] });
         return listUsers;
     }
 
@@ -61,15 +63,15 @@ class UserService {
             throw new Error("Usuário não encontrado.");
         }
         const userConflic = await User.findOne({
-            where: { 
+            where: {
                 [Op.or]: [
-                    {usuario: dto.usuario},
-                    {email: dto.email}
+                    { usuario: dto.usuario },
+                    { email: dto.email }
                 ],
                 id: { [Op.ne]: id }
             }
         })
-        if(userConflic){
+        if (userConflic) {
             throw new Error("Email ou Usuário já foi cadastrado por outra pessoa.");
         }
         await User.update(dto, {
@@ -79,9 +81,31 @@ class UserService {
 
     async deleteUsers(array) {
         const deleteRows = await User.destroy({
-            where: {id: array}
+            where: { id: array }
         });
         return deleteRows;
+    }
+
+    async changePassword(usuario) {
+        if (!usuario) {
+            throw new AppError("Usuário e nova senha são obrigatórios.", 400);
+        }
+
+        const user = await User.findOne({ where: { usuario } });
+        if (!user) {
+            throw new AppError("Usuário não encontrado.", 404);
+        }
+
+        const plainPassword = generatePassword();
+        const passwordHash = await bcrypt.hash(plainPassword, 10);
+
+        const updatePassword = async () => {
+            await User.update({ password: passwordHash }, {
+                where: { usuario: usuario }
+            });
+            sendEmailUser(user.email, plainPassword);
+        };
+        return updatePassword();
     }
 
 }
