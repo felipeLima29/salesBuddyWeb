@@ -3,7 +3,7 @@ import InputAddUser from '../components/inputs/inputAddUser';
 import ButtonEditUser from '../components/buttons/buttonsEditUser';
 import { isNull } from '../utils/verifyIsNull';
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import ResetPasswordModal from '../components/resetPasswordModal';
@@ -11,8 +11,6 @@ import ResetPasswordModal from '../components/resetPasswordModal';
 function EditUser() {
 
     const { id } = useParams();
-    const navigate = useNavigate();
-
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [formData, setFormData] = useState({
         id: '',
@@ -153,7 +151,7 @@ function EditUser() {
             <ResetPasswordModal
                 handleClose={handleClose}
                 isOpen={isModalOpen}
-                id={id}
+                usuario={formData.usuario}
             />
         </div>
     )

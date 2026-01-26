@@ -1,10 +1,36 @@
 import { useEffect, useState } from "react";
 import ReactDOM from 'react-dom';
 import InputUser from "./inputs/inputUser";
+import { isNull } from "../utils/verifyIsNull";
+import { toast } from "react-toastify";
+import axios from "axios";
 
-function ResetPasswordModal({ isOpen, handleClose, id }) {
+function ResetPasswordModal({ isOpen, handleClose, usuario }) {
 
     const [mounted, setMounted] = useState(false);
+    const [actualPassword, setActualPassword] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+
+    const handleChangePassword = async () => {
+        if (isNull(actualPassword) || isNull(newPassword)) {
+            toast.error('Preencha todos os campos.');
+            return;
+        }
+
+        try {
+            const token = localStorage.getItem('token');
+
+            const response = await axios.put('http://localhost:3000/changePassword',
+                {usuario, actualPassword, newPassword},
+                { headers: { 'Authorization': 'Bearer ' + token } }
+            );
+            toast.success(response.data.message);
+            handleClose();
+        } catch (error) {
+            toast.error(error.response.data.message);
+        }
+
+    }
 
     useEffect(() => {
         setMounted(true);
@@ -13,24 +39,24 @@ function ResetPasswordModal({ isOpen, handleClose, id }) {
 
     useEffect(() => {
         if (isOpen) {
-            const appRoot = document.getElementById('root') || document.getElementById('__next');
-            if (appRoot) {
-                appRoot.style.filter = 'blur(5px)';
-                appRoot.style.pointerEvents = 'none';
+            const appContent = document.getElementById('appContent') || document.getElementById('__next');
+            if (appContent) {
+                appContent.style.filter = 'blur(5px)';
+                appContent.style.pointerEvents = 'none';
             }
         } else {
-            const appRoot = document.getElementById('root') || document.getElementById('__next');
-            if (appRoot) {
-                appRoot.style.filter = 'none';
-                appRoot.style.pointerEvents = 'auto';
+            const appContent = document.getElementById('appContent') || document.getElementById('__next');
+            if (appContent) {
+                appContent.style.filter = 'none';
+                appContent.style.pointerEvents = 'auto';
             }
         }
 
         return () => {
-            const appRoot = document.getElementById('root') || document.getElementById('__next');
-            if (appRoot) {
-                appRoot.style.filter = 'none';
-                appRoot.style.pointerEvents = 'auto';
+            const appContent = document.getElementById('appContent') || document.getElementById('__next');
+            if (appContent) {
+                appContent.style.filter = 'none';
+                appContent.style.pointerEvents = 'auto';
             }
         };
     }, [isOpen]);
@@ -46,17 +72,19 @@ function ResetPasswordModal({ isOpen, handleClose, id }) {
             }}>
             <div className="modalContent" style={{ pointerEvents: 'auto' }}>
                 <span className="spanResetPassword">Insira sua senha atual</span>
-                <InputUser 
+                <InputUser
+                    onChange={(e) => setActualPassword(e.target.value)}
                     placeholder="Senha atual"
                 />
 
                 <span className="spanResetPassword">Insira sua nova senha</span>
-                <InputUser 
+                <InputUser
+                    onChange={(e) => setNewPassword(e.target.value)}
                     placeholder="Nova senha"
                 />
-                
+
                 <div className="modalActions">
-                    <button className="btnYes">ALTERAR</button>
+                    <button className="btnYes" onClick={handleChangePassword}>ALTERAR</button>
                     <button className="btnNo" onClick={handleClose}>CANCELAR</button>
                 </div>
             </div>

@@ -16,7 +16,7 @@ import ResetPasswordModal from './components/resetPasswordModal.jsx';
 function AppRoutes() {
     return (
         <div>
-            <ToastContainer />
+            
             <Routes>
                 <Route path="/" element={<PortalLogin />} />
                 <Route path="/forgotPassword" element={<ForgotPassword />} />
@@ -28,7 +28,7 @@ function AppRoutes() {
                     <Route path="/usersList/editUser/:id" element={<EditUser />} />
                     <Route path="/usersList/modelDeleteUser" element={<ConfirmModalDelete />} />
                     <Route path="/salesList/paymentReceiptModal" element={<PaymentReceiptModal />} />
-                    <Route path="/usersList/editUser/resetPasswordModal" element={<ResetPasswordModal />} />
+                    <Route path="/usersList/editUser/resetPasswordModal/" element={<ResetPasswordModal />} />
                 </Route>
 
             </Routes>
