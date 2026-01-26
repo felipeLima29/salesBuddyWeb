@@ -86,7 +86,7 @@ class UserService {
         return deleteRows;
     }
 
-    async changePassword(usuario) {
+    async resetPassword(usuario) {
         if (!usuario) {
             throw new AppError("Usuário e nova senha são obrigatórios.", 400);
         }
@@ -106,6 +106,23 @@ class UserService {
             sendEmailUser(user.email, plainPassword);
         };
         return updatePassword();
+    }
+
+    async changePassword(usuario, actualPassword, newPassword) {
+        const user = await User.findOne({ where: {usuario} });
+        if(!user) {
+            throw new AppError("Usuário não encontrado.", 404);
+        }
+        const passwordMatch = await bcrypt.compare(actualPassword, user.password);
+        if(!passwordMatch){
+            throw new AppError("Senha atual incorreta.", 401);
+        }
+
+        const passwordHash = await bcrypt.hash(newPassword, 10);
+        await User.update(
+            {password: passwordHash },
+            {where: {usuario: usuario}}
+        );
     }
 
 }

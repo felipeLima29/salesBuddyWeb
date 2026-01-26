@@ -8,15 +8,13 @@ function ConfirmModalDelete({ isOpen, usuariosToDelete, idsToDelete, handleClose
 
     const deleteUser = async () => {
         try {
-            console.log(idsToDelete)
             const ids = idsToDelete;
             const response = await axios.delete('http://localhost:3000/deleteUsers',
                 {
-                    // Tudo isso aqui é o SEGUNDO argumento (Config)
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                     },
-                    data: { // O body TEM que vir dentro de uma propriedade chamada 'data' aqui dentro
+                    data: {
                         ids: ids
                     }
                 }

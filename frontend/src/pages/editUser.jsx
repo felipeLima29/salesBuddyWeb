@@ -6,12 +6,14 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import ResetPasswordModal from '../components/resetPasswordModal';
 
 function EditUser() {
 
     const { id } = useParams();
     const navigate = useNavigate();
 
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [formData, setFormData] = useState({
         id: '',
         usuario: '',
@@ -21,10 +23,19 @@ function EditUser() {
         cnpj: ''
     });
 
+    const handleOpen = () => {
+        setIsModalOpen(true);
+    }
+    const handleClose = () => {
+        setIsModalOpen(false);
+    }
+
     useEffect(() => {
 
         const getUser = async () => {
-            const response = await axios.get(`http://localhost:3000/getUserId/${id}`);
+            const response = await axios.get(`http://localhost:3000/getUserId/${id}`,
+                { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } }
+            );
             const user = response.data;
 
             const findUser = {
@@ -131,12 +142,19 @@ function EditUser() {
                 </div>
                 <ButtonEditUser
                     onSave={updateUser}
+                    onReset={handleOpen}
                     classNameTxSave='txActiveUser'
                     classNameButtonSave='buttonActiveUser'
                     classNameTxReset='txInactiveUser'
                     classNameButtonreset='buttonInactiveUser'
                 />
             </div>
+
+            <ResetPasswordModal
+                handleClose={handleClose}
+                isOpen={isModalOpen}
+                id={id}
+            />
         </div>
     )
 }

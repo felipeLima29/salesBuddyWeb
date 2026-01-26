@@ -572,3 +572,11 @@ hr {
     justify-content: center;
     gap: 15px;
 }
+
+.spanResetPassword {
+    color: #A32C2C;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    display: flex;
+}

@@ -116,7 +116,7 @@ export async function deleteUsers(req, res) {
     }
 }
 
-export async function changePassword(req, res) {
+export async function resetPassword(req, res) {
     try {
         const userDto = new UserDTO(req.body);
         const usuario = userDto.usuario;
@@ -133,6 +133,32 @@ export async function changePassword(req, res) {
         });
 
     } catch (error) {
+        return res.status(400).json({
+            error: true,
+            message: error.message
+        })
+    }
+}
+
+export async function changePassword(req, res) {
+    try {
+        const { usuario, actualPassword, newPassword } = req.body;
+        if(
+            isNull(usuario) ||
+            isNull(actualPassword) ||
+            isNull(newPassword)
+        ){
+            return res.status(400).json({
+                error: true,
+                message: "Preencha todos os campos obrigatórios."
+            })
+        }
+        await UserService.changePassword(usuario, actualPassword, newPassword);
+        return res.status(200).json({
+            message: "Senha redefinida com sucesso."
+        });
+    }
+    catch (error) {
         return res.status(400).json({
             error: true,
             message: error.message
