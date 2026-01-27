@@ -11,11 +11,10 @@ const transporter = nodemailer.createTransport({
         user: process.env.EMAIL_RESET,
         pass: process.env.PASSWORD_RESET
     },
-    
+
 });
 
-async function sendEmailUser(to, pass) {
-    console.log(to, " | ", pass);
+export async function sendEmailUser(to, pass) {
     await transporter.sendMail({
         from: 'Sales Buddy',
         to: to,
@@ -27,4 +26,26 @@ async function sendEmailUser(to, pass) {
     });
 }
 
-export default sendEmailUser;
+export async function sendReceiptEmail(file, clientEmail) {
+    await transporter.sendMail({
+        from: 'Sales Buddy <felipe.lima@gfxconsultoria.com>',
+        to: clientEmail,
+        subject: 'Comprovante de Venda - Sales Buddy',
+        html: `
+                <div style="font-family: Arial, sans-serif; color: #333;">
+                    <h2>Olá!</h2>
+                    <p>Obrigado por comprar conosco.</p>
+                    <p>Segue em anexo o comprovante detalhado da sua venda.</p>
+                    <br>
+                    <p>Atenciosamente,<br>Equipe Sales Buddy</p>
+                </div>
+            `,
+        attachments: [
+            {
+                filename: 'comprovante-venda.png',
+                content: file.buffer,
+                contentType: 'image/png'
+            }
+        ]
+    });
+}

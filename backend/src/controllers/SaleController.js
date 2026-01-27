@@ -1,4 +1,5 @@
 import SaleDTO from "../dtos/SaleDTO.js";
+import { sendReceiptEmail } from "../services/EmailProvider.js";
 import SaleService from "../services/SaleService.js";
 import isNull from "../utils/verifyIsNull.js";
 
@@ -33,6 +34,27 @@ export async function listAllSales(req, res) {
     try {
         const listSales = await SaleService.listAllSales();
         return res.status(200).json(listSales);
+    } catch (error) {
+        return res.status(500).json({
+            error: true,
+            message: error.message
+        })
+    }
+}
+
+export async function sendReceipt(req, res) {
+    try {
+        const file = req.file;
+        const email = req.query.email;
+        if (file == null || isNull(email)) {
+            return res.status(400).json({
+                error: true,
+                message: "Arquivo e email do cliente são obrigatórios."
+            });
+        }
+        await sendReceiptEmail(file, email);
+
+        return res.status(200).json({ message: "Email enviado com sucesso." });
     } catch (error) {
         return res.status(500).json({
             error: true,

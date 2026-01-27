@@ -1,5 +1,5 @@
 import UserDTO from "../dtos/UserDTO.js";
-import sendEmailUser from "../services/EmailProvider.js";
+import { sendEmailUser } from "../services/EmailProvider.js";
 import UserService from "../services/UserService.js";
 import isNull from "../utils/verifyIsNull.js";
 
@@ -123,11 +123,11 @@ export async function resetPassword(req, res) {
         if (isNull(usuario)) {
             return res.status(400).json({
                 error: true,
-                message: "Usuário e nova senha são obrigatórios."
+                message: "Usuário é obrigatórios."
             });
         }
 
-        await UserService.changePassword(usuario);
+        await UserService.resetPassword(usuario);
         return res.status(200).json({
             message: "Senha alterada com sucesso. Verifique seu email."
         });

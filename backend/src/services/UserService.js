@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import User from "../models/User.js";
 import generatePassword from "../utils/generatePassword.js";
 import AppError from "../utils/appError.js";
-import sendEmailUser from "./EmailProvider.js";
+import { sendEmailUser } from "./EmailProvider.js";
 
 class UserService {
 
