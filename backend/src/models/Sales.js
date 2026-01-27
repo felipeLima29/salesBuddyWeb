@@ -28,15 +28,15 @@ const Sale = sequelize.define('Sales', {
         allowNull: false
     },
     valueReceived: {
-        type: DataTypes.STRING,
+        type: DataTypes.DECIMAL(10, 2),
         allowNull: false
     },
     valueSale: {
-        type: DataTypes.STRING,
+        type: DataTypes.DECIMAL(10, 2),
         allowNull: false
     },
     changeDue: {
-        type: DataTypes.STRING,
+        type: DataTypes.DECIMAL(10, 2),
         allowNull: false
     }
 })
