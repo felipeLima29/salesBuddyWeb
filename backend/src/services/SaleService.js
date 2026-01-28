@@ -14,7 +14,7 @@ class SaleService {
             changeDue: dto.changeDue
         });
 
-        if(dto.description && dto.description.length > 0) {
+        if (dto.description && dto.description.length > 0) {
             const itemsArray = dto.description.split('#');
             await Promise.all(itemsArray.map(async (itemName) => {
                 await SaleItem.create({
@@ -27,9 +27,28 @@ class SaleService {
         return newSale;
     }
 
-    async listAllSales(){
+    async listAllSales() {
         const listSales = Sale.findAll();
         return listSales;
+    }
+
+    async getSaleId(dto) {
+        if (!dto.id) {
+            throw new Error("ID não fornecido.");
+        }
+
+        const saleComplete = await Sale.findOne({
+            where: { id: dto.id },
+            include: [{
+                model: SaleItem,
+                attributes: ['productName']
+            }],
+            logging: console.log
+        });
+        if (!saleComplete) {
+            throw new Error("Venda com esse ID não encontrada.");
+        }
+        return saleComplete;
     }
 }
 

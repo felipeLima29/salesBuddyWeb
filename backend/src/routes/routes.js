@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { changePassword, deleteUsers, getUserId, insertUser, listAllUser, resetPassword, updateUser } from "../controllers/UserController.js";
-import { insertSale, listAllSales, sendReceipt } from "../controllers/SaleController.js";
+import { insertSale, listAllSales, listSale, sendReceipt } from "../controllers/SaleController.js";
 import { login } from "../controllers/authController.js";
 import middleware from "../middlewares/auth.js";
 import multer from "multer";
@@ -24,6 +24,7 @@ router.put('/changePassword', middleware, changePassword);
 router.post('/insertSale', middleware, insertSale);
 router.get('/listAllSales', middleware, listAllSales);
 router.post('/sendReceipt', middleware, upload.single('receipt'), sendReceipt);
+router.get('/listSale/:id', middleware, listSale);
 
 // Rotas de autenticação
 router.post('/login', login);

@@ -1,5 +1,5 @@
 import SaleDTO from "../dtos/SaleDTO.js";
-import SaleItem from "../models/SalesItems.js";
+import UserDTO from "../dtos/UserDTO.js";
 import { sendReceiptEmail } from "../services/EmailProvider.js";
 import SaleService from "../services/SaleService.js";
 import isNull from "../utils/verifyIsNull.js";
@@ -53,11 +53,31 @@ export async function sendReceipt(req, res) {
                 message: "Arquivo e email do cliente são obrigatórios."
             });
         }
-        await sendReceiptEmail(file, email);
+        sendReceiptEmail(file, email);
 
         return res.status(200).json({ message: "Email enviado com sucesso." });
     } catch (error) {
         return res.status(500).json({
+            error: true,
+            message: error.message
+        })
+    }
+}
+
+export async function listSale(req, res) {
+    try {
+        const saleDto = new SaleDTO(req.params);
+        if (isNull(req.params.id)) {
+            return res.status(400).json({
+                error: true,
+                message: "ID da venda é obrigatório."
+            });
+        }
+
+        const getSale = await SaleService.getSaleId(saleDto);
+        return res.status(200).json(getSale);
+    } catch (error) {
+        return res.status(400).json({
             error: true,
             message: error.message
         })

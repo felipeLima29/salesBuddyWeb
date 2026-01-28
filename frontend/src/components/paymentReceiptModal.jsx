@@ -1,7 +1,31 @@
-import { useEffect } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import ReactDOM from 'react-dom';
+import html2canvas from "html2canvas";
 
 function PaymentReceiptModal({ isOpen, handleClose, data }) {
+
+    const receiptRef = useRef(null);
+
+    const itemsList = useMemo(() => {
+        if (!data || !data.description) return [];
+        return data.description.split('# ').filter(Boolean);
+    }, [data]);
+
+    const handleSaveReceipt = async () => {
+        const element = receiptRef.current;
+        if (!element) return;
+
+        const canvas = await html2canvas(element, {
+            backgroundColor: "#ffffff",
+            scale: 2
+        });
+
+        const image = canvas.toDataURL("image/png");
+        const link = document.createElement("a");
+        link.href = image;
+        link.download = `comprovante-${data.name || 'venda'}.png`;
+        link.click();
+    };
 
     useEffect(() => {
         if (isOpen) {
@@ -31,7 +55,7 @@ function PaymentReceiptModal({ isOpen, handleClose, data }) {
 
     const modalReceipt = (
         <div className="backgroundModalReceipt">
-            <div className="receiptModaldiv">
+            <div className="receiptModaldiv" ref={receiptRef}>
                 <div className="receiptModalDetails">
 
                     <div className="receiptModalTop">
@@ -51,11 +75,21 @@ function PaymentReceiptModal({ isOpen, handleClose, data }) {
                 <div className="receiptModalDescription">
                     <div className="receiptModalItems">
                         <label className="labelReceiptModal" htmlFor="ITM">Itm</label>
-                        <span className="spanReceiptModal">{data.qtdItems}</span>
+                        <div style={{ display: 'flex', flexDirection: 'column' }}>
+                            {itemsList.map((_, index) => (
+                                <span key={index} className="spanReceiptModal">
+                                    {index + 1}
+                                </span>
+                            ))}
+                        </div>
                     </div>
                     <div className="receiptModalItems">
                         <label className="labelReceiptModal" htmlFor="DESCRICAO">Descrição</label>
-                        <span className="spanReceiptModal">{data.description}</span>
+                        <div style={{ display: 'flex', flexDirection: 'column' }}>
+                            {itemsList.map((name, index) => (
+                                <span key={index} className="spanReceiptModal">{name}</span>
+                            ))}
+                        </div>
                     </div>
                 </div>
                 <hr />
@@ -77,7 +111,7 @@ function PaymentReceiptModal({ isOpen, handleClose, data }) {
                 </div>
             </div>
             <div className="receiptModalButtons">
-                <button className="btnReceiptModalBlue">SALVAR</button>
+                <button className="btnReceiptModalBlue" onClick={handleSaveReceipt}>SALVAR</button>
                 <button className="btnReceiptModalBlue">IMPRIMIR</button>
                 <button className="btnReceiptModalRed" onClick={handleClose}>FECHAR</button>
             </div>

@@ -14,7 +14,4 @@ const SaleItem = sequelize.define('SalesItems', {
     }
 });
 
-Sale.hasMany(SaleItem, { foreignKey: 'saleId' });
-SaleItem.belongsTo(Sale, { foreignKey: 'saleId' })
-
 export default SaleItem;

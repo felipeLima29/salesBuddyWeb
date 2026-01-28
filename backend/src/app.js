@@ -5,6 +5,7 @@ import sequelize from './database/db.js';
 import './models/User.js';
 import './models/Sales.js';
 import seedAdmin from './database/seedAdmin.js';
+import associateModels from './database/association.js';
 
 const app = express();
 app.use(cors());
@@ -18,6 +19,7 @@ const startServer = async () => {
 
         await seedAdmin();
 
+        associateModels();
         app.listen(3000, () => {
             console.log('Server rodando na porta 3000');
         });

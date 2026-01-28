@@ -1,5 +1,6 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../database/db.js";
+import SaleItem from "./SalesItems.js";
 
 const Sale = sequelize.define('Sales', {
     id: {
@@ -39,6 +40,7 @@ const Sale = sequelize.define('Sales', {
         type: DataTypes.DECIMAL(10, 2),
         allowNull: false
     }
+
 })
 
 export default Sale;
