@@ -21,7 +21,7 @@ function ResetPasswordModal({ isOpen, handleClose, usuario }) {
             const token = localStorage.getItem('token');
 
             const response = await axios.put('http://localhost:3000/changePassword',
-                {usuario, actualPassword, newPassword},
+                { usuario, actualPassword, newPassword },
                 { headers: { 'Authorization': 'Bearer ' + token } }
             );
             toast.success(response.data.message);
@@ -73,12 +73,14 @@ function ResetPasswordModal({ isOpen, handleClose, usuario }) {
             <div className="modalContent" style={{ pointerEvents: 'auto' }}>
                 <span className="spanResetPassword">Insira sua senha atual</span>
                 <InputUser
+                    type="password"
                     onChange={(e) => setActualPassword(e.target.value)}
                     placeholder="Senha atual"
                 />
 
                 <span className="spanResetPassword">Insira sua nova senha</span>
                 <InputUser
+                    type="password"
                     onChange={(e) => setNewPassword(e.target.value)}
                     placeholder="Nova senha"
                 />

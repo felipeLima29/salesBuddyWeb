@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import ResetPasswordModal from '../components/resetPasswordModal';
+import { formatCNPJ } from '../utils/formatters';
 
 function EditUser() {
 
@@ -65,6 +66,10 @@ function EditUser() {
             isNull(formData.cnpj)
         ) {
             toast.error('Preenchar todos os campos.');
+            return;
+        }
+        if(formData.cnpj !=18){
+            toast.error('CNPJ inválido.');
             return;
         }
         try {
@@ -132,8 +137,9 @@ function EditUser() {
                     <div className='divAddUser'>
                         <label htmlFor="CNPJ" className='txViewInfo'>CNPJ</label>
                         <InputAddUser
+                            maxLength="18"
                             name='cnpj'
-                            value={formData.cnpj}
+                            value={formatCNPJ(formData.cnpj)}
                             onChange={handleChange}
                         />
                     </div>
@@ -143,8 +149,8 @@ function EditUser() {
                     onReset={handleOpen}
                     classNameTxSave='txActiveUser'
                     classNameButtonSave='buttonActiveUser'
-                    classNameTxReset='txInactiveUser'
-                    classNameButtonreset='buttonInactiveUser'
+                    classNameTxReset='txActiveUser'
+                    classNameButtonreset='buttonActiveUser'
                 />
             </div>
 
