@@ -1,4 +1,5 @@
 import SaleDTO from "../dtos/SaleDTO.js";
+import SaleItem from "../models/SalesItems.js";
 import { sendReceiptEmail } from "../services/EmailProvider.js";
 import SaleService from "../services/SaleService.js";
 import isNull from "../utils/verifyIsNull.js";
@@ -9,7 +10,7 @@ export async function insertSale(req, res) {
         if (isNull(saleDto.name) ||
             isNull(saleDto.cpf) ||
             isNull(saleDto.email) ||
-            isNull(saleDto.description) ||
+            saleDto.description == null ||
             saleDto.qtdItems == null ||
             saleDto.valueReceived == null ||
             saleDto.valueSale == null ||
