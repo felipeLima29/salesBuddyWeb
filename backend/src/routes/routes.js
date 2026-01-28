@@ -17,7 +17,7 @@ router.get('/listAllUser', middleware, listAllUser);
 router.get('/getUserId/:id', middleware, getUserId);
 router.put('/updateUser/:id', middleware, updateUser);
 router.delete('/deleteUsers', middleware, deleteUsers);
-router.put('/forgotPassword', middleware, resetPassword);
+router.put('/forgotPassword', resetPassword); // Não precisa de middleware
 router.put('/changePassword', middleware, changePassword);
 
 // Rotas de Vendas

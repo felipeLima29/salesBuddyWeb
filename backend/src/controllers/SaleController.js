@@ -75,7 +75,7 @@ export async function listSale(req, res) {
         }
 
         const getSale = await SaleService.getSaleId(saleDto);
-        return res.status(200).json(getSale);
+        0
     } catch (error) {
         return res.status(400).json({
             error: true,
