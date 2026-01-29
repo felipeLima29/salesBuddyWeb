@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
+import { data, Link } from "react-router-dom";
 import icReceipt from "../assets/icReceipt.svg";
 import { useEffect, useState } from "react";
 import PaymentReceiptModal from "../components/paymentReceiptModal";
 import axios from "axios";
+import { formatCpf } from "../utils/formatters";
 function SalesList() {
 
     const [receiptIsOpen, setReceiptIsOpen] = useState(false);
@@ -58,7 +59,7 @@ function SalesList() {
                             <tr key={sale.idVenda}>
                                 <td className="txViewIdName textCenter">{sale.id}</td>
                                 <td className="txViewIdName">{sale.name}</td>
-                                <td className="txViewUsersSales">{sale.cpf}</td>
+                                <td className="txViewUsersSales">{formatCpf(sale.cpf)}</td>
                                 <td className="txViewUsersSales">{sale.email}</td>
                                 <td className="txViewUsersSales textCenter">{sale.qtdItems}</td>
                                 <td className="txViewUsersSales textCenter">{sale.valueSale}</td>

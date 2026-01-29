@@ -8,6 +8,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import ResetPasswordModal from '../components/resetPasswordModal';
 import { formatCNPJ } from '../utils/formatters';
+import validateEmail from '../utils/regex';
 
 function EditUser() {
 
@@ -68,8 +69,13 @@ function EditUser() {
             toast.error('Preenchar todos os campos.');
             return;
         }
-        if(formData.cnpj !=18){
+        if(formatCNPJ(formData.cnpj).length !=18){
             toast.error('CNPJ inválido.');
+            return;
+        }
+        if(!validateEmail(formData.email)){
+            toast.error('E-mail inválido.');
+            console.log(validateEmail(formData.email));
             return;
         }
         try {

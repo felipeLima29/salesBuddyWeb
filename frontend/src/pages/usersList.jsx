@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import icEditUser from '../assets/icEditUser.svg';
 import ButtonListUser from "../components/buttons/buttonsListUser.jsx";
 import ConfirmModalDelete from '../components/confirmModal.jsx';
+import { formatCNPJ } from "../utils/formatters.js";
 
 function UserList() {
 
@@ -90,7 +91,7 @@ function UserList() {
                                     <td className="txViewUser">{user.usuario}</td>
                                     <td className="txViewUsersSales">{user.nome}</td>
                                     <td className="txViewUsersSales">{user.empresa}</td>
-                                    <td className="txViewUsersSales">{user.cnpj}</td>
+                                    <td className="txViewUsersSales">{formatCNPJ(user.cnpj)}</td>
                                     <td>
                                         <Link to={`/usersList/editUser/${user.id}`} style={{
                                             display: 'block',
