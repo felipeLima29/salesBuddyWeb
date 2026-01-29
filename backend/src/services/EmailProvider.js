@@ -19,7 +19,8 @@ export async function sendEmailUser(to, pass) {
         from: 'Sales Buddy',
         to: to,
         subject: 'Senha temporária - Sales Buddy',
-        html: `<p>Sua senha temporária é: 
+        html: `<h2>NÃO COMPARTILHE ISSO COM NINGUÉM.</h2>
+                <p>Sua senha temporária é:
                     <strong>${pass}</strong>
                 </p>
                 <p>Por favor, altere sua senha após o login.</p>`

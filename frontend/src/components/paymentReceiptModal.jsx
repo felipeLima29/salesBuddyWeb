@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef } from "react";
 import ReactDOM from 'react-dom';
 import html2canvas from "html2canvas";
+import { formatCpf } from "../utils/formatters";
 
 function PaymentReceiptModal({ isOpen, handleClose, data }) {
 
@@ -105,7 +106,7 @@ function PaymentReceiptModal({ isOpen, handleClose, data }) {
                         </div>
                         <div className="receiptModalItemsFields">
                             <label className="labelReceiptModal" htmlFor="CPF">CPF</label> <br />
-                            <span className="spanReceiptModal">{data.cpf}</span>
+                            <span className="spanReceiptModal">{formatCpf(data.cpf)}</span>
                         </div>
                     </div>
                     <label className="labelReceiptModal" htmlFor="EMAIL">E-mail</label> <br />
@@ -115,17 +116,17 @@ function PaymentReceiptModal({ isOpen, handleClose, data }) {
                 <div className="receiptModalDescription">
                     <div className="receiptModalItems">
                         <label className="labelReceiptModal" htmlFor="ITM">Itm</label>
-                        <div style={{ display: 'flex', flexDirection: 'column' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap:'10px' }}>
                             {itemsList.map((_, index) => (
                                 <span key={index} className="spanReceiptModal">
-                                    {index + 1}
+                                    {"0" + (index + 1) }
                                 </span>
                             ))}
                         </div>
                     </div>
                     <div className="receiptModalItems">
                         <label className="labelReceiptModal" htmlFor="DESCRICAO">Descrição</label>
-                        <div style={{ display: 'flex', flexDirection: 'column' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap:'10px' }}>
                             {itemsList.map((name, index) => (
                                 <span key={index} className="spanReceiptModal">{name}</span>
                             ))}

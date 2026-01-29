@@ -4,7 +4,7 @@ import InputUser from "../components/inputs/inputUser";
 import { isNull } from "../utils/verifyIsNull";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function ForgotPassword() {
 
@@ -41,6 +41,8 @@ function ForgotPassword() {
                 <div className="divInteractForgot">
                     <InputUser placeholder="Digite seu login" onChange={(e) => setUsuario(e.target.value)} />
                     <ButtonLogin handleLogin={handleChangePassword} text="ENVIAR"/>
+
+                    <Link to='/' className="backLogin">VOLTAR PARA FAZER LOGIN</Link>
                 </div>
             </div>
 
