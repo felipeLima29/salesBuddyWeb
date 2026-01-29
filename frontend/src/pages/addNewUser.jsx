@@ -29,6 +29,10 @@ function addNewUser() {
             toast.error('Preenchar todos os campos.');
             return;
         }
+        if(formatCNPJ(cnpj).length != 18){
+            toast.error('CNPJ inválido.');
+            return;
+        }
         if (!validateEmail(email)) {
             toast.error('E-mail inválido.');
             return;

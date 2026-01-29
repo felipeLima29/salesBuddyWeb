@@ -27,6 +27,46 @@ function PaymentReceiptModal({ isOpen, handleClose, data }) {
         link.click();
     };
 
+    const handlePrintReceipt = async () => {
+        const element = receiptRef.current;
+        if (!element) return;
+
+        const canvas = await html2canvas(element, {
+            backgroundColor: "#ffffff",
+            scale: 2
+        });
+
+        const imgData = canvas.toDataURL("image/png");
+
+        const printWindow = window.open('', '', 'width=800,height=600');
+
+        if (printWindow) {
+            printWindow.document.write(`
+                <html>
+                    <head>
+                        <style>
+                            body { 
+                                margin: 0; 
+                                display: flex; 
+                                justify-content: center; 
+                                align-items: flex-start; 
+                            }
+                            img { 
+                                max-width: 100%; 
+                                height: auto; 
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <img src="${imgData}" onload="window.print(); window.close();" />
+                    </body>
+                </html>
+            `);
+
+            printWindow.document.close();
+        }
+    }
+
     useEffect(() => {
         if (isOpen) {
             const appRoot = document.getElementById('root') || document.getElementById('__next');
@@ -112,7 +152,7 @@ function PaymentReceiptModal({ isOpen, handleClose, data }) {
             </div>
             <div className="receiptModalButtons">
                 <button className="btnReceiptModalBlue" onClick={handleSaveReceipt}>SALVAR</button>
-                <button className="btnReceiptModalBlue">IMPRIMIR</button>
+                <button className="btnReceiptModalBlue" onClick={handlePrintReceipt}>IMPRIMIR</button>
                 <button className="btnReceiptModalRed" onClick={handleClose}>FECHAR</button>
             </div>
 

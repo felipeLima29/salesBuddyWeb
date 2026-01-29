@@ -8,7 +8,17 @@ function ConfirmModalDelete({ isOpen, usuariosToDelete, idsToDelete, handleClose
 
     const deleteUser = async () => {
         try {
+            const idUser = localStorage.getItem('id');
             const ids = idsToDelete;
+
+            const isSelfDelete = ids.some(id => String(id) === String(idUser));
+
+            if(isSelfDelete){
+                toast.error("Você não pode deletar você mesmo.");
+                handleClose();
+                return;
+            }
+
             const response = await axios.delete('http://localhost:3000/deleteUsers',
                 {
                     headers: {
