@@ -1,11 +1,14 @@
 import express from 'express';
 import cors from 'cors';
+import dotenv from 'dotenv';
 import router from './routes/routes.js';
 import sequelize from './database/db.js';
 import './models/User.js';
 import './models/Sales.js';
 import seedAdmin from './database/seedAdmin.js';
 import associateModels from './database/association.js';
+
+dotenv.config();
 
 const app = express();
 app.use(cors());
@@ -20,7 +23,7 @@ const startServer = async () => {
         await seedAdmin();
 
         associateModels();
-        app.listen(3000, () => {
+        app.listen(process.env.PORT, () => {
             console.log('Server rodando na porta 3000');
         });
     } catch (error) {

@@ -189,13 +189,14 @@ a {
 }
 
 .buttonUserContainer {
-    flex-direction: row-reverse;
     display: flex;
+    flex-direction: row-reverse;
     position: fixed;
     bottom: 30px;
     right: 30px;
     z-index: 1000;
     gap: 15px;
+    
 }
 
 .tableSalesList {
@@ -578,6 +579,7 @@ hr {
 .spanResetPassword {
     color: #A32C2C;
     font-family: 'Montserrat', sans-serif;
+    padding-bottom: 10px;
     font-weight: 700;
     font-size: 14px;
     display: flex;

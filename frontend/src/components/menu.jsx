@@ -38,7 +38,10 @@ function Menu() {
                 </li>
                 <li className='divMenu'>
                     <img src={icLogoutPink} alt="Log out Icon" className='imgMenu' />
-                    <NavLink to="/" className='optionsMenu'>LOG OUT</NavLink>
+                    <NavLink to="/" className='optionsMenu' onClick={() => {
+                        localStorage.setItem('token', null);
+                        localStorage.setItem('id', null);
+                    }}>LOG OUT</NavLink>
                 </li>
             </ul>
 
