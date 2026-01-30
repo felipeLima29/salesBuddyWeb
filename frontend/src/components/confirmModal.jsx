@@ -34,7 +34,7 @@ function ConfirmModalDelete({ isOpen, usuariosToDelete, idsToDelete, handleClose
             toast.success(response.data.message);
         } catch (error) {
             handleClose();
-            toast.error(error);
+            toast.error(error.response.data.message);
         }
     }
 

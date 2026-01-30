@@ -22,7 +22,8 @@ export default async function seedAdmin() {
             nome: "Administrador",
             email: "admin@sistema.com",
             empresa: "Sistema",
-            cnpj: "00.000.000/0001-00"
+            cnpj: "00.000.000/0001-00",
+            isAdmin: true
         })
 
         console.log("Admin criado com sucesso.");

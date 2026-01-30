@@ -32,6 +32,10 @@ const User = sequelize.define('User',{
     cnpj:{
         type: DataTypes.STRING,
         allowNull: false
+    },
+    isAdmin: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false
     }
 })
 

@@ -26,6 +26,7 @@ class UserService {
 
         const newUser = await User.create({
             ...dto,
+            isAdmin: false,
             password: passwordHash
         });
 
@@ -62,6 +63,17 @@ class UserService {
         if (!verifyUser) {
             throw new Error("Usuário não encontrado.");
         }
+
+        const verifyAdmin = await User.findOne({
+            where: {
+                id: id,
+                isAdmin: true
+            }
+        });
+        if(verifyAdmin){
+            throw new AppError("Você não poder alterar informações de um administrador.")
+        }
+
         const userConflic = await User.findOne({
             where: {
                 [Op.or]: [
@@ -80,6 +92,17 @@ class UserService {
     }
 
     async deleteUsers(array) {
+
+        const verifyAdmin = await User.findOne({
+            where: {
+                id: array,
+                isAdmin: true
+            }
+        })
+        if(verifyAdmin){
+            throw new AppError('Você não pode deletar um administrador.', 400);
+        }
+
         const deleteRows = await User.destroy({
             where: { id: array }
         });
