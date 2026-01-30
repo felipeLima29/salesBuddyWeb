@@ -24,7 +24,7 @@ const startServer = async () => {
 
         associateModels();
         app.listen(process.env.PORT, () => {
-            console.log('Server rodando na porta 3000');
+            console.log('Server rodando na porta', process.env.PORT);
         });
     } catch (error) {
         console.error('Erro ao conectar:', error);

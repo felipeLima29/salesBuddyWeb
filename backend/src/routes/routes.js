@@ -4,6 +4,7 @@ import { insertSale, listAllSales, listSale, sendReceipt } from "../controllers/
 import { login } from "../controllers/authController.js";
 import middleware from "../middlewares/auth.js";
 import multer from "multer";
+import { insertReprocess, listAllReprocess } from "../controllers/ReprocessController.js";
 
 const router = Router();
 const storage = multer.memoryStorage();
@@ -28,4 +29,8 @@ router.get('/listSale/:id', middleware, listSale);
 
 // Rotas de autenticação
 router.post('/login', login);
+
+// Rotas de Reprocessamento
+router.post('/insertReprocess', middleware, insertReprocess);
+router.get('/listAllReprocess', middleware, listAllReprocess);
 export default router;

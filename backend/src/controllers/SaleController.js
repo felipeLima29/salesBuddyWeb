@@ -24,7 +24,7 @@ export async function insertSale(req, res) {
 
         return res.status(201).json({ message: "Venda inserida com sucesso." })
     } catch (error) {
-        return res.status(409).json({
+        return res.status(500).json({
             error: true,
             message: error.message
         })
