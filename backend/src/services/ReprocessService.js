@@ -1,3 +1,4 @@
+import { where } from "sequelize";
 import Reprocess from "../models/Reprocessing.js";
 
 class ReprocessService {
@@ -10,12 +11,28 @@ class ReprocessService {
 
         return newReprocess;
     }
+
     async listAllReprocess() {
         const listAllReprocess = await Reprocess.findAll();
-
         return listAllReprocess;
     }
 
+    async reprocessItem(dto){
+
+        const verifyId = await Reprocess.findOne({
+            where: {id: dto.id}
+        });
+        console.log(dto)
+
+        if(!verifyId) throw new AppError("Reprocessamento não encontrado.", 404);
+        const { id, isReprocessed } = dto;
+        console.log(id, isReprocessed);
+
+        return await Reprocess.update( 
+            {isReprocessed: isReprocessed},
+            {where: { id: id }} 
+        );
+    }
 
 }
 

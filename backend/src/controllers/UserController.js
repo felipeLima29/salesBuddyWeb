@@ -59,7 +59,7 @@ export async function getUserId(req, res) {
 
         return res.status(200).json(getUser)
     } catch (error) {
-        return res.status(400).json({
+        return res.status(500).json({
             error: true,
             message: error.message
         })

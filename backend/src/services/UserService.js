@@ -72,7 +72,7 @@ class UserService {
             }
         })
         if (userConflic) {
-            throw new Error("Email ou Usuário já foi cadastrado por outra pessoa.");
+            throw new AppError('Email ou Usuário já foi cadastrado por outra pessoa.', 409)
         }
         await User.update(dto, {
             where: { id: id }
@@ -120,7 +120,7 @@ class UserService {
 
         const passwordHash = await bcrypt.hash(newPassword, 10);
         await User.update(
-            {password: passwordHash },
+            {password: passwordHash},
             {where: {usuario: usuario}}
         );
     }

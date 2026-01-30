@@ -23,7 +23,6 @@ class SaleService {
                 })
             }))
         }
-
         return newSale;
     }
 

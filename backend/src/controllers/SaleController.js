@@ -1,5 +1,4 @@
 import SaleDTO from "../dtos/SaleDTO.js";
-import UserDTO from "../dtos/UserDTO.js";
 import { sendReceiptEmail } from "../services/EmailProvider.js";
 import SaleService from "../services/SaleService.js";
 import isNull from "../utils/verifyIsNull.js";
@@ -75,7 +74,7 @@ export async function listSale(req, res) {
         }
 
         const getSale = await SaleService.getSaleId(saleDto);
-        0
+        return res.status(200).json(getSale);
     } catch (error) {
         return res.status(400).json({
             error: true,

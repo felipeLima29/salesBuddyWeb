@@ -24,8 +24,22 @@ export async function insertReprocess(req, res) {
 
 export async function listAllReprocess(req, res) {
     try {
-        const reprocess = await ReprocessService.listAllReprocess();
-        return res.status(200).json(reprocess);
+        const listReprocess = await ReprocessService.listAllReprocess();
+        return res.status(200).json(listReprocess);
+    } catch (error) {
+        return res.status(500).json({
+            error: true,
+            message: error.message
+        })
+    }
+}
+
+export async function reprocessItem(req, res) {
+    try {
+        const reprocessDto = new ReprocessDTO(req.body)
+        await ReprocessService.reprocessItem(reprocessDto);
+        return res.status(200).json({message: "Reprocessamento feito!"});
+        
     } catch (error) {
         return res.status(500).json({
             error: true,
