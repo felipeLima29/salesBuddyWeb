@@ -11,6 +11,16 @@ const SaleItem = sequelize.define('SalesItems', {
     productName: {
         type: DataTypes.STRING,
         allowNull: false
+    },
+    saleId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'Sales',
+            key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE'
     }
 });
 
