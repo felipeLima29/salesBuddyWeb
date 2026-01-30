@@ -266,9 +266,20 @@ a {
     font-weight: 700;
 }
 
+.textLeft {
+    text-align: left;
+}
+
+.colSpacing {
+    padding-left: 7px !important;
+    padding-right: 7px !important;
+}
+
 .txViewUsersSales {
     color: #A32C65;
-    padding-right: 8px;
+    padding-right: 6px;
+    white-space: nowrap;
+    padding-left: 4px;
 }
 
 .txViewIdName {
