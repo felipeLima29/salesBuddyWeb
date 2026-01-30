@@ -5,7 +5,7 @@ import isNull from "../utils/verifyIsNull.js";
 export async function insertReprocess(req, res) {
     try {
         const reprocessDTO = new ReprocessDTO(req.body);
-        if(isNull(reprocessDTO.nameUser) || reprocessDTO.value == null){
+        if (isNull(reprocessDTO.nameUser) || reprocessDTO.value == null) {
             return res.status(400).json({
                 error: true,
                 message: "Todos os campos são obrigatórios."
@@ -23,6 +23,13 @@ export async function insertReprocess(req, res) {
 }
 
 export async function listAllReprocess(req, res) {
-    const reprocess = await ReprocessService.listAllReprocess();
-    return res.status(200).json(reprocess);
+    try {
+        const reprocess = await ReprocessService.listAllReprocess();
+        return res.status(200).json(reprocess);
+    } catch (error) {
+        return res.status(500).json({
+            error: true,
+            message: error.message
+        })
+    }
 }
