@@ -112,10 +112,13 @@ function PaymentReceiptModal({ isOpen, handleClose, data }) {
                     <label className="labelReceiptModal" htmlFor="EMAIL">E-mail</label> <br />
                     <span className="spanReceiptModal">{data.email}</span>
                 </div>
+
                 <hr />
+
                 <div className="receiptModalDescription">
                     <div className="receiptModalItems">
                         <label className="labelReceiptModal" htmlFor="ITM">Itm</label>
+
                         <div style={{ display: 'flex', flexDirection: 'column', gap:'10px' }}>
                             {itemsList.map((_, index) => (
                                 <span key={index} className="spanReceiptModal">
@@ -123,16 +126,20 @@ function PaymentReceiptModal({ isOpen, handleClose, data }) {
                                 </span>
                             ))}
                         </div>
+                        
                     </div>
                     <div className="receiptModalItems">
                         <label className="labelReceiptModal" htmlFor="DESCRICAO">Descrição</label>
+
                         <div style={{ display: 'flex', flexDirection: 'column', gap:'10px' }}>
                             {itemsList.map((name, index) => (
                                 <span key={index} className="spanReceiptModal">{name}</span>
                             ))}
                         </div>
+
                     </div>
                 </div>
+
                 <hr />
 
                 <div className="receiptModalValues">
