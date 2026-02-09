@@ -2,7 +2,7 @@ class SaleDTO {
     constructor(body) {
         this.id = body.id;
         this.name = body.name;
-        this.cpf = body.cpf;
+        this.cpf = body.cpf ? body.cpf.replace(/\D/g, '') : null;
         this.email = body.email;
         this.description = body.description;
         this.qtdItems = body.qtdItems;

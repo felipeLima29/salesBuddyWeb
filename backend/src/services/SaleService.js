@@ -4,8 +4,11 @@ import AppError from "../utils/appError.js";
 
 class SaleService {
     async createSale(dto) {
-        if(!dto) {
-            throw new AppError('Informações nao fornecidas.', 400);
+        if (!dto) {
+            throw new AppError('Informações não fornecidas.', 400);
+        }
+        if (dto.cpf.length != 11) {
+            throw new AppError('CPF inválido.', 400);
         }
         const newSale = await Sale.create({
             name: dto.name,
@@ -13,7 +16,7 @@ class SaleService {
             email: dto.email,
             description: dto.description,
             qtdItems: dto.qtdItems,
-            valueReceived: dto.value/Received,
+            valueReceived: dto.valueReceived,
             valueSale: dto.valueSale,
             changeDue: dto.changeDue
         });
