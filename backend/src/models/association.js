@@ -1,5 +1,5 @@
-import Sale from "../models/Sales.js";
-import SaleItem from "../models/SalesItems.js";
+import Sale from "./Sales.js";
+import SaleItem from "./SalesItems.js";
 
 export default function associateModels() {
     Sale.hasMany(SaleItem, { foreignKey: 'saleId' });

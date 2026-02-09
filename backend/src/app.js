@@ -6,7 +6,7 @@ import sequelize from './database/db.js';
 import './models/User.js';
 import './models/Sales.js';
 import seedAdmin from './database/seedAdmin.js';
-import associateModels from './database/association.js';
+import associateModels from './models/association.js';
 
 dotenv.config();
 
@@ -27,7 +27,7 @@ const startServer = async () => {
             console.log('Server rodando na porta', process.env.PORT);
         });
     } catch (error) {
-        console.error('Erro ao conectar:', error);
+        console.error('Erro ao conectar:', error.message);
     }
 };
 

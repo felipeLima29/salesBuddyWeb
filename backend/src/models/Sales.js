@@ -40,6 +40,9 @@ const Sale = sequelize.define('Sales', {
         allowNull: false
     }
 
-})
+}, {
+    tableName: 'Sales'
+}
+)
 
 export default Sale;

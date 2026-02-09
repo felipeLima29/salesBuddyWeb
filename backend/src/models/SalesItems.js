@@ -1,6 +1,5 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../database/db.js";
-import Sale from "./Sales.js";
 
 const SaleItem = sequelize.define('SalesItems', {
     id: {
@@ -22,6 +21,8 @@ const SaleItem = sequelize.define('SalesItems', {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
     }
+}, {
+    tableName: 'SalesItems'
 });
 
 export default SaleItem;
