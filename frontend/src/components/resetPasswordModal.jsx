@@ -73,6 +73,7 @@ function ResetPasswordModal({ isOpen, handleClose, usuario }) {
             <div className="modalContent" style={{ pointerEvents: 'auto' }}>
                 <span className="spanResetPassword">Insira sua senha atual</span>
                 <InputUser
+                    className='inputLogin'
                     type="password"
                     onChange={(e) => setActualPassword(e.target.value)}
                     placeholder="Senha atual"
@@ -80,6 +81,7 @@ function ResetPasswordModal({ isOpen, handleClose, usuario }) {
 
                 <span className="spanResetPassword">Insira sua nova senha</span>
                 <InputUser
+                    className='inputLogin'
                     type="password"
                     onChange={(e) => setNewPassword(e.target.value)}
                     placeholder="Nova senha"

@@ -1,5 +1,4 @@
 import icEditUser from '../assets/icEditUser.svg';
-import InputAddUser from '../components/inputs/inputAddUser';
 import ButtonEditUser from '../components/buttons/buttonsEditUser';
 import { isNull } from '../utils/verifyIsNull';
 import { useEffect, useState } from 'react';
@@ -9,6 +8,7 @@ import { toast } from 'react-toastify';
 import ResetPasswordModal from '../components/resetPasswordModal';
 import { formatCNPJ } from '../utils/formatters';
 import validateEmail from '../utils/regex';
+import InputUser from '../components/inputs/inputUser';
 
 function EditUser() {
 
@@ -110,41 +110,46 @@ function EditUser() {
                 <div className='formAddUser'>
                     <div className='divAddUser'>
                         <label htmlFor="USUÁRIOS" className='txViewInfo'>USUÁRIO</label>
-                        <InputAddUser
+                        <InputUser
                             name='usuario'
+                            className='inputAddUser'
                             value={formData.usuario}
                             onChange={handleChange}
                         />
                     </div>
                     <div className='divAddUser'>
                         <label htmlFor="NOME" className='txViewInfo'>NOME</label>
-                        <InputAddUser
+                        <InputUser
                             name='nome'
+                            className='inputAddUser'
                             value={formData.nome}
                             onChange={handleChange}
                         />
                     </div>
                     <div className="divAddUser">
                         <label htmlFor="NOME" className="txViewInfo">EMAIL</label>
-                        <InputAddUser
+                        <InputUser
                             name='email'
+                            className='inputAddUser'
                             value={formData.email}
                             onChange={handleChange}
                         />
                     </div>
                     <div className='divAddUser'>
                         <label htmlFor="EMPRESA" className='txViewInfo'>EMPRESA</label>
-                        <InputAddUser
+                        <InputUser
                             name='empresa'
+                            className='inputAddUser'
                             value={formData.empresa}
                             onChange={handleChange}
                         />
                     </div>
                     <div className='divAddUser'>
                         <label htmlFor="CNPJ" className='txViewInfo'>CNPJ</label>
-                        <InputAddUser
+                        <InputUser
                             maxLength="18"
                             name='cnpj'
+                            className='inputAddUser'
                             value={formatCNPJ(formData.cnpj)}
                             onChange={handleChange}
                         />

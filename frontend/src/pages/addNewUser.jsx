@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import icPersonBlue from '../assets/icPersonBlue.svg';
 import ButtonEditUser from '../components/buttons/buttonsEditUser';
-import InputAddUser from '../components/inputs/inputAddUser';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { isNull } from '../utils/verifyIsNull';
 import validateEmail from '../utils/regex';
 import { formatCNPJ } from '../utils/formatters';
+import InputUser from '../components/inputs/inputUser';
 
 function addNewUser() {
 
@@ -29,7 +29,7 @@ function addNewUser() {
             toast.error('Preenchar todos os campos.');
             return;
         }
-        if(formatCNPJ(cnpj).length != 18){
+        if (formatCNPJ(cnpj).length != 18) {
             toast.error('CNPJ inválido.');
             return;
         }
@@ -66,35 +66,40 @@ function addNewUser() {
                 <div className='formAddUser'>
                     <div className='divAddUser'>
                         <label htmlFor="USUÁRIOS" className='txViewInfo'>USUÁRIO</label>
-                        <InputAddUser
+                        <InputUser
+                            className='inputAddUser'
                             value={usuario}
                             onChange={(e) => setUsuario(e.target.value)}
                         />
                     </div>
                     <div className='divAddUser'>
                         <label htmlFor="NOME" className='txViewInfo'>NOME</label>
-                        <InputAddUser
+                        <InputUser
+                            className='inputAddUser'
                             value={nome}
                             onChange={(e) => setNome(e.target.value)}
                         />
                     </div>
                     <div className='divAddUser'>
                         <label htmlFor="E-MAIL" className='txViewInfo'>E-MAIL</label>
-                        <InputAddUser
+                        <InputUser
+                            className='inputAddUser'
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
                     </div>
                     <div className='divAddUser'>
                         <label htmlFor="EMPRESA" className='txViewInfo'>EMPRESA</label>
-                        <InputAddUser
+                        <InputUser
+                            className='inputAddUser'
                             value={empresa}
                             onChange={(e) => setEmpresa(e.target.value)}
                         />
                     </div>
                     <div className='divAddUser'>
                         <label htmlFor="CNPJ" className='txViewInfo'>CNPJ</label>
-                        <InputAddUser
+                        <InputUser
+                            className='inputAddUser'
                             value={cnpj}
                             maxLength="18"
                             onChange={(e) => {

@@ -45,8 +45,8 @@ function PortalLogin() {
 
             </div>
             <div className='inputContainer'>
-                <InputUser type="text" placeholder="Usuário" onChange={(e) => setUsuario(e.target.value)} />
-                <InputUser type="password" placeholder="Senha" onChange={(e) => setPassword(e.target.value)} />
+                <InputUser type="text" className='inputLogin' placeholder="Usuário" onChange={(e) => setUsuario(e.target.value)} />
+                <InputUser type="password" className='inputLogin' placeholder="Senha" onChange={(e) => setPassword(e.target.value)} />
 
                 <ButtonLogin handleLogin={handleLogin} text="LOGIN"/>
 

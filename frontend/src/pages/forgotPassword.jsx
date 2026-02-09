@@ -39,8 +39,12 @@ function ForgotPassword() {
                 </div>
 
                 <div className="divInteractForgot">
-                    <InputUser placeholder="Digite seu login" onChange={(e) => setUsuario(e.target.value)} />
-                    <ButtonLogin handleLogin={handleChangePassword} text="ENVIAR"/>
+                    <InputUser
+                        placeholder="Digite seu login"
+                        className='inputLogin'
+                        onChange={(e) => setUsuario(e.target.value)}
+                    />
+                    <ButtonLogin handleLogin={handleChangePassword} text="ENVIAR" />
 
                     <Link to='/' className="backLogin">VOLTAR PARA FAZER LOGIN</Link>
                 </div>
