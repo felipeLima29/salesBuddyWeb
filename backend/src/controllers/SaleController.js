@@ -1,6 +1,7 @@
 import SaleDTO from "../dtos/SaleDTO.js";
 import { sendReceiptEmail } from "../services/EmailProvider.js";
 import SaleService from "../services/SaleService.js";
+import AppError from "../utils/appError.js";
 import isNull from "../utils/verifyIsNull.js";
 
 export async function insertSale(req, res) {
@@ -23,6 +24,13 @@ export async function insertSale(req, res) {
 
         return res.status(201).json({ message: "Venda inserida com sucesso." })
     } catch (error) {
+        if (error instanceof AppError) {
+            return res.status(error.statusCode).json({
+                error: true,
+                message: error.message
+            })
+        }
+
         return res.status(500).json({
             error: true,
             message: error.message
@@ -76,7 +84,14 @@ export async function listSale(req, res) {
         const getSale = await SaleService.getSaleId(saleDto);
         return res.status(200).json(getSale);
     } catch (error) {
-        return res.status(400).json({
+        if (error instanceof AppError) {
+            return res.status(error.statusCode).json({
+                error: true,
+                message: error.message
+            })
+        }
+
+        return res.status(500).json({
             error: true,
             message: error.message
         })

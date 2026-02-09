@@ -1,8 +1,12 @@
 import Sale from "../models/Sales.js";
 import SaleItem from "../models/SalesItems.js";
+import AppError from "../utils/appError.js";
 
 class SaleService {
     async createSale(dto) {
+        if(!dto) {
+            throw new AppError('Informações nao fornecidas.', 400);
+        }
         const newSale = await Sale.create({
             name: dto.name,
             cpf: dto.cpf,
@@ -33,7 +37,7 @@ class SaleService {
 
     async getSaleId(dto) {
         if (!dto.id) {
-            throw new Error("ID não fornecido.");
+            throw new AppError("ID não fornecido.", 400);
         }
 
         const saleComplete = await Sale.findOne({
@@ -45,7 +49,7 @@ class SaleService {
             logging: console.log
         });
         if (!saleComplete) {
-            throw new Error("Venda com esse ID não encontrada.");
+            throw new AppError("Venda com esse ID não encontrada.", 404);
         }
         return saleComplete;
     }
