@@ -1,17 +1,18 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { toast } from "react-toastify";
 import icEditUser from '../assets/icEditUser.svg';
 import ButtonListUser from "../components/buttons/buttonsListUser.jsx";
 import ConfirmModalDelete from '../components/confirmModal.jsx';
 import { formatCNPJ } from "../utils/formatters.js";
+import { useUser } from "../hooks/useUser.jsx";
 
 function UserList() {
 
     const [users, setUsers] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedUserId, setSelectedUserId] = useState([]);
+    const { list } = useUser();
 
     const handleOpen = () => {
         if (selectedUserId.length > 0) {
@@ -42,12 +43,10 @@ function UserList() {
 
     const listUsers = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/listAllUser',
-                { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } }
-            );
+            const response = await list();
 
-            if (response.data) {
-                setUsers(response.data);
+            if (response) {
+                setUsers(response);
             } else {
                 toast.info('Sem usuários cadastrados');
             }
