@@ -6,7 +6,6 @@ import sequelize from './database/db.js';
 import './models/User.js';
 import './models/Sales.js';
 import seedAdmin from './database/seedAdmin.js';
-import associateModels from './models/association.js';
 
 dotenv.config();
 
@@ -22,7 +21,6 @@ const startServer = async () => {
 
         await seedAdmin();
 
-        associateModels();
         app.listen(process.env.PORT, () => {
             console.log('Server rodando na porta', process.env.PORT);
         });

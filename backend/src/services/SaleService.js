@@ -1,5 +1,4 @@
-import Sale from "../models/Sales.js";
-import SaleItem from "../models/SalesItems.js";
+import { Sale, SaleItem } from "../models/association.js";
 import AppError from "../utils/appError.js";
 
 class SaleService {

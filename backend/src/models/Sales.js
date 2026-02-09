@@ -42,7 +42,13 @@ const Sale = sequelize.define('Sales', {
 
 }, {
     tableName: 'Sales'
+});
+
+Sale.associate = (models) => {
+    Sale.hasMany(models.SaleItem, {
+        foreignKey: 'saleId',
+        as: 'items'
+    })
 }
-)
 
 export default Sale;

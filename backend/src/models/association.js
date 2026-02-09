@@ -1,9 +1,15 @@
 import Sale from "./Sales.js";
 import SaleItem from "./SalesItems.js";
 
-export default function associateModels() {
-    Sale.hasMany(SaleItem, { foreignKey: 'saleId' });
-    SaleItem.belongsTo(Sale, { foreignKey: 'saleId' });
+const models = {
+    Sale,
+    SaleItem
+};
 
-    console.log("Associações realizadas com sucesso!");
-}
+Object.keys(models).forEach((modelName) => {
+    if (models[modelName].associate) {
+        models[modelName].associate(models)
+    }
+});
+
+export { Sale, SaleItem };

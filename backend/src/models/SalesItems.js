@@ -25,4 +25,11 @@ const SaleItem = sequelize.define('SalesItems', {
     tableName: 'SalesItems'
 });
 
+SaleItem.associate = (models) => {
+    SaleItem.belongsTo(models.Sale, {
+        foreignKey: 'saleId',
+        as: 'sale'
+    })
+}
+
 export default SaleItem;
