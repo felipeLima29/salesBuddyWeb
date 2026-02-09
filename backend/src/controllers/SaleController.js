@@ -43,6 +43,13 @@ export async function listAllSales(req, res) {
         const listSales = await SaleService.listAllSales();
         return res.status(200).json(listSales);
     } catch (error) {
+        if (error instanceof AppError) {
+            return res.status(error.statusCode).json({
+                error: true,
+                message: error.message
+            })
+        }
+
         return res.status(500).json({
             error: true,
             message: error.message
