@@ -5,13 +5,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { isNull } from '../utils/verifyIsNull.js';
 import { toast } from 'react-toastify';
-import axios from 'axios';
+import { useAuth } from '../hooks/useAuth.jsx';
 
 function PortalLogin() {
 
     const [usuario, setUsuario] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+    const {login} = useAuth();
 
     const handleLogin = async () => {
         if (isNull(usuario) || isNull(password)) {
@@ -20,22 +21,12 @@ function PortalLogin() {
         }
 
         try {
-            const response = await axios.post('http://localhost:3000/login',
-                { usuario, password }
-            );
-            const responseData = response.data;
-
-            if(responseData.login == false){
-                toast.info(responseData.message);
-                return;
-            }
-            localStorage.setItem('token', responseData.token);
-            localStorage.setItem('id', responseData.user);
+            await login(usuario, password);
             toast.success('Login realizado com sucesso.');
             navigate('/usersList');
             
         } catch (error) {
-            toast.error(error.response.data.message);
+            toast.error(error.message);
         }
     }
     return (
