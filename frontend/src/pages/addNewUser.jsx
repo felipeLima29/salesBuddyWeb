@@ -10,6 +10,7 @@ import InputUser from '../components/inputs/inputUser';
 
 function addNewUser() {
 
+    const [loading, setLoading] = useState(false);
     const [usuario, setUsuario] = useState('');
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
@@ -37,12 +38,13 @@ function addNewUser() {
             toast.error('E-mail inválido.');
             return;
         }
+        setLoading(true);
         try {
             const response = await axios.post('http://localhost:3000/insertUser',
                 { usuario, nome, email, empresa, cnpj },
                 { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } }
             );
-            toast.success('Usuário inserido com sucesso.');
+            toast.success(response.data.message);
             setUsuario('');
             setNome('');
             setEmail('');
@@ -51,6 +53,8 @@ function addNewUser() {
             console.log(response.data);
         } catch (error) {
             toast.error(error.response.data.message);
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -109,7 +113,7 @@ function addNewUser() {
                     </div>
                 </div>
                 <ButtonEditUser
-
+                    loading={loading}
                     onSave={handleInsert}
                     classNameTxSave='txActiveUser'
                     classNameButtonSave='buttonActiveUser'

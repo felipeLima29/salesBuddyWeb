@@ -20,11 +20,19 @@ export async function insertUser(req, res) {
         const clearCnpj = userDto.cnpj.replace(/\D/g, '');
         userDto.cnpj = clearCnpj;
         const { newUser, tempPassword } = await UserService.createUser(userDto);
-        // Sem await pro usuário não ter que esperar o email ser enviado para inserir outro usuário.
-        sendEmailUser(newUser.email, tempPassword);
+
+        let emailSend = false;
+        try {
+            await sendEmailUser(newUser.email, tempPassword);
+            emailSend = true;
+        } catch (emailError) {
+            console.error(`Falha ao enviar email para ${newUser.email}:`, emailError.message);
+            emailSend = false;
+        }
+        
 
         return res.status(201).json({
-            message: "Usuário inserido com sucesso.",
+            message: emailSend ? "Usuário inserido com sucesso." : "Usuário criado, mas houve erro ao enviar e-mail.",
             user: newUser,
             password: tempPassword
         })

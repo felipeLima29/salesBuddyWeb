@@ -67,8 +67,7 @@ export async function sendReceipt(req, res) {
                 message: "Arquivo e email do cliente são obrigatórios."
             });
         }
-        // Sem await pro usuário não ter que esperar o email ser enviado.
-        sendReceiptEmail(file, email);
+        await sendReceiptEmail(file, email);
         return res.status(200).json({ message: "Email enviado com sucesso." });
     } catch (error) {
         return res.status(500).json({
