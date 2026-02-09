@@ -1,6 +1,7 @@
 import UserDTO from "../dtos/UserDTO.js";
 import { sendEmailUser } from "../services/EmailProvider.js";
 import UserService from "../services/UserService.js";
+import AppError from "../utils/appError.js";
 import isNull from "../utils/verifyIsNull.js";
 
 export async function insertUser(req, res) {
@@ -19,6 +20,7 @@ export async function insertUser(req, res) {
         const clearCnpj = userDto.cnpj.replace(/\D/g, '');
         userDto.cnpj = clearCnpj;
         const { newUser, tempPassword } = await UserService.createUser(userDto);
+        // Sem await pro usuário não ter que esperar o email ser enviado para inserir outro usuário.
         sendEmailUser(newUser.email, tempPassword);
 
         return res.status(201).json({
@@ -27,7 +29,14 @@ export async function insertUser(req, res) {
             password: tempPassword
         })
     } catch (error) {
-        return res.status(409).json({
+        if (error instanceof AppError) {
+            return res.status(error.statusCode).json({
+                error: true,
+                message: error.message
+            })
+        }
+
+        return res.status(500).json({
             error: true,
             message: error.message
         })
@@ -39,7 +48,7 @@ export async function listAllUser(req, res) {
         const listUsers = await UserService.listAllUsers();
         return res.status(200).json(listUsers)
     } catch (error) {
-        return res.status(400).json({
+        return res.status(500).json({
             error: true,
             message: error.message
         })
@@ -59,6 +68,13 @@ export async function getUserId(req, res) {
 
         return res.status(200).json(getUser)
     } catch (error) {
+        if (error instanceof AppError) {
+            return res.status(error.statusCode).json({
+                error: true,
+                message: error.message
+            })
+        }
+
         return res.status(500).json({
             error: true,
             message: error.message
@@ -88,7 +104,14 @@ export async function updateUser(req, res) {
             message: "Usuário atualizado com sucesso."
         })
     } catch (error) {
-        return res.status(400).json({
+        if (error instanceof AppError) {
+            return res.status(error.statusCode).json({
+                error: true,
+                message: error.message
+            })
+        }
+
+        return res.status(500).json({
             error: true,
             message: error.message
         })
@@ -103,13 +126,19 @@ export async function deleteUsers(req, res) {
         }
         const response = await UserService.deleteUsers(ids);
 
-        console.log(response);
         return res.status(200).json({
             message: "Usuário(s) deletado(s) com sucesso.",
             affectedRows: response
         });
     } catch (error) {
-        return res.status(400).json({
+        if (error instanceof AppError) {
+            return res.status(error.statusCode).json({
+                error: true,
+                message: error.message
+            })
+        }
+
+        return res.status(500).json({
             error: true,
             message: error.message
         })
@@ -133,7 +162,14 @@ export async function resetPassword(req, res) {
         });
 
     } catch (error) {
-        return res.status(400).json({
+        if (error instanceof AppError) {
+            return res.status(error.statusCode).json({
+                error: true,
+                message: error.message
+            })
+        }
+
+        return res.status(500).json({
             error: true,
             message: error.message
         })
@@ -143,11 +179,11 @@ export async function resetPassword(req, res) {
 export async function changePassword(req, res) {
     try {
         const { usuario, actualPassword, newPassword } = req.body;
-        if(
+        if (
             isNull(usuario) ||
             isNull(actualPassword) ||
             isNull(newPassword)
-        ){
+        ) {
             return res.status(400).json({
                 error: true,
                 message: "Preencha todos os campos obrigatórios."
@@ -159,7 +195,14 @@ export async function changePassword(req, res) {
         });
     }
     catch (error) {
-        return res.status(400).json({
+        if (error instanceof AppError) {
+            return res.status(error.statusCode).json({
+                error: true,
+                message: error.message
+            })
+        }
+
+        return res.status(500).json({
             error: true,
             message: error.message
         })

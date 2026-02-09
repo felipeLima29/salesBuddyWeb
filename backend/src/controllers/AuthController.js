@@ -5,16 +5,16 @@ import isNull from "../utils/verifyIsNull.js";
 
 export async function login(req, res) {
 
-    const { usuario, password } = new UserDTO(req.body);
-
-    if (isNull(usuario) || isNull(password)) {
-        return res.status(400).json({
-            error: true,
-            message: "Usuário e senha são obrigatórios."
-        });
-    }
-
     try {
+        const { usuario, password } = new UserDTO(req.body);
+
+        if (isNull(usuario) || isNull(password)) {
+            return res.status(400).json({
+                error: true,
+                message: "Usuário e senha são obrigatórios."
+            });
+        }
+
         const { token, userFound } = await AuthService.login({ usuario, password });
 
         return res.status(200).json({
@@ -26,7 +26,7 @@ export async function login(req, res) {
         });
     } catch (error) {
 
-        if(error instanceof AppError) {
+        if (error instanceof AppError) {
             return res.status(error.statusCode).json({
                 error: true,
                 login: false,

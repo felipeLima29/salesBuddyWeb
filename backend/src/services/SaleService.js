@@ -9,7 +9,7 @@ class SaleService {
             email: dto.email,
             description: dto.description,
             qtdItems: dto.qtdItems,
-            valueReceived: dto.valueReceived,
+            valueReceived: dto.value/Received,
             valueSale: dto.valueSale,
             changeDue: dto.changeDue
         });

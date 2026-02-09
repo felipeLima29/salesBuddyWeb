@@ -8,6 +8,9 @@ import { sendEmailUser } from "./EmailProvider.js";
 class UserService {
 
     async createUser(dto) {
+        if(dto.cnpj.length!=14) {
+            throw new AppError('CNPJ inválido.', 400);
+        }
         const verifyUser = await User.findOne({
             where: {
                 [Op.or]: [
@@ -18,7 +21,7 @@ class UserService {
         })
 
         if (verifyUser) {
-            throw new Error("Usuário já existe.");
+            throw new AppError("Usuário já existe.", 409);
         }
 
         const plainPassword = generatePassword();
@@ -41,27 +44,27 @@ class UserService {
 
     async getUserId(dto) {
         if (!dto.id) {
-            throw new Error("ID não fornecido.");
+            throw new AppError("ID não fornecido.", 400);
         }
         const verifyUser = await User.findOne({
             where: { id: dto.id },
             attributes: ['usuario', 'nome', 'email', 'empresa', 'cnpj']
         })
         if (!verifyUser) {
-            throw new Error("Usuário com esse ID não encontrado.");
+            throw new AppError("Usuário com esse ID não encontrado.", 404);
         }
         return verifyUser;
     }
 
     async updateUser(dto, id) {
         if (!dto) {
-            throw new Error("Dados não fornecidos.");
+            throw new AppError("Dados não fornecidos.", 400);
         }
         const verifyUser = await User.findOne({
             where: { id: id }
         })
         if (!verifyUser) {
-            throw new Error("Usuário não encontrado.");
+            throw new AppError("Usuário não encontrado.", 404);
         }
 
         const verifyAdmin = await User.findOne({
@@ -71,7 +74,7 @@ class UserService {
             }
         });
         if(verifyAdmin){
-            throw new AppError("Você não poder alterar informações de um administrador.")
+            throw new AppError("Você não poder alterar informações de um administrador.", 401);
         }
 
         const userConflic = await User.findOne({
