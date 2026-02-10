@@ -1,59 +1,68 @@
-import { useState } from 'react';
+import { useEffect, useRef } from 'react';
 import icPersonBlue from '../assets/icPersonBlue.svg';
 import ButtonEditUser from '../components/buttons/buttonsEditUser';
+import * as Yup from 'yup';
+import { useFormik } from 'formik';
 import { toast } from 'react-toastify';
-import { isNull } from '../utils/verifyIsNull';
-import validateEmail from '../utils/regex';
-import { formatCNPJ } from '../utils/formatters';
 import InputUser from '../components/inputs/inputUser';
 import { useUser } from '../hooks/useUser';
+import { formatCNPJ } from '../utils/formatters';
 
-function addNewUser() {
+function AddNewUser() {
+    const { create, loading } = useUser();
 
-    const [loading, setLoading] = useState(false);
-    const [usuario, setUsuario] = useState('');
-    const [nome, setNome] = useState('');
-    const [email, setEmail] = useState('');
-    const [empresa, setEmpresa] = useState('');
-    const [cnpj, setCnpj] = useState('');
-    const { create } = useUser();
+    const trys = useRef(0);
+    const validateSchema = Yup.object({
+        usuario: Yup.string().required('Usuário é obrigatório.'),
+        nome: Yup.string().required('Nome é obrigatório.'),
+        email: Yup.string()
+        .email('Formato de e-mail inválido.')
+        .required('E-mail é obrigatório.'),
+        empresa: Yup.string().required('Empresa é obrigatório.'),
+        cnpj: Yup.string().required('CNPJ é obrigatório.')
+    });
 
-    const handleInsert = async (e) => {
-        if (e) e.preventDefault();
+    const formik = useFormik({
+        initialValues: {
+            usuario: '',
+            nome: '',
+            email: '',
+            empresa: '',
+            cnpj: ''
+        },
+        validationSchema: validateSchema,
+        validateOnBlur: false,
+        validateOnChange: false,
+        onSubmit: async (values, { resetForm }) => {
+            try {
+                const response = await create(
+                    values.usuario,
+                    values.nome,
+                    values.email,
+                    values.empresa,
+                    values.cnpj
+                );
 
-        if (
-            isNull(usuario) ||
-            isNull(nome) ||
-            isNull(email) ||
-            isNull(empresa) ||
-            isNull(cnpj)
-        ) {
-            toast.error('Preenchar todos os campos.');
-            return;
+                toast.success(response.message || "Usuário cadastrado com sucesso!");
+                resetForm();
+                trys.current = 0;
+            } catch (error) {
+                toast.error(error.message || "Erro ao cadastrar.");
+            }
         }
-        if (formatCNPJ(cnpj).length != 18) {
-            toast.error('CNPJ inválido.');
-            return;
+    });
+    useEffect(() => {
+        if (formik.submitCount > trys.current) {
+            trys.current = formik.submitCount;
+
+            if (!formik.isValid) {
+                const primeiroErro = Object.values(formik.errors)[0];
+                if (primeiroErro) {
+                    toast.error(primeiroErro);
+                }
+            }
         }
-        if (!validateEmail(email)) {
-            toast.error('E-mail inválido.');
-            return;
-        }
-        setLoading(true);
-        try {
-            const response = await create(usuario, nome, email, empresa, cnpj);
-            toast.success(response.message);
-            setUsuario('');
-            setNome('');
-            setEmail('');
-            setEmpresa('');
-            setCnpj('');
-        } catch (error) {
-            toast.error(error.response.data.message);
-        } finally {
-            setLoading(false);
-        }
-    }
+    }, [formik.submitCount, formik.isValid, formik.errors]);
 
 
     return (
@@ -64,54 +73,62 @@ function addNewUser() {
                     <h3>CADASTRAR NOVO USUÁRIO</h3>
                 </div>
 
-                <div className='formAddUser'>
+                <form className='formAddUser'>
                     <div className='divAddUser'>
                         <label htmlFor="USUÁRIOS" className='txViewInfo'>USUÁRIO</label>
                         <InputUser
+                            name='usuario'
                             className='inputAddUser'
-                            value={usuario}
-                            onChange={(e) => setUsuario(e.target.value)}
+                            value={formik.values.usuario}
+                            onChange={formik.handleChange}
                         />
                     </div>
                     <div className='divAddUser'>
                         <label htmlFor="NOME" className='txViewInfo'>NOME</label>
                         <InputUser
+                            name='nome'
                             className='inputAddUser'
-                            value={nome}
-                            onChange={(e) => setNome(e.target.value)}
+                            value={formik.values.nome}
+                            onChange={formik.handleChange}
                         />
                     </div>
                     <div className='divAddUser'>
                         <label htmlFor="E-MAIL" className='txViewInfo'>E-MAIL</label>
                         <InputUser
+                            name='email'
                             className='inputAddUser'
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            value={formik.values.email}
+                            onChange={formik.handleChange}
                         />
                     </div>
                     <div className='divAddUser'>
                         <label htmlFor="EMPRESA" className='txViewInfo'>EMPRESA</label>
                         <InputUser
+                            name='empresa'
                             className='inputAddUser'
-                            value={empresa}
-                            onChange={(e) => setEmpresa(e.target.value)}
+                            value={formik.values.empresa}
+                            onChange={formik.handleChange}
                         />
                     </div>
                     <div className='divAddUser'>
                         <label htmlFor="CNPJ" className='txViewInfo'>CNPJ</label>
                         <InputUser
+                            name='cnpj'
                             className='inputAddUser'
-                            value={cnpj}
+                            value={formik.values.cnpj}
                             maxLength="18"
                             onChange={(e) => {
-                                setCnpj(formatCNPJ(e.target.value));
-                            }}
+                                const masked = formatCNPJ(e.target.value);
+                                formik.setFieldValue('cnpj', masked);
+                            } }
                         />
                     </div>
-                </div>
+                </form>
+
                 <ButtonEditUser
                     loading={loading}
-                    onSave={handleInsert}
+                    onSave={formik.handleSubmit}
+                    onReset={formik.handleReset}
                     classNameTxSave='txActiveUser'
                     classNameButtonSave='buttonActiveUser'
                     classNameTxReset='txInactiveUser'
@@ -126,4 +143,4 @@ function addNewUser() {
 
 }
 
-export default addNewUser;
+export default AddNewUser;
