@@ -3,15 +3,16 @@ import ButtonEditUser from '../components/buttons/buttonsEditUser';
 import { isNull } from '../utils/verifyIsNull';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
 import { toast } from 'react-toastify';
 import ResetPasswordModal from '../components/resetPasswordModal';
 import { formatCNPJ } from '../utils/formatters';
 import validateEmail from '../utils/regex';
 import InputUser from '../components/inputs/inputUser';
+import { useUser } from '../hooks/useUser';
 
 function EditUser() {
 
+    const { edit, findUserId } = useUser();
     const { id } = useParams();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [formData, setFormData] = useState({
@@ -33,10 +34,8 @@ function EditUser() {
     useEffect(() => {
 
         const getUser = async () => {
-            const response = await axios.get(`http://localhost:3000/getUserId/${id}`,
-                { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } }
-            );
-            const user = response.data;
+            const user = await findUserId(id);
+            console.log(user);
 
             const findUser = {
                 usuario: user.usuario,
@@ -79,13 +78,10 @@ function EditUser() {
             return;
         }
         try {
-            const response = await axios.put(`http://localhost:3000/updateUser/${id}`, formData,
-                { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } }
-            );
-            toast.success('Usuário atualizado com sucesso!');
-            console.log(response.data);
+            const response = await edit(id, formData);
+            toast.success(response);
         } catch (error) {
-            toast.error(error.response.data.message);
+            toast.error(error.message);
             error.body;
         }
 

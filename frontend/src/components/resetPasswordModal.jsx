@@ -3,13 +3,14 @@ import ReactDOM from 'react-dom';
 import InputUser from "./inputs/inputUser";
 import { isNull } from "../utils/verifyIsNull";
 import { toast } from "react-toastify";
-import axios from "axios";
+import { useUser } from "../hooks/useUser";
 
 function ResetPasswordModal({ isOpen, handleClose, usuario }) {
 
     const [mounted, setMounted] = useState(false);
     const [actualPassword, setActualPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
+    const { resetPassword } = useUser();
 
     const handleChangePassword = async () => {
         if (isNull(actualPassword) || isNull(newPassword)) {
@@ -18,16 +19,11 @@ function ResetPasswordModal({ isOpen, handleClose, usuario }) {
         }
 
         try {
-            const token = localStorage.getItem('token');
-
-            const response = await axios.put('http://localhost:3000/changePassword',
-                { usuario, actualPassword, newPassword },
-                { headers: { 'Authorization': 'Bearer ' + token } }
-            );
-            toast.success(response.data.message);
+            const response = await resetPassword(usuario, actualPassword, newPassword);
+            toast.success(response.message);
             handleClose();
         } catch (error) {
-            toast.error(error.response.data.message);
+            toast.error(error.message);
         }
 
     }

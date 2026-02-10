@@ -116,13 +116,12 @@ class UserService {
 
     async resetPassword(usuario) {
         if (!usuario) {
-            throw new AppError("Usuário e nova senha são obrigatórios.", 400);
+            throw new AppError("Digite um usuário para atualizar.", 400);
         }
 
         const user = await User.findOne({ where: { usuario } });
-        if (!user) {
-            throw new AppError("Usuário não encontrado.", 404);
-        }
+        if(user.isAdmin) throw new AppError('Você não tem autorização de alterar a senha de um administrador.', 401);
+        if (!user) throw new AppError("Usuário não encontrado.", 404);
 
         const plainPassword = generatePassword();
         const passwordHash = await bcrypt.hash(plainPassword, 10);

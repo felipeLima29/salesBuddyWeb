@@ -3,13 +3,14 @@ import ButtonLogin from "../components/buttons/buttonLogin";
 import InputUser from "../components/inputs/inputUser";
 import { isNull } from "../utils/verifyIsNull";
 import { toast } from "react-toastify";
-import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { useUser } from "../hooks/useUser";
 
 function ForgotPassword() {
 
     const [usuario, setUsuario] = useState("");
     const navigate = useNavigate();
+    const { forgotPassword } = useUser();
 
     const handleChangePassword = async () => {
         if (isNull(usuario)) {
@@ -17,15 +18,11 @@ function ForgotPassword() {
             return;
         }
         try {
-            const response = await axios.put("http://localhost:3000/forgotPassword",
-                { usuario }
-            );
-
-            const responseData = response.data;
-            toast.success(responseData.message);
+            const response = await forgotPassword(usuario);
+            toast.success(response.message);
             navigate("/");
         } catch (error) {
-            toast.error(error.response.data.message);
+            toast.error(error.message);
         }
 
     };
