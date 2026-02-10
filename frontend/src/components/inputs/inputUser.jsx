@@ -1,4 +1,4 @@
-export default function InputUser({ value, name, maxLength, onChange, placeholder, type, className }) {
+export default function InputUser({ value, name, maxLength, onChange, onBlur, placeholder, type, className }) {
 
     return (
         <div>
@@ -8,6 +8,7 @@ export default function InputUser({ value, name, maxLength, onChange, placeholde
                 maxLength={maxLength}
                 type={type}
                 onChange={onChange}
+                onBlur={onBlur}
                 placeholder={placeholder}
                 className={className}
             />

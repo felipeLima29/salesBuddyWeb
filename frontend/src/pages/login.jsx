@@ -2,44 +2,87 @@ import icLogo from '../assets/icLogo.svg';
 import InputUser from '../components/inputs/inputUser.jsx';
 import ButtonLogin from '../components/buttons/buttonLogin.jsx';
 import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { isNull } from '../utils/verifyIsNull.js';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 import { useAuth } from '../hooks/useAuth.jsx';
+import { useEffect, useRef } from 'react';
 
 function PortalLogin() {
 
-    const [usuario, setUsuario] = useState('');
-    const [password, setPassword] = useState('');
     const navigate = useNavigate();
-    const {login} = useAuth();
+    const { login } = useAuth();
 
-    const handleLogin = async () => {
-        if (isNull(usuario) || isNull(password)) {
-            toast.info('Por favor, preencha todos os campos.');
-            return;
+    const validationSchema = Yup.object({
+        usuario: Yup.string().required('Usuário é obrigatório.'),
+        password: Yup.string().required('Senha é obrigatório.')
+    });
+
+    const formik = useFormik({
+        initialValues: {
+            usuario: '',
+            password: ''
+        },
+        validationSchema: validationSchema,
+
+        onSubmit: async (values) => {
+            try {
+                await login(values.usuario, values.password);
+                toast.success('Login realizado com sucesso.');
+                navigate('/usersList');
+            } catch (error) {
+                toast.error(error.message);
+            }
         }
+    });
 
-        try {
-            await login(usuario, password);
-            toast.success('Login realizado com sucesso.');
-            navigate('/usersList');
+    const trys = useRef(0);
+    useEffect(() => {
+        if (formik.submitCount > trys.current) {
+            trys.current = formik.submitCount
             
-        } catch (error) {
-            toast.error(error.message);
+            if(!formik.isValid) {
+                const listErrors = Object.values(formik.errors);
+                if(listErrors.length > 0){
+                    toast.error(listErrors[0])
+                }
+            }
+
         }
-    }
+    }, [formik.submitCount, formik.isValid, formik.errors]);
+
     return (
         <div className='bodyLogin'>
             <div className="logoContainer">
                 <img src={icLogo} alt="icLogo" id="icLogo" />
-
             </div>
-            <div className='inputContainer'>
-                <InputUser type="text" className='inputLogin' placeholder="Usuário" onChange={(e) => setUsuario(e.target.value)} />
-                <InputUser type="password" className='inputLogin' placeholder="Senha" onChange={(e) => setPassword(e.target.value)} />
 
-                <ButtonLogin handleLogin={handleLogin} text="LOGIN"/>
+            <form onSubmit={formik.handleSubmit} className='inputContainer'>
+                <div>
+                    <InputUser
+                        name='usuario'
+                        type="text"
+                        className='inputLogin'
+                        placeholder="Usuário"
+                        value={formik.values.usuario}
+                        onBlur={formik.handleBlur}
+                        onChange={formik.handleChange}
+                    />
+                </div>
+
+                <div>
+                    <InputUser
+                        name='password'
+                        type='password'
+                        className='inputLogin'
+                        placeholder="Senha"
+                        value={formik.values.password}
+                        onBlur={formik.handleBlur}
+                        onChange={formik.handleChange}
+                    />
+                </div>
+
+                <ButtonLogin handleLogin={formik.handleSubmit} text="LOGIN" />
 
                 <Link to="/forgotPassword"
                     id="navForgetPassword"
@@ -49,8 +92,9 @@ function PortalLogin() {
                         fontWeight: '600'
                     }}>Esqueci a senha
                 </Link>
-            </div>
+            </form >
         </div>
+
     )
 }
 
