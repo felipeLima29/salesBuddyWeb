@@ -1,14 +1,15 @@
-import { data, Link } from "react-router-dom";
 import icReceipt from "../assets/icReceipt.svg";
 import { useEffect, useState } from "react";
 import PaymentReceiptModal from "../components/paymentReceiptModal";
-import axios from "axios";
 import { formatCpf } from "../utils/formatters";
+import { useSale } from "../hooks/useSale";
+
 function SalesList() {
 
     const [receiptIsOpen, setReceiptIsOpen] = useState(false);
     const [sales, setSales] = useState([]);
     const [selectedSale, setSelectedSale] = useState(null);
+    const { list } = useSale();
 
     const handleOpen = () => {
         setReceiptIsOpen(true);
@@ -24,10 +25,8 @@ function SalesList() {
 
     const listSales = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/listAllSales',
-                { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } }
-            );
-            setSales(response.data);
+            const response = await list();
+            setSales(response);
         } catch (error) {
             error.message;
         }

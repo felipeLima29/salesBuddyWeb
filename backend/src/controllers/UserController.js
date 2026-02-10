@@ -29,7 +29,7 @@ export async function insertUser(req, res) {
             console.error(`Falha ao enviar email para ${newUser.email}:`, emailError.message);
             emailSend = false;
         }
-        
+
 
         return res.status(201).json({
             message: emailSend ? "Usuário inserido com sucesso." : "Usuário criado, mas houve erro ao enviar e-mail.",
@@ -95,15 +95,17 @@ export async function updateUser(req, res) {
         const { id } = req.params;
         const userDto = new UserDTO(req.body);
 
-        if (isNull(id) ||
-            isNull(userDto.usuario) ||
-            isNull(userDto.nome) ||
-            isNull(userDto.email) ||
-            isNull(userDto.empresa) ||
-            isNull(userDto.cnpj)) {
+        if (!id) {
             return res.status(400).json({
                 error: true,
-                message: "Todos os campos são obrigatórios."
+                message: "ID do usuário é obrigatório."
+            });
+        }
+
+        if (Object.keys(userDto).length === 0) {
+            return res.status(400).json({
+                error: true,
+                message: "Nenhum dado fornecido para atualização."
             });
         }
         await UserService.updateUser(userDto, id);

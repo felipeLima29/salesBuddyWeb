@@ -1,10 +1,11 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { toast } from 'react-toastify';
+import { useUser } from '../hooks/useUser';
 
 function ConfirmModalDelete({ isOpen, usuariosToDelete, idsToDelete, handleClose, onSucess }) {
     const [mounted, setMounted] = useState(false);
+    const { deletes } = useUser();
 
     const deleteUser = async () => {
         try {
@@ -19,22 +20,13 @@ function ConfirmModalDelete({ isOpen, usuariosToDelete, idsToDelete, handleClose
                 return;
             }
 
-            const response = await axios.delete('http://localhost:3000/deleteUsers',
-                {
-                    headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`
-                    },
-                    data: {
-                        ids: ids
-                    }
-                }
-            );
+            const response = await deletes(ids);
             handleClose();
             onSucess();
-            toast.success(response.data.message);
+            toast.success(response);
         } catch (error) {
             handleClose();
-            toast.error(error.response.data.message);
+            toast.error(error.message);
         }
     }
 
