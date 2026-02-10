@@ -15,14 +15,14 @@ function ButtonEditUser({
         <div className="buttonUserContainer">
 
             <div
-                onClick={!loading ? onSave : undefined} // Proteção extra: só chama se não estiver loading
+                onClick={!loading ? onSave : undefined}
                 style={{
                     display: 'flex',
                     alignItems: 'center',
                     gap: '5px',
-                    cursor: loading ? 'not-allowed' : 'pointer', // Muda o cursor
-                    opacity: loading ? 0.7 : 1, // Dá um visual de desabilitado
-                    pointerEvents: loading ? 'none' : 'auto' // A MÁGICA: Impede o clique físico
+                    cursor: loading ? 'not-allowed' : 'pointer',
+                    opacity: loading ? 0.7 : 1,
+                    pointerEvents: loading ? 'none' : 'auto'
                 }}
             >
                 <button disabled={loading} className={classNameButtonSave}>

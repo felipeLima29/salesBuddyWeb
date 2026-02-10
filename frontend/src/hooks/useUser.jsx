@@ -2,6 +2,18 @@ import api from "../services/api";
 
 export const useUser = () => {
 
+    const create = async (usuario, nome, email, empresa, cnpj) => {
+        try {
+            const response = await api.post('/insertUser',
+                {usuario, nome, email, empresa, cnpj}
+            );
+            return response.data;
+        } catch (error) {
+            const message = error.response?.data?.message || "Erro ao criar usuário.";
+            throw new Error(message);
+        }
+    }
+
     const list = async () => {
         try {
             const response = await api.get('/listAllUser');
@@ -67,6 +79,6 @@ export const useUser = () => {
             throw new Error(message);
         }
     }
-    return { list, deletes, edit, findUserId, forgotPassword, resetPassword };
+    return { create, list, deletes, edit, findUserId, forgotPassword, resetPassword };
 
 }

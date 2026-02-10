@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import icPersonBlue from '../assets/icPersonBlue.svg';
 import ButtonEditUser from '../components/buttons/buttonsEditUser';
-import axios from 'axios';
 import { toast } from 'react-toastify';
 import { isNull } from '../utils/verifyIsNull';
 import validateEmail from '../utils/regex';
 import { formatCNPJ } from '../utils/formatters';
 import InputUser from '../components/inputs/inputUser';
+import { useUser } from '../hooks/useUser';
 
 function addNewUser() {
 
@@ -16,6 +16,7 @@ function addNewUser() {
     const [email, setEmail] = useState('');
     const [empresa, setEmpresa] = useState('');
     const [cnpj, setCnpj] = useState('');
+    const { create } = useUser();
 
     const handleInsert = async (e) => {
         if (e) e.preventDefault();
@@ -40,17 +41,13 @@ function addNewUser() {
         }
         setLoading(true);
         try {
-            const response = await axios.post('http://localhost:3000/insertUser',
-                { usuario, nome, email, empresa, cnpj },
-                { headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` } }
-            );
-            toast.success(response.data.message);
+            const response = await create(usuario, nome, email, empresa, cnpj);
+            toast.success(response.message);
             setUsuario('');
             setNome('');
             setEmail('');
             setEmpresa('');
             setCnpj('');
-            console.log(response.data);
         } catch (error) {
             toast.error(error.response.data.message);
         } finally {
