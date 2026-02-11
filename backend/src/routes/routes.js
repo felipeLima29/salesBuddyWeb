@@ -8,7 +8,7 @@ import { insertReprocess, listAllReprocess, reprocessItem } from "../controllers
 
 const router = Router();
 const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
+const upload = multer({ dest: 'uploads/' })
 
 router.get('/', (req, res) => {
     res.json({msg: "Consumo bem sucedido!"})

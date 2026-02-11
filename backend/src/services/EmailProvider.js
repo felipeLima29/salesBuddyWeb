@@ -28,25 +28,33 @@ export async function sendEmailUser(to, pass) {
 }
 
 export async function sendReceiptEmail(file, clientEmail) {
-    await transporter.sendMail({
-        from: 'Sales Buddy <felipe.lima@gfxconsultoria.com>',
-        to: clientEmail,
-        subject: 'Comprovante de Venda - Sales Buddy',
-        html: `
+    const myEmail = process.env.EMAIL_RESET;
+    try {
+        const info = await transporter.sendMail({
+            from: myEmail,
+            to: clientEmail,
+            subject: 'Comprovante de Venda - Sales Buddy',
+            html: `
                 <div style="font-family: Arial, sans-serif; color: #333;">
-                    <h2>Olá!</h2>
-                    <p>Obrigado por comprar conosco.</p>
-                    <p>Segue em anexo o comprovante detalhado da sua venda.</p>
-                    <br>
-                    <p>Atenciosamente,<br>Equipe Sales Buddy</p>
+                    <h2>Comprovante de Venda</h2>
+                    <p>Olá,</p>
+                    <p>Agradecemos a sua preferência!</p>
+                    <p>Conforme solicitado, segue em anexo o comprovante digital da sua compra realizada no Sales Buddy.</p>
+                    <hr>
+                    <p style="font-size: 12px; color: #777;">Este é um e-mail automático, por favor não responda.</p>
                 </div>
             `,
-        attachments: [
-            {
-                filename: 'comprovante-venda.png',
-                content: file.buffer,
-                contentType: 'image/png'
-            }
-        ]
-    });
+            attachments: [
+                {
+                    filename: `comprovante_venda.png`,
+                    content: file.buffer,
+                    contentType: 'image/png'
+                }
+            ]
+        });
+        return info;
+    } catch (error) {
+        throw error;
+    }
+
 }

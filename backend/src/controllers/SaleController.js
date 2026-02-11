@@ -68,6 +68,7 @@ export async function sendReceipt(req, res) {
             });
         }
         await sendReceiptEmail(file, email);
+
         return res.status(200).json({ message: "Email enviado com sucesso." });
     } catch (error) {
         return res.status(500).json({
